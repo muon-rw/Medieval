@@ -176,25 +176,17 @@ modrinth {
 	changelog = new File("$project.rootDir/changelog.md").getText('UTF-8')
 	//debugMode = true
 	dependencies {
-		required.project("zenith")
-		required.project("spell-engine")
 	}
 }
 
 task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
 	apiToken = System.getenv("CF_TOKEN")
 	//debugMode = true
-	def mainFile = upload(924809, remapJar)
+	def mainFile = upload(1055023, remapJar)
 	mainFile.changelog = new File("$project.rootDir/changelog.md").getText('UTF-8')
 	mainFile.changelogType = "markdown"
 	mainFile.releaseType = "release"
 	mainFile.addGameVersion("1.20.1")
 	mainFile.addModLoader("fabric")
 	mainFile.displayName = project.archives_base_name + "-" + project.version
-	mainFile.addRequirement("zenith")
-	mainFile.addRequirement("spell-engine")
-	mainFile.addOptional("better-combat-by-daedelus")
-	mainFile.addOptional("paladins-and-priests")
-	mainFile.addOptional("wizards")
-	mainFile.addOptional("jewelry")
 }
