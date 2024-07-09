@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "medieval",
+	"version": "${version}",
+	"name": "Medieval (Fabric)",
+	"description": "Core mod for the Medieval MC modpacks",
+	"authors": [
+		"Muon"
+	],
+	"contact": {
+		"homepage": "https://legacy.curseforge.com/minecraft/mc-mods/medieval-core-mod",
+		"sources": "https://legacy.curseforge.com/minecraft/mc-mods/medieval-core-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/medieval/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.muon.medieval.Medieval"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.14.23",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+	},
+	"mixins": [
+		"medieval.mixins.json"
+	]
+}
