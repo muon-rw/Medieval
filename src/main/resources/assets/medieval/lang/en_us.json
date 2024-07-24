@@ -1,0 +1,10 @@
+{
+  "item.medieval.challenge_orb": "Challenge Orb",
+  "item.medieval.challenge_orb.searching": "Searching for nearby structure...",
+  "item.medieval.challenge_orb.found": "Found structure: %s. Click again to regenerate.",
+  "item.medieval.challenge_orb.not_found": "No valid structure found nearby.",
+  "item.medieval.challenge_orb.regenerating": "Regenerating structure: %s",
+  "item.medieval.challenge_orb.success": "Structure regenerated successfully: %s",
+  "item.medieval.challenge_orb.fail": "Failed to regenerate structure: %s",
+  "item.medieval.challenge_orb.cooldown": "Challenge Orb is on cooldown."
+}

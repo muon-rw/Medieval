@@ -114,7 +114,6 @@ dependencies {
     if(project.hasProperty('placeboVersion'))       implementation fg.deobf("dev.shadowsoffire:Placebo:${mcVersion}-${placeboVersion}")
     if(project.hasProperty('jeiVersion'))           implementation fg.deobf("mezz.jei:jei-${mcVersion}-forge:${jeiVersion}")
     if(project.hasProperty('jadeFileId'))           implementation fg.deobf("curse.maven:jade-324717:${jadeFileId}")
-    if(project.hasProperty('curiosVersion'))        implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curiosVersion}")
     if(project.hasProperty('patchouliVersion'))     implementation fg.deobf("vazkii.patchouli:Patchouli:${patchouliVersion}")
     if(project.hasProperty('topVersion'))           implementation fg.deobf(project.dependencies.create("mcjty.theoneprobe:theoneprobe:${topVersion}") {
             transitive = false
@@ -126,14 +125,31 @@ dependencies {
     if(project.hasProperty('attributeslibVersion')) implementation fg.deobf("dev.shadowsoffire:ApothicAttributes:${mcVersion}-${attributeslibVersion}")
     if(project.hasProperty('apotheosisVersion')) implementation fg.deobf("dev.shadowsoffire:Apotheosis:${mcVersion}-${apotheosisVersion}")
     if(project.hasProperty('betterCombatVersion')) implementation fg.deobf("maven.modrinth:better-combat:${betterCombatVersion}+${mcVersion}-forge")
-    implementation fg.deobf("curse.maven:survive-367337:4791291")
-    implementation fg.deobf("curse.maven:unionlib-367806:5178187")
+
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
         jarJar.ranged(it, "[${mixin_extras_version},)")
     }
-    implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${project.playerAnimVersion}")
+
+    implementation fg.deobf("curse.maven:survive-367337:4791291")
+    implementation fg.deobf("curse.maven:unionlib-367806:5178187")
+
+    runtimeOnly fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${project.playerAnimVersion}")
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${project.clothConfigVersion}")
+
+    runtimeOnly fg.deobf("curse.maven:geckolib-388172:5460309")
+    runtimeOnly fg.deobf("curse.maven:bosses-of-mass-destruction-forge-941573:4955739")
+
+
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
+    runtimeOnly fg.deobf("curse.maven:lionfish-api-1001614:5363774")
+    runtimeOnly fg.deobf("curse.maven:lendercataclysm-551586:5474791")
+
+    implementation fg.deobf("curse.maven:ftb-chunks-forge-314906:5378090")
+    implementation fg.deobf("curse.maven:ftb-library-forge-404465:5543335")
+    runtimeOnly fg.deobf("curse.maven:ftb-teams-forge-404468:5267190")
+    runtimeOnly fg.deobf("curse.maven:architectury-api-419699:5137938")
 }
 
 mixin {

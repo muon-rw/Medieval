@@ -8,6 +8,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import dev.muon.medieval.item.ModItems;
 
 
 @Mod(Medieval.MODID)
@@ -20,6 +21,8 @@ public class Medieval
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
         Medieval.LOGGER.info("Medieval MC Forge Tweaks loading");
+
+        ModItems.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
     }
     private void commonSetup(final FMLCommonSetupEvent event)
