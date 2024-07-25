@@ -28,11 +28,12 @@ public class StructureRegenerator {
 
     private static final Set<String> WHITELISTED_NAMESPACES = Set.of(
             "eeeabsmobs",
-            "cataclysm"
+            "cataclysm",
+            "dungeons_arise"
     );
 
     private static final List<ResourceLocation> ADDITIONAL_VALID_STRUCTURES = List.of(
-            new ResourceLocation("dungeons_arise:keep_kayra")
+            new ResourceLocation("minecraft:end_city")
     );
 
 
@@ -84,7 +85,7 @@ public class StructureRegenerator {
 
     public static BlockPos isAnyClaimed(ServerLevel level, BoundingBox boundingBox) {
         if (!FTBChunksAPI.api().isManagerLoaded()) {
-            LOGGER.warn("FTB Chunks manager is not loaded. Assuming no chunks are claimed.");
+            LOGGER.warn("FTB Chunks manager is not loaded. This shouldn't happen! Assuming no chunks are claimed.");
             return null;
         }
 

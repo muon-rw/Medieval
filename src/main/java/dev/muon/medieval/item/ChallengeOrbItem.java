@@ -89,7 +89,6 @@ public class ChallengeOrbItem extends Item {
                         .withStyle(ChatFormatting.RED), true);
             }
 
-            // Clear the found structure data
             tag.remove("FoundStructure");
         }
     }
