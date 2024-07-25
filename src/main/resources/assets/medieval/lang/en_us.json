@@ -6,5 +6,7 @@
   "item.medieval.challenge_orb.regenerating": "Regenerating structure: %s",
   "item.medieval.challenge_orb.success": "Structure regenerated successfully: %s",
   "item.medieval.challenge_orb.fail": "Failed to regenerate structure: %s",
-  "item.medieval.challenge_orb.cooldown": "Challenge Orb is on cooldown."
+  "item.medieval.challenge_orb.cooldown": "Challenge Orb is on cooldown.",
+
+  "item.medieval.town_portal_scroll": "Town Portal Scroll"
 }

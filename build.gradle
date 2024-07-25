@@ -131,25 +131,33 @@ dependencies {
         jarJar.ranged(it, "[${mixin_extras_version},)")
     }
 
+    // Shared Libs
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
+    runtimeOnly fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${project.playerAnimVersion}")
+    runtimeOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:${project.clothConfigVersion}")
+    runtimeOnly fg.deobf("curse.maven:geckolib-388172:5460309")
+    runtimeOnly fg.deobf("curse.maven:caelus-308989:5281700")
+
+    // Survive
     implementation fg.deobf("curse.maven:survive-367337:4791291")
     implementation fg.deobf("curse.maven:unionlib-367806:5178187")
 
-    runtimeOnly fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${project.playerAnimVersion}")
-    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${project.clothConfigVersion}")
-
-    runtimeOnly fg.deobf("curse.maven:geckolib-388172:5460309")
+    // BOMD
     runtimeOnly fg.deobf("curse.maven:bosses-of-mass-destruction-forge-941573:4955739")
 
-
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
+    // Cataclysm
     runtimeOnly fg.deobf("curse.maven:lionfish-api-1001614:5363774")
     runtimeOnly fg.deobf("curse.maven:lendercataclysm-551586:5474791")
 
+    // FTB
     implementation fg.deobf("curse.maven:ftb-chunks-forge-314906:5378090")
     implementation fg.deobf("curse.maven:ftb-library-forge-404465:5543335")
     runtimeOnly fg.deobf("curse.maven:ftb-teams-forge-404468:5267190")
     runtimeOnly fg.deobf("curse.maven:architectury-api-419699:5137938")
+
+    // Irons
+    implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:5539243")
 }
 
 mixin {
