@@ -138,6 +138,7 @@ dependencies {
     runtimeOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:${project.clothConfigVersion}")
     runtimeOnly fg.deobf("curse.maven:geckolib-388172:5460309")
     runtimeOnly fg.deobf("curse.maven:caelus-308989:5281700")
+    runtimeOnly fg.deobf("curse.maven:attributefix-280510:4911084")
 
     // Survive
     implementation fg.deobf("curse.maven:survive-367337:4791291")
@@ -158,6 +159,14 @@ dependencies {
 
     // Irons
     implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:5539243")
+
+    // Health Bar
+    implementation fg.deobf("curse.maven:ydms-mobhealthbar-mod-559894:4818965")
+
+    // Autoleveling + Skill Tree
+    implementation fg.deobf("curse.maven:auto-leveling-616126:4899526")
+    implementation fg.deobf("curse.maven:passive-skill-tree-850298:5367713")
+    implementation fg.deobf("curse.maven:item-production-lib-950401:5114036")
 }
 
 mixin {
