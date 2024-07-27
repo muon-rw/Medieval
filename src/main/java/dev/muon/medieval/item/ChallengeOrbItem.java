@@ -16,7 +16,9 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class ChallengeOrbItem extends Item {
-    private static final int COOLDOWN_TICKS = 200;
+    private static final int COOLDOWN_TICKS = 20 * 30;
+    private static final int SEARCH_TIMEOUT_TICKS = 100;
+
 
     public ChallengeOrbItem(Properties properties) {
         super(properties);
@@ -37,16 +39,30 @@ public class ChallengeOrbItem extends Item {
                     .withStyle(ChatFormatting.RED), true);
             return InteractionResultHolder.fail(itemStack);
         }
-        // First click
-        if (!tag.contains("FoundStructure")) {
-            findStructure(serverLevel, player, itemStack);
+
+        long currentTime = serverLevel.getGameTime();
+        if (tag.contains("FoundStructure")) {
+            long searchTime = tag.getLong("SearchTime");
+            if (currentTime - searchTime > SEARCH_TIMEOUT_TICKS) {
+                // Search has timed out, reset and search again
+                tag.remove("FoundStructure");
+                tag.remove("SearchTime");
+                findStructure(serverLevel, player, itemStack);
+
+            } else {
+
+                // Confirm Click
+                confirmAndRegenerate(serverLevel, player, itemStack);
+            }
         } else {
-            // Second click
-            confirmAndRegenerate(serverLevel, player, itemStack);
+
+            // Initial click
+            findStructure(serverLevel, player, itemStack);
         }
 
         return InteractionResultHolder.success(itemStack);
     }
+
 
     private void findStructure(ServerLevel level, Player player, ItemStack itemStack) {
         var structureRegistry = level.registryAccess().registryOrThrow(Registries.STRUCTURE);
@@ -60,6 +76,7 @@ public class ChallengeOrbItem extends Item {
                 if (StructureRegenerator.findNearestStructure(level, player.blockPosition(), structureId) != null) {
                     CompoundTag tag = itemStack.getOrCreateTag();
                     tag.putString("FoundStructure", structureId.toString());
+                    tag.putLong("SearchTime", level.getGameTime());
                     player.displayClientMessage(Component.translatable("item.medieval.challenge_orb.found", structureId)
                             .withStyle(ChatFormatting.GREEN), true);
                     return;

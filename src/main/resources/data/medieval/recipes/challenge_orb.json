@@ -1,16 +1,19 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-      " E ",
-      "EDE",
-      " E "
+      "NDN",
+      "DRD",
+      "NDN"
     ],
     "key": {
-      "E": {
-        "item": "minecraft:ender_pearl"
+      "N": {
+        "item": "minecraft:netherite_scale"
       },
       "D": {
-        "item": "minecraft:diamond"
+        "item": "apotheosis:infused_breath"
+      },
+      "R": {
+        "item": "simplyswords:empowered_remnant"
       }
     },
     "result": {

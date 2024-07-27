@@ -29,11 +29,13 @@ public class StructureRegenerator {
     private static final Set<String> WHITELISTED_NAMESPACES = Set.of(
             "eeeabsmobs",
             "cataclysm",
-            "dungeons_arise"
+            "dungeons_arise",
+            "dungeons_arise_seven_seas",
+            "mowziesmobs"
     );
 
     private static final List<ResourceLocation> ADDITIONAL_VALID_STRUCTURES = List.of(
-            new ResourceLocation("minecraft:end_city")
+            new ResourceLocation("irons_spellbooks:ancient_battleground")
     );
 
 
