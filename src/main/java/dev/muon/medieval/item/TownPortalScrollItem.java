@@ -28,7 +28,7 @@ import java.util.Optional;
 public class TownPortalScrollItem extends Item {
     private static final TagKey<Structure> VILLAGE_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation("minecraft", "village"));
     private static final int CHANNEL_TICKS = 100;
-    private static final int COOLDOWN_TICKS = 15 * 60 * 20; // 15 minutes
+    private static final int COOLDOWN_TICKS = 10 * 60 * 20; // 10 minutes
     private SoundInstance portalSound;
 
     public TownPortalScrollItem(Properties properties) {

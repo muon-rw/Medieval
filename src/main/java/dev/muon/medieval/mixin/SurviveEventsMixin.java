@@ -14,12 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = SurviveEvents.class, remap = false)
 public class SurviveEventsMixin {
-    /**
-     * Can't use WrapMethod because TempType is a private inner class -
-     * and @Coerce Object doesn't seem to work with it.
-     * probably don't matta
-     */
 
+    // Big performance hit, and for some reason still calculates when disabled
     @Inject(method = "getExactTemperature", at = @At("HEAD"), cancellable = true)
     private static void skipExactTemp(Level world, BlockPos pos, @Coerce Object type, CallbackInfoReturnable<Double> cir) {
         if (!Survive.TEMPERATURE_CONFIG.enabled) {

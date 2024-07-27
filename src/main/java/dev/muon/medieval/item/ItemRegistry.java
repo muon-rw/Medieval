@@ -7,7 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModItems {
+public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Medieval.MODID);
     public static final RegistryObject<Item> CHALLENGE_ORB = ITEMS.register("challenge_orb",
             () -> new ChallengeOrbItem(new Item.Properties().stacksTo(16)));
