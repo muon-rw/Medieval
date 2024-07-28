@@ -16,6 +16,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class ChallengeOrbItem extends Item {
+    private static final int SEARCH_COOLDOWN = 25;
     private static final int COOLDOWN_TICKS = 20 * 30;
     private static final int SEARCH_TIMEOUT_TICKS = 100;
 
@@ -58,6 +59,7 @@ public class ChallengeOrbItem extends Item {
 
             // Initial click
             findStructure(serverLevel, player, itemStack);
+            player.getCooldowns().addCooldown(this, SEARCH_COOLDOWN);
         }
 
         return InteractionResultHolder.success(itemStack);

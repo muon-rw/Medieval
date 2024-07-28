@@ -36,7 +36,7 @@ public class StructureRegenerator {
     );
 
     private static final List<ResourceLocation> ADDITIONAL_VALID_STRUCTURES = List.of(
-            new ResourceLocation("irons_spellbooks:ancient_battleground")
+            new ResourceLocation("irons_spellbooks:catacombs")
     );
 
 
