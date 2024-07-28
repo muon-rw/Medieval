@@ -27,10 +27,6 @@ public class Medieval
 
         ItemRegistry.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
-
-        //MinecraftForge.EVENT_BUS.register(DynamicMobLeveling.class);
-        MinecraftForge.EVENT_BUS.register(OriginalLevelCapability.class);
-        //MinecraftForge.EVENT_BUS.register(LevelDisplayRenderer.class);
     }
     private void commonSetup(final FMLCommonSetupEvent event)
     {}

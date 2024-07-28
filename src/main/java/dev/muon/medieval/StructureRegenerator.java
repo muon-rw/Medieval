@@ -26,7 +26,7 @@ import java.util.*;
 
 public class StructureRegenerator {
     private static final Logger LOGGER = LogManager.getLogger();
-
+    public static int SEARCH_RADIUS = 6;
     private static final Set<String> WHITELISTED_NAMESPACES = Set.of(
             "eeeabsmobs",
             "cataclysm",
@@ -147,10 +147,9 @@ public class StructureRegenerator {
     }
 
     public static StructureStart findNearestStructure(ServerLevel level, BlockPos pos, ResourceLocation structureId) {
-        int searchRadius = 8; // In chunks!
         Map<Structure, StructureStart> structures = new HashMap<>();
-        for (int x = -searchRadius; x <= searchRadius; x++) {
-            for (int z = -searchRadius; z <= searchRadius; z++) {
+        for (int x = -SEARCH_RADIUS; x <= SEARCH_RADIUS; x++) {
+            for (int z = -SEARCH_RADIUS; z <= SEARCH_RADIUS; z++) {
                 ChunkPos chunkPos = new ChunkPos((pos.getX() >> 4) + x, (pos.getZ() >> 4) + z);
                 Map<Structure, LongSet> structuresInChunk = level.structureManager().getAllStructuresAt(chunkPos.getWorldPosition());
 

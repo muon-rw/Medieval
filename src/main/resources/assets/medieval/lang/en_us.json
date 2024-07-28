@@ -8,5 +8,7 @@
   "item.medieval.challenge_orb.fail": "Failed to regenerate structure: %s",
   "item.medieval.challenge_orb.cooldown": "Challenge Orb is on cooldown.",
   "item.medieval.town_portal_scroll.cooldown": "Town Portal is still on cooldown for %s",
-  "item.medieval.town_portal_scroll": "Town Portal Scroll"
+  "item.medieval.town_portal_scroll": "Town Portal Scroll",
+  "item.medieval.town_portal_scroll.tooltip": "Channel to teleport to your bed, or to the nearest village if you have no bed.",
+  "itemGroup.medieval": "Medieval"
 }
