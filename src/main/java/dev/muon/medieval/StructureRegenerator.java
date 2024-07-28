@@ -11,6 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -80,7 +81,7 @@ public class StructureRegenerator {
 
         LOGGER.info("Regenerated structure {} in {} ms", structureId, duration);
 
-        return new RegenerationResult(true, "Structure regenerated successfully in " + duration + " ms");
+        return new RegenerationResult(true, duration + " ms");
     }
 
 
@@ -136,7 +137,10 @@ public class StructureRegenerator {
                         boundingBox.maxX(), boundingBox.maxY(), boundingBox.maxZ())
                 .forEach(pos -> {
                     BlockEntity blockEntity = level.getBlockEntity(pos);
-                    if (blockEntity instanceof RandomizableContainerBlockEntity) {
+                    if (blockEntity instanceof RandomizableContainerBlockEntity container) {
+                        container.unpackLootTable(null);
+                        container.clearContent();
+                        container.setChanged();
                         level.removeBlock(pos, false);
                     }
                 });

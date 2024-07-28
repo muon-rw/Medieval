@@ -1,5 +1,7 @@
 package dev.muon.medieval.item;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,7 +29,7 @@ import java.util.Optional;
 
 public class TownPortalScrollItem extends Item {
     private static final TagKey<Structure> VILLAGE_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation("minecraft", "village"));
-    private static final int CHANNEL_TICKS = 100;
+    private static final int CHANNEL_TICKS = 80;
     private static final int COOLDOWN_TICKS = 10 * 60 * 20; // 10 minutes
     private SoundInstance portalSound;
 
@@ -47,9 +49,25 @@ public class TownPortalScrollItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+
+        // nvm this will never trigger lol
+        if (player.getCooldowns().isOnCooldown(this)) {
+            if (level.isClientSide) {
+                int remainingCooldownSeconds = (int) (player.getCooldowns().getCooldownPercent(this, 0) * COOLDOWN_TICKS / 20);
+                String formattedTime = String.format("%d:%02d", remainingCooldownSeconds / 60, remainingCooldownSeconds % 60);
+                player.displayClientMessage(Component.translatable("item.medieval.town_portal_scroll.cooldown", formattedTime), true);
+            }
+            return InteractionResultHolder.fail(itemStack);
+        }
+
         player.startUsingItem(hand);
-        return InteractionResultHolder.consume(player.getItemInHand(hand));
+        if (level.isClientSide) {
+            playChannelSound(player);
+        }
+        return InteractionResultHolder.consume(itemStack);
     }
+
 
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
@@ -58,18 +76,36 @@ public class TownPortalScrollItem extends Item {
             double remainingSeconds = Math.max(0, (CHANNEL_TICKS - elapsedTicks - 1) / 20.0);
             String formattedTime = String.format("%.1f", remainingSeconds);
             player.displayClientMessage(Component.literal("Channeling: " + formattedTime + "s"), true);
-
-            if (elapsedTicks % 20 == 0) {
-                level.playLocalSound(player.getX(), player.getY(), player.getZ(),
-                        SoundEvents.EVOKER_PREPARE_ATTACK, SoundSource.PLAYERS, 0.5F, 1.0F, false);
-            }
         }
     }
 
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
-        if (level.isClientSide && entity instanceof Player player) {
-            player.displayClientMessage(Component.empty(), true);
+        if (level.isClientSide) {
+            if (entity instanceof Player player) {
+                player.displayClientMessage(Component.empty(), true);
+            }
+            stopChannelSound();
+        }
+    }
+
+    private void playChannelSound(Player player) {
+        SimpleSoundInstance sound = new SimpleSoundInstance(
+                SoundEvents.PORTAL_TRIGGER,
+                SoundSource.PLAYERS,
+                0.5F,
+                0.6F,
+                player.getRandom(),
+                player.blockPosition()
+        );
+        Minecraft.getInstance().getSoundManager().play(sound);
+        this.portalSound = sound;
+    }
+
+    private void stopChannelSound() {
+        if (this.portalSound != null) {
+            Minecraft.getInstance().getSoundManager().stop(this.portalSound);
+            this.portalSound = null;
         }
     }
 
@@ -79,7 +115,7 @@ public class TownPortalScrollItem extends Item {
         if (!(entity instanceof ServerPlayer player)) {
             return stack;
         }
-
+        stopChannelSound();
         ServerLevel serverLevel = player.serverLevel();
 
         boolean teleported = false;

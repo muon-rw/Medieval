@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Medieval.MODID);
     public static final RegistryObject<Item> CHALLENGE_ORB = ITEMS.register("challenge_orb",
-            () -> new ChallengeOrbItem(new Item.Properties().stacksTo(16)));
+            () -> new ChallengeOrbItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> TOWN_PORTAL_SCROLL = ITEMS.register("town_portal_scroll",
             () -> new TownPortalScrollItem(new Item.Properties().stacksTo(16)));
 

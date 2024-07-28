@@ -4,9 +4,9 @@
   "item.medieval.challenge_orb.found": "Found structure: %s. Click again to regenerate.",
   "item.medieval.challenge_orb.not_found": "No valid structure found nearby.",
   "item.medieval.challenge_orb.regenerating": "Regenerating structure: %s",
-  "item.medieval.challenge_orb.success": "Structure regenerated successfully: %s",
+  "item.medieval.challenge_orb.success": "Structure regenerated successfully in %s",
   "item.medieval.challenge_orb.fail": "Failed to regenerate structure: %s",
   "item.medieval.challenge_orb.cooldown": "Challenge Orb is on cooldown.",
-
+  "item.medieval.town_portal_scroll.cooldown": "Town Portal is still on cooldown for %s",
   "item.medieval.town_portal_scroll": "Town Portal Scroll"
 }
