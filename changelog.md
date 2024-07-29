@@ -1,3 +1,10 @@
+## 1.2.2
+- Cancel leveling for fully passive mobs (cows, chickens, etc)
+- Clean up some unused event dynamic leveling stuff
+
+## 1.2.1
+- I don't remember. Why are you reading this? Who is downloading this?
+
 ## 1.2.0
 - Challenge Orbs
 - Town Portal Scrolls

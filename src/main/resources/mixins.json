@@ -5,7 +5,8 @@
     "refmap": "${modid}.refmap.json",
     "mixins": [
         "SurviveEventsMixin",
-        "GuiHelperMixin"
+        "GuiHelperMixin",
+        "MobLevelingEventsMixin"
     ],
     "client": [
     ],

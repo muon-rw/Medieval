@@ -17,14 +17,14 @@ import java.util.List;
 /**
  * Not currently implemented
  */
-@Mod.EventBusSubscriber(modid = Medieval.MODID)
+//@Mod.EventBusSubscriber(modid = Medieval.MODID)
 public class DynamicMobLeveling {
 
     private static final int UPDATE_INTERVAL = 200;
     private static final double LEVEL_RADIUS = 64.0;
     private static int tickCounter = 0;
 
-    @SubscribeEvent
+    //@SubscribeEvent
     public static void onWorldTick(TickEvent.LevelTickEvent event) {
         if (event.phase == TickEvent.Phase.END && !event.level.isClientSide()) {
             tickCounter++;

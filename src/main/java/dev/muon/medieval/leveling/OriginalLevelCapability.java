@@ -12,12 +12,12 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Medieval.MODID)
+//@Mod.EventBusSubscriber(modid = Medieval.MODID)
 public class OriginalLevelCapability {
     public static final Capability<OriginalLevel> ORIGINAL_LEVEL = CapabilityManager.get(new CapabilityToken<>(){});
     private static final ResourceLocation CAPABILITY_ID = new ResourceLocation(Medieval.MODID, "original_level");
 
-    @SubscribeEvent
+    //@SubscribeEvent
     public static void attachCapability(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof LivingEntity) {
             event.addCapability(CAPABILITY_ID, new OriginalLevelProvider());

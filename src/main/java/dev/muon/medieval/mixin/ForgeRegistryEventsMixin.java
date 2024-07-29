@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ForgeRegistryEventsMixin {
     /**
      * Might switch to this, modifying YDM's name rendering.
-     * For now our own event works fine
+     * For now, unused
      */
 /*
     private static Entity capturedEntity;
