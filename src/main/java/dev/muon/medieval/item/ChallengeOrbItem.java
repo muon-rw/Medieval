@@ -7,6 +7,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -35,6 +37,7 @@ public class ChallengeOrbItem extends Item {
         ItemStack itemStack = player.getItemInHand(hand);
         CompoundTag tag = itemStack.getOrCreateTag();
 
+        // never reached idk why it's still here
         if (player.getCooldowns().isOnCooldown(this)) {
             player.displayClientMessage(Component.translatable("item.medieval.challenge_orb.cooldown")
                     .withStyle(ChatFormatting.RED), true);
@@ -75,12 +78,18 @@ public class ChallengeOrbItem extends Item {
                 player.displayClientMessage(Component.translatable("item.medieval.challenge_orb.searching")
                         .withStyle(ChatFormatting.YELLOW), true);
 
+
                 if (StructureRegenerator.findNearestStructure(level, player.blockPosition(), structureId) != null) {
                     CompoundTag tag = itemStack.getOrCreateTag();
                     tag.putString("FoundStructure", structureId.toString());
                     tag.putLong("SearchTime", level.getGameTime());
+
                     player.displayClientMessage(Component.translatable("item.medieval.challenge_orb.found", structureId)
                             .withStyle(ChatFormatting.GREEN), true);
+
+                    level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                            SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.PLAYERS, 1.0F, 2.0F);
+
                     return;
                 }
             }

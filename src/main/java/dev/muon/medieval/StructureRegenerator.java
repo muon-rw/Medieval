@@ -11,6 +11,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -80,6 +82,8 @@ public class StructureRegenerator {
         long duration = endTime - startTime;
 
         LOGGER.info("Regenerated structure {} in {} ms", structureId, duration);
+        level.playSound(null, pos.getX(), pos.getY(), pos.getZ(),
+                SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 2.0F, 0.5F);
 
         return new RegenerationResult(true, duration + " ms");
     }
