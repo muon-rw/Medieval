@@ -1,9 +1,6 @@
 package dev.muon.medieval.item;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -34,7 +31,6 @@ public class TownPortalScrollItem extends Item {
     private static final TagKey<Structure> VILLAGE_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation("minecraft", "village"));
     private static final int CHANNEL_TICKS = 80;
     private static final int COOLDOWN_TICKS = 10 * 60 * 20; // 10 minutes
-    private SoundInstance portalSound;
 
     public TownPortalScrollItem(Properties properties) {
         super(properties);
@@ -49,6 +45,7 @@ public class TownPortalScrollItem extends Item {
     public int getUseDuration(ItemStack pStack) {
         return CHANNEL_TICKS;
     }
+
     @Override
     public void appendHoverText(ItemStack stack, @javax.annotation.Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
@@ -62,7 +59,7 @@ public class TownPortalScrollItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
 
-        // nvm this will never trigger lol
+        // this will never trigger lol
         if (player.getCooldowns().isOnCooldown(this)) {
             if (level.isClientSide) {
                 int remainingCooldownSeconds = (int) (player.getCooldowns().getCooldownPercent(this, 0) * COOLDOWN_TICKS / 20);
@@ -73,9 +70,6 @@ public class TownPortalScrollItem extends Item {
         }
 
         player.startUsingItem(hand);
-        if (level.isClientSide) {
-            playChannelSound(player);
-        }
         return InteractionResultHolder.consume(itemStack);
     }
 
@@ -90,55 +84,25 @@ public class TownPortalScrollItem extends Item {
         }
     }
 
-    @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
-        if (level.isClientSide) {
-            if (entity instanceof Player player) {
-                player.displayClientMessage(Component.empty(), true);
-            }
-            stopChannelSound();
-        }
-    }
-
-    private void playChannelSound(Player player) {
-        SimpleSoundInstance sound = new SimpleSoundInstance(
-                SoundEvents.PORTAL_TRIGGER,
-                SoundSource.PLAYERS,
-                0.5F,
-                0.6F,
-                player.getRandom(),
-                player.blockPosition()
-        );
-        Minecraft.getInstance().getSoundManager().play(sound);
-        this.portalSound = sound;
-    }
-
-    private void stopChannelSound() {
-        if (this.portalSound != null) {
-            Minecraft.getInstance().getSoundManager().stop(this.portalSound);
-            this.portalSound = null;
-        }
-    }
-
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if (!(entity instanceof ServerPlayer player)) {
             return stack;
         }
-        stopChannelSound();
         ServerLevel serverLevel = player.serverLevel();
 
         boolean teleported = false;
         Component resultMessage = null;
 
-        // Check for valid respawn position
+        // Check for valid respawn position (bed)
         if (player.getRespawnPosition() != null && player.getRespawnDimension() == serverLevel.dimension()) {
             Optional<Vec3> respawnPosition = Player.findRespawnPositionAndUseSpawnBlock(serverLevel, player.getRespawnPosition(), player.getRespawnAngle(), false, false);
             if (respawnPosition.isPresent()) {
                 Vec3 pos = respawnPosition.get();
-                player.teleportTo(serverLevel, pos.x(), pos.y(), pos.z(), player.getYRot(), player.getXRot());
+                player.teleportTo(serverLevel, pos.x, pos.y, pos.z, player.getYRot(), player.getXRot());
                 teleported = true;
+                resultMessage = Component.literal("Teleporting...").withStyle(ChatFormatting.GREEN);
             } else {
                 player.setRespawnPosition(serverLevel.dimension(), null, 0.0F, false, false);
                 resultMessage = Component.literal("Previous bed was missing or obstructed, teleporting to nearest village.");
@@ -152,10 +116,9 @@ public class TownPortalScrollItem extends Item {
                 BlockPos safePos = findSafeSpawnLocation(serverLevel, nearestVillage);
                 player.teleportTo(serverLevel, safePos.getX() + 0.5, safePos.getY() + 0.1, safePos.getZ() + 0.5, player.getYRot(), player.getXRot());
                 teleported = true;
+                resultMessage = Component.literal("Teleporting...").withStyle(ChatFormatting.GREEN);
             }
         }
-
-
 
         if (teleported) {
             serverLevel.playSound(null, player.getX(), player.getY(), player.getZ(),
@@ -166,8 +129,8 @@ public class TownPortalScrollItem extends Item {
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
-        } else {
-            resultMessage = Component.literal("No valid teleport destination found.");
+        } else if (resultMessage == null) {
+            resultMessage = Component.literal("No valid teleport destination found.").withStyle(ChatFormatting.RED);
         }
 
         if (resultMessage != null) {
@@ -178,13 +141,13 @@ public class TownPortalScrollItem extends Item {
     }
 
     private BlockPos findSafeSpawnLocation(ServerLevel level, BlockPos start) {
-        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos(start.getX(), level.getMaxBuildHeight(), start.getZ());
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos(start.getX(), Math.min(level.getMaxBuildHeight(), start.getY() + 10), start.getZ());
 
         while (mutable.getY() > level.getMinBuildHeight()) {
             BlockPos below = mutable.below();
             BlockState belowState = level.getBlockState(below);
 
-            if (belowState.isSolid() || belowState.liquid()) {
+            if (belowState.isSolid()) {
                 if (isSafeSpawn(level, mutable)) {
                     return mutable.immutable();
                 }
@@ -194,10 +157,31 @@ public class TownPortalScrollItem extends Item {
             mutable.move(Direction.DOWN);
         }
 
+        mutable.set(start.getX(), start.getY(), start.getZ());
+        while (mutable.getY() < level.getMaxBuildHeight() - 1) {
+            if (isSafeSpawn(level, mutable)) {
+                return mutable.immutable();
+            }
+            mutable.move(Direction.UP);
+        }
+
         return start;
     }
 
     private boolean isSafeSpawn(ServerLevel level, BlockPos pos) {
-        return level.getBlockState(pos).isAir() && level.getBlockState(pos.above()).isAir();
+        if (!level.getBlockState(pos).isAir() || !level.getBlockState(pos.above()).isAir()) {
+            return false;
+        }
+
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos(pos.getX(), pos.getY(), pos.getZ());
+        while (mutable.getY() < level.getMaxBuildHeight()) {
+            BlockState state = level.getBlockState(mutable);
+            if (!state.isAir() && !state.liquid()) {
+                return false;
+            }
+            mutable.move(Direction.UP);
+        }
+
+        return level.getBlockState(pos.below()).isSolid();
     }
 }
