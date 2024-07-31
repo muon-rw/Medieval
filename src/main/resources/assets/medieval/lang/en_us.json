@@ -9,6 +9,12 @@
   "item.medieval.challenge_orb.cooldown": "Challenge Orb is on cooldown.",
   "item.medieval.town_portal_scroll.cooldown": "Town Portal is still on cooldown for %s",
   "item.medieval.town_portal_scroll": "Town Portal Scroll",
-  "item.medieval.town_portal_scroll.tooltip": "Channel to teleport to your bed, or to the nearest village if you have no bed.",
+  "item.medieval.town_portal_scroll.tooltip": "Channel to teleport to your bed, or to the nearest village if you have no bed. Only works in the Overworld.",
+  "item.medieval.town_portal_scroll.wrong_dimension": "This item can only be used in the Overworld",
+  "item.medieval.town_portal_scroll.teleport_bed": "Teleporting to bed...",
+  "item.medieval.town_portal_scroll.bed_obstructed": "Previous bed was missing or obstructed, teleporting to nearest village.",
+  "item.medieval.town_portal_scroll.teleport_waystone": "Teleporting to village Waystone...",
+  "item.medieval.town_portal_scroll.teleport_village": "Teleporting to village...",
+  "item.medieval.town_portal_scroll.no_destination": "No valid teleport destination found.",
   "itemGroup.medieval": "Medieval"
 }

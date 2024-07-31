@@ -167,6 +167,10 @@ dependencies {
     implementation fg.deobf("curse.maven:auto-leveling-616126:4899526")
     implementation fg.deobf("curse.maven:passive-skill-tree-850298:5367713")
     implementation fg.deobf("curse.maven:item-production-lib-950401:5114036")
+
+    // Waystones
+    implementation fg.deobf("curse.maven:waystones-245755:5500759")
+    implementation fg.deobf("curse.maven:balm-531761:5467600")
 }
 
 mixin {

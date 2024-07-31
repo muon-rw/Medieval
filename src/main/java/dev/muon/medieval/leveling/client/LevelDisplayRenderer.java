@@ -8,6 +8,7 @@ import daripher.autoleveling.event.MobsLevelingEvents;
 import daripher.skilltree.capability.skill.IPlayerSkills;
 import daripher.skilltree.capability.skill.PlayerSkillsProvider;
 import dev.muon.medieval.Medieval;
+import net.blay09.mods.waystones.core.Waystone;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
@@ -29,7 +30,6 @@ public class LevelDisplayRenderer {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void onRenderNameTag(RenderNameTagEvent event) {
         if (!(event.getEntity() instanceof LivingEntity)) return;
-
         LivingEntity entity = (LivingEntity) event.getEntity();
         int entityLevel = MobsLevelingEvents.getLevel(entity) + 1;
 
