@@ -1,6 +1,8 @@
 ## 1.2.3
 - Fix crash on dedicated servers
 - Fixed town portal scrolls sometimes teleporting to unsafe positions
+- Restricted town portal scrolls to Overworld (may change later, other dimensions were inconsistent)
+
 ## 1.2.2
 - Cancel leveling for fully passive mobs (cows, chickens, etc)
 - Clean up some unused event dynamic leveling stuff
