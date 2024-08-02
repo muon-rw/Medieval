@@ -1,3 +1,7 @@
+## 1.2.4
+- Soft check for FTB Chunks/Passive Skill Tree instead of crashing
+- Add description to Challenge Orb
+
 ## 1.2.3
 - Fix crash on dedicated servers
 - Fixed town portal scrolls sometimes teleporting to unsafe positions

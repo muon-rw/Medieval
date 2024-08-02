@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
+import net.minecraftforge.fml.ModList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -91,30 +92,34 @@ public class StructureRegenerator {
 
 
     public static BlockPos isAnyClaimed(ServerLevel level, BoundingBox boundingBox) {
-        if (!FTBChunksAPI.api().isManagerLoaded()) {
-            LOGGER.warn("FTB Chunks manager is not loaded. This shouldn't happen! Assuming no chunks are claimed.");
-            return null;
-        }
+        if (ModList.get().isLoaded("ftbchunks")) {
+            if (!FTBChunksAPI.api().isManagerLoaded()) {
+                LOGGER.warn("FTB Chunks manager is not loaded. This shouldn't happen! Assuming no chunks are claimed.");
+                return null;
+            }
 
-        ClaimedChunkManager chunkManager = FTBChunksAPI.api().getManager();
-        ResourceKey<Level> dimension = level.dimension();
+            ClaimedChunkManager chunkManager = FTBChunksAPI.api().getManager();
+            ResourceKey<Level> dimension = level.dimension();
 
-        int minChunkX = boundingBox.minX() >> 4;
-        int minChunkZ = boundingBox.minZ() >> 4;
-        int maxChunkX = boundingBox.maxX() >> 4;
-        int maxChunkZ = boundingBox.maxZ() >> 4;
+            int minChunkX = boundingBox.minX() >> 4;
+            int minChunkZ = boundingBox.minZ() >> 4;
+            int maxChunkX = boundingBox.maxX() >> 4;
+            int maxChunkZ = boundingBox.maxZ() >> 4;
 
-        for (int chunkX = minChunkX; chunkX <= maxChunkX; chunkX++) {
-            for (int chunkZ = minChunkZ; chunkZ <= maxChunkZ; chunkZ++) {
-                ChunkDimPos chunkDimPos = new ChunkDimPos(dimension, chunkX, chunkZ);
-                ClaimedChunk claimedChunk = chunkManager.getChunk(chunkDimPos);
-                if (claimedChunk != null) {
-                    return new BlockPos((chunkX << 4) + 8, 0, (chunkZ << 4) + 8);
+            for (int chunkX = minChunkX; chunkX <= maxChunkX; chunkX++) {
+                for (int chunkZ = minChunkZ; chunkZ <= maxChunkZ; chunkZ++) {
+                    ChunkDimPos chunkDimPos = new ChunkDimPos(dimension, chunkX, chunkZ);
+                    ClaimedChunk claimedChunk = chunkManager.getChunk(chunkDimPos);
+                    if (claimedChunk != null) {
+                        return new BlockPos((chunkX << 4) + 8, 0, (chunkZ << 4) + 8);
+                    }
                 }
             }
+        } else {
+            LOGGER.info("FTB Chunks is not loaded. No claim check performed.");
         }
 
-        // No chunks are claimed
+        // No chunks are claimed or FTB Chunks is not loaded
         return null;
     }
 

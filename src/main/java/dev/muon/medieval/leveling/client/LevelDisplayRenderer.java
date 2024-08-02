@@ -21,6 +21,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Medieval.MODID, value = Dist.CLIENT)
@@ -88,21 +89,27 @@ public class LevelDisplayRenderer {
     }
 
     private static int getLevelColor(Player player, int entityLevel) {
-        if (!PlayerSkillsProvider.hasSkills(player)) {
-            return 0xFFFF00; //yellow
-        }
+        if (ModList.get().isLoaded("skilltree") && PlayerSkillsProvider.hasSkills(player)) {
+            IPlayerSkills skills = PlayerSkillsProvider.get(player);
+            int playerLevel = skills.getPlayerSkills().size();
+            int levelDifference = entityLevel - playerLevel;
 
-        IPlayerSkills skills = PlayerSkillsProvider.get(player);
-        int playerLevel = skills.getPlayerSkills().size();
-
-        int levelDifference = entityLevel - playerLevel;
-
-        if (levelDifference > 10) {
-            return 0xFF0000; // red
-        } else if (levelDifference > -5) {
-            return 0xFFFF00; // yellow
+            if (levelDifference > 10) {
+                return 0xFF0000; // red
+            } else if (levelDifference > -5) {
+                return 0xFFFF00; // yellow
+            } else {
+                return 0x00FF00; // green
+            }
         } else {
-            return 0x00FF00; // green
+            if (entityLevel < 8) {
+                return 0x00FF00; // green
+            } else if (entityLevel <= 19) {
+                return 0xFFFF00; // yellow
+            } else {
+                return 0xFF0000; // red
+            }
         }
     }
+
 }

@@ -1,5 +1,6 @@
 {
   "item.medieval.challenge_orb": "Challenge Orb",
+  "item.medieval.challenge_orb.tooltip": "Respawns the nearest boss structure on use. Does not work if the structure contains any claimed chunks.",
   "item.medieval.challenge_orb.searching": "Searching for nearby structure...",
   "item.medieval.challenge_orb.found": "Found structure: %s. Click again to regenerate.",
   "item.medieval.challenge_orb.not_found": "No valid structure found nearby.",

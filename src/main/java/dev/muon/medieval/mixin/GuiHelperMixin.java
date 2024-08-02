@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = GuiHelper.class, remap = false)
 public class GuiHelperMixin {
-
-    // I love this mod!
-    // =D
+    /**
+     * The stamina bar would stay visible when loading a config with disabled stamina into a new modpack instance.
+     */
     @Inject(
             method = "registerOverlays",
             at = @At(
