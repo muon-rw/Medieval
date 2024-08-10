@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
 	id "com.modrinth.minotaur" version "2.+"
 	id 'net.darkhax.curseforgegradle' version "1.1.16"
@@ -13,18 +13,7 @@ base {
 }
 
 repositories {
-	maven {
-		name = "Parchment"
-		url = 'https://maven.parchmentmc.org'
-	}
-	maven {
-		name = "Porting Lib"
-		url = "https://mvn.devos.one/releases/"
-	}
-	maven {
-		name = "CCA"
-		url = 'https://maven.ladysnake.org/releases'
-	}
+	maven {url = 'https://maven.ladysnake.org/releases'}
 	maven {
 		url = "https://api.modrinth.com/maven"
 		content {
@@ -32,15 +21,10 @@ repositories {
 		}
 	}
 	maven { url "https://jitpack.io/" }
-	maven { url "https://maven.jamieswhiteshirt.com/libs-release" }
-	maven { url 'https://maven.blamejared.com' }
-	maven { url "https://maven.shedaniel.me" }
-	maven { url "https://maven.terraformersmc.com" }
 	maven { url "https://cursemaven.com" }
-	maven { url "https://maven.bai.lol" }
-	maven { url 'https://maven.kosmx.dev/' }
-	maven { url 'https://libs.azuredoom.com:4443/mods'}
 	maven { url "https://maven.parchmentmc.org" }
+	maven { url "https://maven.terraformersmc.com/" }
+	maven { url "https://maven.shedaniel.me/" }
 	mavenLocal()
 }
 
@@ -50,73 +34,38 @@ dependencies {
 	mappings loom.layered() {
 		officialMojangMappings()
 		// Use parchment mappings. NOTE: Parchment maven must be manually added. (https://maven.parchmentmc.org)
-		parchment("org.parchmentmc.data:parchment-1.20.1:2023.06.26@zip")
+		parchment("org.parchmentmc.data:parchment-1.21:2024.07.28@zip")
 	}
-
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+	modLocalRuntime"com.terraformersmc:modmenu:${project.mod_menu_version}"
 
-	// Zenith
-	//modImplementation "maven.modrinth:zenith-attributes:${project.zenith_attributes_version}"
-	//modImplementation "maven.modrinth:zenith:${project.zenith_version}"
-	//modImplementation "maven.modrinth:zephyr-mod:${project.zephyr_version}"
-	//modImplementation "maven.modrinth:fakerlib:${project.fakerlib_version}"
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
 
-	// RPG Series - Libraries
-	modImplementation("maven.modrinth:projectile-damage-attribute:${project.projectile_damage}-fabric")
-	modImplementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api}-fabric")
-	modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-fabric")
-	modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-fabric")
-	modImplementation("maven.modrinth:runes:${project.runes_version}-fabric")
-	modImplementation("maven.modrinth:better-combat:${project.bettercombat_version}-fabric")
-	modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-fabric")
+	// FTB
+	modImplementation "curse.maven:ftb-quests-fabric-438496:5543247"
+	modImplementation "curse.maven:ftb-library-fabric-438495:5583833"
+	modImplementation "curse.maven:ftb-teams-fabric-438497:5448372"
+	modLocalRuntime "curse.maven:ftb-xmod-compat-889915:5494733"
+	modLocalRuntime "curse.maven:architectury-api-419699:5553799"
+	modApi("teamreborn:energy:4.1.0") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
-	// RPG Series - Content
-	modImplementation("maven.modrinth:archers:${project.archers_version}-fabric")
-	modImplementation("maven.modrinth:wizards:${project.wizards_version}-fabric")
-	modImplementation("maven.modrinth:jewelry:${project.jewelry_version}-fabric")
-	modImplementation("maven.modrinth:paladins-and-priests:${project.paladins_version}-fabric")
-	modImplementation("maven.modrinth:rogues-and-warriors:${project.rogues_version}-fabric")
+	// Thermoo
+	modImplementation 'com.github.TheDeathlyCow:thermoo:v4.2'
+	modLocalRuntime "curse.maven:scorchful-981400:5567705"
+	modLocalRuntime "curse.maven:frostiful-715248:5560676"
+	modLocalRuntime "curse.maven:thermoo-patches-1012677:5554110"
+	modApi "org.ladysnake:satin:2.0.0"
 
-	// RPG Series - External libs
-	modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim_version}")
-	modImplementation("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}")
-	modImplementation("dev.emi:trinkets:${project.trinkets_version}")
-	modImplementation "mod.azure.azurelib:azurelib-fabric-${project.minecraft_version}:${project.azure_lib_version}"
 
-	// Simply Skills
-	modImplementation("maven.modrinth:simply-skills:${project.simply_skills_version}")
-	modImplementation "curse.maven:puffish-attributes-991341:5486688"
-	modImplementation "curse.maven:puffish-skills-835091:5361177"
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
-	// Nameplate
-	modImplementation("maven.modrinth:nameplate:${project.nameplate_version}")
-
-	// Forg
-	modImplementation("maven.modrinth:spellblades-and-such:${project.spellblades_version}")
-	modImplementation("maven.modrinth:extra-rpg-attributes:${project.extra_rpg_attr_version}")
-	modImplementation("maven.modrinth:druids-of-storm-and-spirit:${project.druids_version}")
-
-	// Other stuff
-	implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${project.mixin_squared_version}"))
-	implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.mixin_extras_version}"))
-
-	modImplementation("com.jamieswhiteshirt:reach-entity-attributes:${project.rea_version}")
-	modImplementation("maven.modrinth:AdditionalEntityAttributes:${project.aea_version}")
-
-	modImplementation("io.github.fabricators_of_create.Porting-Lib:base:${project.port_lib_version}")
-	modImplementation("io.github.fabricators_of_create.Porting-Lib:loot:${project.port_lib_version}")
-	modImplementation("io.github.fabricators_of_create.Porting-Lib:utility:${project.port_lib_version}")
-	modImplementation("io.github.fabricators_of_create.Porting-Lib:tags:${project.port_lib_version}")
-	modImplementation("io.github.fabricators_of_create.Porting-Lib:tool_actions:${project.port_lib_version}")
-
-	modImplementation "curse.maven:jade-324717:${jade_id}"
-	modImplementation("com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}")
-	modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}")
-	modImplementation("io.github.ladysnake:PlayerAbilityLib:${project.pal_version}")
-	implementation("com.github.ZsoltMolnarrr:TinyConfig:${project.tiny_config_version}")
-	modImplementation("mod.azure.azurelibarmor:azurelibarmor-fabric-${project.minecraft_version}:${project.azurelib_armor_version}")
 
 }
 
@@ -129,17 +78,14 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {
@@ -148,34 +94,18 @@ jar {
 	}
 }
 
-// configure the maven publication
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
 			from components.java
 		}
 	}
-
 	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
 	repositories {
 		// Add repositories to publish to here.
 		// Notice: This block does NOT have the same function as the block in the top level.
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
-	}
-}
-
-modrinth {
-	token = System.getenv("MODRINTH_TOKEN")
-	projectId = "zephyr-mod"
-	versionType = "release"
-	versionName = "Zephyr " + project.version
-	uploadFile = remapJar
-	gameVersions = ["1.20.1"]
-	loaders = ["fabric"]
-	changelog = new File("$project.rootDir/changelog.md").getText('UTF-8')
-	//debugMode = true
-	dependencies {
 	}
 }
 
@@ -186,7 +116,7 @@ task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge)
 	mainFile.changelog = new File("$project.rootDir/changelog.md").getText('UTF-8')
 	mainFile.changelogType = "markdown"
 	mainFile.releaseType = "release"
-	mainFile.addGameVersion("1.20.1")
+	mainFile.addGameVersion("1.21")
 	mainFile.addModLoader("fabric")
 	mainFile.displayName = project.archives_base_name + "-" + project.version
 }

@@ -22,8 +22,7 @@ public class MedievalMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.endsWith("DynamicDamageMixin")) {
-            return FabricLoader.getInstance().isModLoaded("nameplate")
-                    && FabricLoader.getInstance().isModLoaded("simply_skills");
+            return FabricLoader.getInstance().isModLoaded("nameplate") && FabricLoader.getInstance().isModLoaded("simply_skills");
         }
         return true;
     }
