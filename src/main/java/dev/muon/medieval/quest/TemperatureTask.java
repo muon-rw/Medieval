@@ -27,25 +27,6 @@ public class TemperatureTask extends AbstractBooleanTask {
         EQUAL;
         public static final NameMap<TemperatureComparison> NAME_MAP = NameMap.of(ABOVE, values()).create();
     }
-    public static void checkTemperatureQuests(ServerPlayer player) {
-        ServerQuestFile file = ServerQuestFile.INSTANCE;
-        if (file == null) return;
-
-        TeamData data = file.getOrCreateTeamData(player);
-        if (data.isLocked()) return;
-
-        int playerTemperature = player.thermoo$getTemperature();
-
-        file.withPlayerContext(player, () -> {
-            for (TemperatureTask task : file.collect(TemperatureTask.class)) {
-                if (!data.isCompleted(task) && data.canStartTasks(task.getQuest())) {
-                    if (task.checkTemperature(playerTemperature)) {
-                        task.submitTask(data, player, ItemStack.EMPTY);
-                    }
-                }
-            }
-        });
-    }
 
     @Override
     public int autoSubmitOnPlayerTick() {
