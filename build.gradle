@@ -9,7 +9,7 @@ version = project.mod_version
 group = project.maven_group
 
 base {
-	archivesName = project.archives_base_name
+	archivesName = "${project.archives_base_name}-fabric"
 }
 
 repositories {
@@ -118,5 +118,5 @@ task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge)
 	mainFile.releaseType = "release"
 	mainFile.addGameVersion("1.21")
 	mainFile.addModLoader("fabric")
-	mainFile.displayName = project.archives_base_name + "-" + project.version
+	mainFile.displayName = "Fabric-${rootProject.version}+${minecraft_version}"
 }

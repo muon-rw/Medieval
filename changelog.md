@@ -1,2 +1,2 @@
 ## 0.1.0
-- Initial
+- Initial, FTB Quests / Thermoo tasks
