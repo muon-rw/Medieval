@@ -131,11 +131,12 @@ dependencies {
         jarJar.ranged(it, "[${mixin_extras_version},)")
     }
 
+    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${project.clothConfigVersion}")
+
     // Shared Libs
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
     runtimeOnly fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${project.playerAnimVersion}")
-    runtimeOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:${project.clothConfigVersion}")
     runtimeOnly fg.deobf("curse.maven:geckolib-388172:5460309")
     runtimeOnly fg.deobf("curse.maven:caelus-308989:5281700")
     runtimeOnly fg.deobf("curse.maven:attributefix-280510:4911084")
@@ -171,6 +172,10 @@ dependencies {
     // Waystones
     implementation fg.deobf("curse.maven:waystones-245755:5500759")
     implementation fg.deobf("curse.maven:balm-531761:5467600")
+
+    // Target Dummy
+    implementation fg.deobf("curse.maven:mmmmmmmmmmmm-225738:5594972")
+    runtimeOnly fg.deobf("curse.maven:selene-499980:5640082")
 }
 
 mixin {

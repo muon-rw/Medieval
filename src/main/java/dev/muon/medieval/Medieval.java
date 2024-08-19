@@ -1,8 +1,6 @@
 package dev.muon.medieval;
 
-import dev.muon.medieval.leveling.OriginalLevelCapability;
-import dev.muon.medieval.leveling.client.LevelDisplayRenderer;
-import dev.muon.medieval.leveling.DynamicMobLeveling;
+import dev.muon.medieval.config.MedievalConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -25,7 +23,9 @@ public class Medieval
         modEventBus.addListener(this::commonSetup);
         Medieval.LOGGER.info("Medieval MC Forge Tweaks loading");
 
+        MedievalConfig.register();
         ItemRegistry.register(modEventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
     }
     private void commonSetup(final FMLCommonSetupEvent event)

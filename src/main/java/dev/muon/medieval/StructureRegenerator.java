@@ -4,6 +4,7 @@ import dev.ftb.mods.ftbchunks.api.ClaimedChunk;
 import dev.ftb.mods.ftbchunks.api.ClaimedChunkManager;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
+import dev.muon.medieval.config.MedievalConfig;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
@@ -13,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -29,19 +31,6 @@ import java.util.*;
 
 public class StructureRegenerator {
     private static final Logger LOGGER = LogManager.getLogger();
-    public static int SEARCH_RADIUS = 6;
-    private static final Set<String> WHITELISTED_NAMESPACES = Set.of(
-            "eeeabsmobs",
-            "cataclysm",
-            "dungeons_arise",
-            "dungeons_arise_seven_seas",
-            "mowziesmobs"
-    );
-
-    private static final List<ResourceLocation> ADDITIONAL_VALID_STRUCTURES = List.of(
-            new ResourceLocation("irons_spellbooks:catacombs")
-    );
-
 
     public static RegenerationResult regenerateStructure(ServerLevel level, BlockPos pos, ResourceLocation structureId) {
         if (!isValidStructure(structureId)) {
@@ -125,7 +114,8 @@ public class StructureRegenerator {
 
 
     public static boolean isValidStructure(ResourceLocation structureId) {
-        return WHITELISTED_NAMESPACES.contains(structureId.getNamespace()) || ADDITIONAL_VALID_STRUCTURES.contains(structureId);
+        return MedievalConfig.get().allowedStructureNamespaces.contains(structureId.getNamespace()) ||
+                MedievalConfig.get().additionalValidStructures.contains(structureId.toString());
     }
 
     private static void removeExistingEntities(ServerLevel level, BoundingBox boundingBox) {
@@ -135,10 +125,24 @@ public class StructureRegenerator {
                         boundingBox.minX(), boundingBox.minY(), boundingBox.minZ(),
                         boundingBox.maxX() + 1, boundingBox.maxY() + 1, boundingBox.maxZ() + 1
                 ),
-                entity -> entity instanceof net.minecraft.world.entity.Mob
-                        && !(entity instanceof net.minecraft.world.entity.TamableAnimal)
+                StructureRegenerator::shouldRemoveEntity
         );
         entitiesToRemove.forEach(net.minecraft.world.entity.Entity::discard);
+    }
+
+    private static boolean shouldRemoveEntity(net.minecraft.world.entity.Entity entity) {
+
+        if (entity instanceof net.minecraft.world.entity.Mob) {
+            return !(entity instanceof OwnableEntity) || ((OwnableEntity) entity).getOwner() == null;
+        }
+        return entity instanceof net.minecraft.world.entity.decoration.Painting ||
+                entity instanceof net.minecraft.world.entity.decoration.ItemFrame ||
+                entity instanceof net.minecraft.world.entity.decoration.ArmorStand ||
+                entity instanceof net.minecraft.world.entity.vehicle.AbstractMinecart ||
+                entity instanceof net.minecraft.world.entity.vehicle.Boat ||
+                entity instanceof net.minecraft.world.entity.decoration.LeashFenceKnotEntity ||
+                entity instanceof net.minecraft.world.entity.projectile.Arrow ||
+                entity instanceof net.minecraft.world.entity.projectile.SpectralArrow;
     }
 
     private static void forceResetLootContainers(ServerLevel level, BoundingBox boundingBox) {
@@ -157,8 +161,9 @@ public class StructureRegenerator {
 
     public static StructureStart findNearestStructure(ServerLevel level, BlockPos pos, ResourceLocation structureId) {
         Map<Structure, StructureStart> structures = new HashMap<>();
-        for (int x = -SEARCH_RADIUS; x <= SEARCH_RADIUS; x++) {
-            for (int z = -SEARCH_RADIUS; z <= SEARCH_RADIUS; z++) {
+        int searchRadius = MedievalConfig.get().structureSearchRadius;
+        for (int x = -searchRadius; x <= searchRadius; x++) {
+            for (int z = -searchRadius; z <= searchRadius; z++) {
                 ChunkPos chunkPos = new ChunkPos((pos.getX() >> 4) + x, (pos.getZ() >> 4) + z);
                 Map<Structure, LongSet> structuresInChunk = level.structureManager().getAllStructuresAt(chunkPos.getWorldPosition());
 

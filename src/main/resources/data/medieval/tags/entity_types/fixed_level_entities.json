@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    {"id":"guardvillagers:guard","required": false},
+    {"id":"twilightforest:quest_ram","required": false},
+    {"id":"aquamirae:golden_moth","required": false},
+    {"id":"iceandfire:ice_dragon","required": false},
+    {"id":"iceandfire:lightning_dragon","required": false},
+    {"id":"iceandfire:fire_dragon","required": false}
+  ]
+}

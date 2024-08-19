@@ -1,3 +1,9 @@
+## 1.3.0
+- Added mob leveling based on local players' Passive Skill Tree points (may add other player scaling options in the future)
+- Added mob leveling based on structure
+- Added config options
+- Cancel Apotheosis Treasure Goblin gem trigger on Target Dummies
+
 ## 1.2.4
 - Soft check for FTB Chunks/Passive Skill Tree instead of crashing
 - Add description to Challenge Orb
