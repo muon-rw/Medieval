@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin;
+package dev.muon.medieval.mixin.compat.survive;
 
 import com.stereowalker.survive.GuiHelper;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;

@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin;
+package dev.muon.medieval.mixin.compat.autoleveling;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import daripher.autoleveling.event.MobsLevelingEvents;

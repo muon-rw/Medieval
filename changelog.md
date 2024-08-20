@@ -1,3 +1,7 @@
+## 1.4.0
+- IPL integrations
+- More mixin configuring
+
 ## 1.3.0
 - Added mob leveling based on local players' Passive Skill Tree points (may add other player scaling options in the future)
 - Added mob leveling based on structure

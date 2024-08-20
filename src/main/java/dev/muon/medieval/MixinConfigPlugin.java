@@ -21,12 +21,21 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.contains("GuiHelperMixin") || mixinClassName.contains("SurviveEventsMixin")) {
-            return isModLoaded("survive");
+
+        if (mixinClassName.contains(".compat.")) {
+            String[] parts = mixinClassName.split("\\.");
+            for (int i = 0; i < parts.length; i++) {
+                if (parts[i].equals("compat") && i + 1 < parts.length) {
+                    String modId = parts[i + 1];
+                    return isModLoaded(modId);
+                }
+            }
         }
+
         if (mixinClassName.contains("TreasureGoblinBonusMixin")) {
             return isModLoaded("apotheosis") && isModLoaded("dummmmmmy");
         }
+
         return true;
     }
 

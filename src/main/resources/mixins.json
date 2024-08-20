@@ -5,10 +5,16 @@
     "refmap": "${modid}.refmap.json",
     "plugin": "dev.muon.medieval.MixinConfigPlugin",
     "mixins": [
-        "SurviveEventsMixin",
-        "GuiHelperMixin",
-        "MobLevelingEventsMixin",
-        "TreasureGoblinBonusMixin"
+        "compat.survive.SurviveEventsMixin",
+        "compat.survive.GuiHelperMixin",
+        "compat.autoleveling.MobLevelingEventsMixin",
+        "TreasureGoblinBonusMixin",
+        "compat.celestisynth.CelestialCraftingMenuMixin",
+        "compat.ars_nouveau.CraftingLecternTileMixin",
+        "compat.ars_nouveau.CraftingLecternTileInteractiveMixin",
+        "compat.toms_storage.CraftingTerminalBlockEntityMixin",
+        "compat.toms_storage.CraftingTerminalBlockEntityInteractiveMixin",
+        "compat.travelersbackpack.TravelersBackpackCraftingMixin"
     ],
     "client": [
     ],

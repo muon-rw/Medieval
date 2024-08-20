@@ -10,7 +10,7 @@ plugins {
 }
 
 base {
-    archivesName = "${fileName}-${mcVersion}"
+    archivesName = "${fileName}-${mc_version}"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(project.properties.javaVersion)
@@ -109,28 +109,18 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.neoforged:forge:${mcVersion}-${forgeVersion}"
-    if(project.mixin.toBoolean())                   annotationProcessor "org.spongepowered:mixin:${mixinVersion}:processor"
-    if(project.hasProperty('placeboVersion'))       implementation fg.deobf("dev.shadowsoffire:Placebo:${mcVersion}-${placeboVersion}")
-    if(project.hasProperty('jeiVersion'))           implementation fg.deobf("mezz.jei:jei-${mcVersion}-forge:${jeiVersion}")
-    if(project.hasProperty('jadeFileId'))           implementation fg.deobf("curse.maven:jade-324717:${jadeFileId}")
-    if(project.hasProperty('patchouliVersion'))     implementation fg.deobf("vazkii.patchouli:Patchouli:${patchouliVersion}")
-    if(project.hasProperty('topVersion'))           implementation fg.deobf(project.dependencies.create("mcjty.theoneprobe:theoneprobe:${topVersion}") {
-            transitive = false
-    })
-    if(project.hasProperty('bookshelfVersion'))     compileOnly    fg.deobf("net.darkhax.bookshelf:Bookshelf-Forge-${mcVersion}:${bookshelfVersion}")
-    if(project.hasProperty('gamestagesVersion'))    compileOnly    fg.deobf("net.darkhax.gamestages:GameStages-Forge-${mcVersion}:${gamestagesVersion}")
-    if(project.hasProperty('twilightFileId'))       implementation fg.deobf("curse.maven:the-twilight-forest-227639:${twilightFileId}")
-    if(project.hasProperty('gatewaysVersion'))      implementation fg.deobf("dev.shadowsoffire:GatewaysToEternity:${mcVersion}-${gatewaysVersion}")
-    if(project.hasProperty('attributeslibVersion')) implementation fg.deobf("dev.shadowsoffire:ApothicAttributes:${mcVersion}-${attributeslibVersion}")
-    if(project.hasProperty('apotheosisVersion')) implementation fg.deobf("dev.shadowsoffire:Apotheosis:${mcVersion}-${apotheosisVersion}")
-    if(project.hasProperty('betterCombatVersion')) implementation fg.deobf("maven.modrinth:better-combat:${betterCombatVersion}+${mcVersion}-forge")
+    minecraft "net.neoforged:forge:${mc_version}-${forge_version}"
 
+    // Mixin
+    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
         jarJar.ranged(it, "[${mixin_extras_version},)")
     }
 
+    // Important Stuff
+    implementation fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    implementation fg.deobf("curse.maven:jade-324717:${jade_file_id}")
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${project.clothConfigVersion}")
 
     // Shared Libs
@@ -141,9 +131,16 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:caelus-308989:5281700")
     runtimeOnly fg.deobf("curse.maven:attributefix-280510:4911084")
 
-    // Survive
-    implementation fg.deobf("curse.maven:survive-367337:4791291")
-    implementation fg.deobf("curse.maven:unionlib-367806:5178187")
+    // Apotheosis
+    implementation fg.deobf("dev.shadowsoffire:Placebo:${mc_version}-${placebo_version}")
+    implementation fg.deobf("dev.shadowsoffire:ApothicAttributes:${mc_version}-${attributeslib_version}")
+    implementation fg.deobf("dev.shadowsoffire:Apotheosis:${mc_version}-${apotheosis_version}")
+
+    // Ars Nouveau
+    implementation fg.deobf("curse.maven:ars-nouveau-401955:5600384")
+
+    // Better Combat
+    runtimeOnly fg.deobf("maven.modrinth:better-combat:${better_combat_version}+${mc_version}-forge")
 
     // BOMD
     runtimeOnly fg.deobf("curse.maven:bosses-of-mass-destruction-forge-941573:4955739")
@@ -151,6 +148,9 @@ dependencies {
     // Cataclysm
     runtimeOnly fg.deobf("curse.maven:lionfish-api-1001614:5363774")
     runtimeOnly fg.deobf("curse.maven:lendercataclysm-551586:5474791")
+
+    // Celestisynth
+    implementation fg.deobf("curse.maven:celestisynth-872712:5116555")
 
     // FTB
     implementation fg.deobf("curse.maven:ftb-chunks-forge-314906:5378090")
@@ -169,13 +169,24 @@ dependencies {
     implementation fg.deobf("curse.maven:passive-skill-tree-850298:5367713")
     implementation fg.deobf("curse.maven:item-production-lib-950401:5114036")
 
-    // Waystones
-    implementation fg.deobf("curse.maven:waystones-245755:5500759")
-    implementation fg.deobf("curse.maven:balm-531761:5467600")
+    // Survive
+    implementation fg.deobf("curse.maven:survive-367337:4791291")
+    implementation fg.deobf("curse.maven:unionlib-367806:5178187")
 
     // Target Dummy
     implementation fg.deobf("curse.maven:mmmmmmmmmmmm-225738:5594972")
     runtimeOnly fg.deobf("curse.maven:selene-499980:5640082")
+
+    // Tom's Storage
+    implementation fg.deobf("curse.maven:toms-storage-378609:5548573")
+
+    // Traveler's Backpack
+    implementation fg.deobf("curse.maven:travelers-backpack-321117:5529995")
+
+    // Waystones
+    implementation fg.deobf("curse.maven:waystones-245755:5500759")
+    implementation fg.deobf("curse.maven:balm-531761:5467600")
+
 }
 
 mixin {
@@ -193,13 +204,13 @@ tasks.named('processResources', ProcessResources).configure {
         modName: modName,
         author: author,
         desc: desc,
-        mcVersion: mcVersion,
+        mcVersion: mc_version,
         javaVersion: javaVersion,
-        forgeVersion: forgeVersion
+        forgeVersion: forge_version
     ]
 
-    if (project.hasProperty('placeboVersion'))       replaceProperties.put 'placeboVersion', placeboVersion
-    if (project.hasProperty('attributeslibVersion')) replaceProperties.put 'attributeslibVersion', attributeslibVersion
+    if (project.hasProperty('placeboVersion'))       replaceProperties.put 'placeboVersion', placebo_version
+    if (project.hasProperty('attributeslibVersion')) replaceProperties.put 'attributeslibVersion', attributeslib_version
     if (project.hasProperty('curiosVersion'))        replaceProperties.put 'curiosVersion', curiosVersion
     if (project.hasProperty('topVersion'))           replaceProperties.put 'topVersion', topVersion
     if (project.hasProperty('patchouliVersion'))     replaceProperties.put 'patchouliVersion', patchouliVersion
@@ -333,7 +344,7 @@ task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge)
     apiToken = System.getenv("CF_TOKEN")
 
     def mainFile = upload(1055023, jar)
-    mainFile.displayName = "Forge/Neoforge-${rootProject.version}+${mcVersion}"
+    mainFile.displayName = "Forge/Neoforge-${rootProject.version}+${mc_version}"
     mainFile.releaseType = "release"
     mainFile.changelog = new File("$project.rootDir/CHANGELOG.md").getText('UTF-8')
     mainFile.changelogType = "markdown"
