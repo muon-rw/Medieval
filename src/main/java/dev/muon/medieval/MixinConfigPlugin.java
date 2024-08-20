@@ -5,6 +5,7 @@ import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
 
 import java.util.List;
 import java.util.Set;
@@ -25,12 +26,18 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
         if (mixinClassName.contains(".compat.")) {
             String[] parts = mixinClassName.split("\\.");
             for (int i = 0; i < parts.length; i++) {
-                if (parts[i].equals("compat") && i + 1 < parts.length) {
-                    String modId = parts[i + 1];
-                    return isModLoaded(modId);
+                if (parts[i].equals("compat")) {
+                    if (i + 2 < parts.length && parts[i + 1].equals("itemproductionlib")) {
+                        String modId = parts[i + 2];
+                        return isModLoaded("itemproductionlib") && isModLoaded(modId);
+                    } else if (i + 1 < parts.length) {
+                        String modId = parts[i + 1];
+                        return isModLoaded(modId);
+                    }
                 }
             }
         }
+
 
         if (mixinClassName.contains("TreasureGoblinBonusMixin")) {
             return isModLoaded("apotheosis") && isModLoaded("dummmmmmy");
@@ -39,8 +46,11 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
         return true;
     }
 
-    private boolean isModLoaded(String modId) {
-        return LoadingModList.get().getModFileById(modId) != null;
+    private static boolean isModLoaded(String modId) {
+        if (ModList.get() == null) {
+            return LoadingModList.get().getMods().stream().map(ModInfo::getModId).anyMatch(modId::equals);
+        }
+        return ModList.get().isLoaded(modId);
     }
 
     @Override

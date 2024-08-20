@@ -1,8 +1,7 @@
-package dev.muon.medieval.mixin.compat.ars_nouveau;
+package dev.muon.medieval.mixin.compat.itemproductionlib.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.common.block.tile.CraftingLecternTile;
 import daripher.itemproduction.ItemProductionLib;
-import daripher.itemproduction.block.entity.Interactive;
 import net.minecraft.world.inventory.ResultContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;

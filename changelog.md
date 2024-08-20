@@ -1,5 +1,9 @@
+## 1.4.1
+- Optional crafting menu integrations, don't require IPL
+- Fix IPL + Traveler's Backpack integration sometimes not working 
+
 ## 1.4.0
-- IPL integrations
+- IPL integrations: Celestisynth, Traveler's Backpack, Tom's Simple Storage, Ars Nouveau (storage lecterns)
 - More mixin configuring
 
 ## 1.3.0

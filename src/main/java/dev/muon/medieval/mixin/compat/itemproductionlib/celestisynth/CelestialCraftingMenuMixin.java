@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.celestisynth;
+package dev.muon.medieval.mixin.compat.itemproductionlib.celestisynth;
 
 import com.aqutheseal.celestisynth.client.gui.celestialcrafting.CelestialCraftingMenu;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;

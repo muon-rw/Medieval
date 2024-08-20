@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.toms_storage;
+package dev.muon.medieval.mixin.compat.itemproductionlib.toms_storage;
 
 import com.tom.storagemod.tile.CraftingTerminalBlockEntity;
 import daripher.itemproduction.ItemProductionLib;

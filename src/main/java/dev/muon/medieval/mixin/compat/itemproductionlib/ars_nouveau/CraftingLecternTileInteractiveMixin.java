@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.ars_nouveau;
+package dev.muon.medieval.mixin.compat.itemproductionlib.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.common.block.tile.CraftingLecternTile;
 import daripher.itemproduction.block.entity.Interactive;

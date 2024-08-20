@@ -9,12 +9,12 @@
         "compat.survive.GuiHelperMixin",
         "compat.autoleveling.MobLevelingEventsMixin",
         "TreasureGoblinBonusMixin",
-        "compat.celestisynth.CelestialCraftingMenuMixin",
-        "compat.ars_nouveau.CraftingLecternTileMixin",
-        "compat.ars_nouveau.CraftingLecternTileInteractiveMixin",
-        "compat.toms_storage.CraftingTerminalBlockEntityMixin",
-        "compat.toms_storage.CraftingTerminalBlockEntityInteractiveMixin",
-        "compat.travelersbackpack.TravelersBackpackCraftingMixin"
+      "compat.itemproductionlib.celestisynth.CelestialCraftingMenuMixin",
+      "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",
+      "compat.itemproductionlib.ars_nouveau.CraftingLecternTileInteractiveMixin",
+      "compat.itemproductionlib.toms_storage.CraftingTerminalBlockEntityMixin",
+      "compat.itemproductionlib.toms_storage.CraftingTerminalBlockEntityInteractiveMixin",
+      "compat.itemproductionlib.travelersbackpack.TravelersBackpackCraftingMixin"
     ],
     "client": [
     ],
