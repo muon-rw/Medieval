@@ -59,10 +59,6 @@ public class MedievalConfig implements ConfigData {
                 AutoConfig.register(MedievalConfig.class, JanksonConfigSerializer::new);
         }
 
-        public boolean isValidStructure(ResourceLocation structureId) {
-                return allowedStructureNamespaces.contains(structureId.getNamespace()) ||
-                        additionalValidStructures.contains(structureId.toString());
-        }
         public int getStructureLevelBonus(ResourceLocation structureId) {
                 return structureLevelBonuses.getOrDefault(structureId.toString(), 0);
         }
