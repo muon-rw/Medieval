@@ -132,8 +132,8 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:attributefix-280510:4911084")
 
     // Apotheosis
-    implementation fg.deobf("dev.shadowsoffire:Placebo:${mc_version}-${placebo_version}")
-    implementation fg.deobf("dev.shadowsoffire:ApothicAttributes:${mc_version}-${attributeslib_version}")
+    runtimeOnly fg.deobf("dev.shadowsoffire:Placebo:${mc_version}-${placebo_version}")
+    runtimeOnly fg.deobf("dev.shadowsoffire:ApothicAttributes:${mc_version}-${attributeslib_version}")
     implementation fg.deobf("dev.shadowsoffire:Apotheosis:${mc_version}-${apotheosis_version}")
 
     // Ars Nouveau
