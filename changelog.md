@@ -1,3 +1,6 @@
+## 1.4.2
+- Add Autoleveling entity-specific attribute_modifiers per level
+
 ## 1.4.1
 - Optional crafting menu integrations, don't require IPL
 - Fix IPL + Traveler's Backpack integration sometimes not working 

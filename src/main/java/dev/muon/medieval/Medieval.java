@@ -1,9 +1,15 @@
 package dev.muon.medieval;
 
 import dev.muon.medieval.config.MedievalConfig;
+import dev.muon.medieval.leveling.EnhancedEntityLevelingSettingsReloader;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -16,7 +22,7 @@ import dev.muon.medieval.item.ItemRegistry;
 public class Medieval
 {
     public static final String MODID = "medieval";
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
     public Medieval()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -27,9 +33,14 @@ public class Medieval
         ItemRegistry.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(Medieval.class);
     }
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {}
+    private void commonSetup(final FMLCommonSetupEvent event) {}
+
+    @SubscribeEvent
+    public static void onAddReloadListeners(AddReloadListenerEvent event) {
+        event.addListener(new EnhancedEntityLevelingSettingsReloader());
+    }
 
     public static ResourceLocation loc(String id) {
         return new ResourceLocation(Medieval.MODID, id);
