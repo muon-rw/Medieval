@@ -1,3 +1,6 @@
+## 1.4.3
+- Add Autoleveling entity-specific attribute_modifiers per level
+
 ## 1.4.2
 - Make Autoleveling integrations optional
 
