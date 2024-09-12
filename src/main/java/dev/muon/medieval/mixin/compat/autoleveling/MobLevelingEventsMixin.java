@@ -27,6 +27,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.UUID;
 
@@ -92,48 +94,35 @@ public class MobLevelingEventsMixin {
         return 0;
     }
 
-    /**
-     * @author muon-rw
-     * @reason Replacing the original method entirely, to ensure duplicate logic doesn't attempt to run
-     */
-    @Overwrite
-    public static void applyAttributeBonuses(LivingEntity entity) {
-        int level = MobsLevelingEvents.getLevel(entity);
-        Medieval.LOGGER.info("Applying attribute bonuses for entity: {} with level: {}", entity.getType().toString(), level);
-
+    @Inject(method = "applyAttributeBonuses", at = @At("HEAD"), cancellable = true)
+    private static void applyEnhancedAttributeBonuses(LivingEntity entity, CallbackInfo ci) {
         EnhancedEntityLevelingSettings settings = EnhancedEntityLevelingSettingsReloader.getSettingsForEntity(entity.getType());
 
-        if (settings != null) {
-            Medieval.LOGGER.info("Enhanced settings found for entity: {}", entity.getType().toString());
-            if (!settings.getAttributeModifiers().isEmpty()) {
-                Medieval.LOGGER.info("Applying custom attribute modifiers for entity: {}", entity.getType().toString());
-                settings.getAttributeModifiers().forEach((attribute, modifier) -> {
-                    double scaledAmount = modifier.getAmount() * level;
-                    Medieval.LOGGER.info("Applying modifier for attribute: {}, amount: {}, operation: {}",
-                            attribute.toString(), scaledAmount, modifier.getOperation());
-                    applyAttributeBonusIfPossible(entity, attribute, scaledAmount, modifier.getOperation());
-                });
-            } else {
-                Medieval.LOGGER.warn("Enhanced settings found, but attribute modifiers are empty for entity: {}", entity.getType().toString());
-            }
-        } else {
-            Medieval.LOGGER.info("No enhanced settings found for entity: {}. Falling back to config bonuses.", entity.getType().toString());
-            Config.getAttributeBonuses()
-                    .forEach((attribute, bonus) -> {
-                        double scaledAmount = bonus * level;
-                        Medieval.LOGGER.info("Applying config bonus for attribute: {}, amount: {}",
-                                attribute.toString(), scaledAmount);
-                        applyAttributeBonusIfPossible(entity, attribute, scaledAmount, AttributeModifier.Operation.MULTIPLY_TOTAL);
-                    });
+        if (settings != null && !settings.getAttributeModifiers().isEmpty()) {
+            int level = MobsLevelingEvents.getLevel(entity);
+            Medieval.LOGGER.info("Applying enhanced attribute bonuses for entity: {} with level: {}", entity.getType().getDescription(), level);
+
+            settings.getAttributeModifiers().forEach((attribute, modifier) -> {
+                double scaledAmount = modifier.getAmount() * level;
+                Medieval.LOGGER.info("Applying modifier for attribute: {}, amount: {}, operation: {}",
+                        attribute.toString(), scaledAmount, modifier.getOperation());
+                applyAttributeBonusIfPossible(entity, attribute, scaledAmount, modifier.getOperation());
+            });
+
+            ci.cancel(); // If custom modifiers are defined for this entity, we don't want the config default modifiers to be applied.
         }
+        Medieval.LOGGER.info("No enhanced settings found for entity: {}. Falling back to config bonuses.", entity.getType().getDescription());
+
     }
+
     @Unique
     private static void applyAttributeBonusIfPossible(LivingEntity entity, Attribute attribute, double bonus, AttributeModifier.Operation operation) {
         AttributeInstance attributeInstance = entity.getAttribute(attribute);
         if (attributeInstance == null) return;
         UUID modifierId = UUID.fromString("6a102cb4-d735-4cb7-8ab2-3d383219a44e");
         AttributeModifier existingModifier = attributeInstance.getModifier(modifierId);
-        if (existingModifier != null && existingModifier.getAmount() == bonus && existingModifier.getOperation() == operation) return;
+        if (existingModifier != null && existingModifier.getAmount() == bonus && existingModifier.getOperation() == operation)
+            return;
         if (existingModifier != null) attributeInstance.removeModifier(existingModifier);
         AttributeModifier newModifier = new AttributeModifier(modifierId, "Auto Leveling Bonus", bonus, operation);
         attributeInstance.addPermanentModifier(newModifier);
