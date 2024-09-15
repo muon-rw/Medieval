@@ -1,3 +1,6 @@
+## 0.2.0
+- Add a few assets
+
 ## 0.1.1
 - Update Medieval Logo
 
