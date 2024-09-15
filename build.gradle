@@ -118,5 +118,5 @@ task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge)
 	mainFile.releaseType = "release"
 	mainFile.addGameVersion("1.21.1")
 	mainFile.addModLoader("fabric")
-	mainFile.displayName = "Fabric-${rootProject.version}+${minecraft_version}"
+	mainFile.displayName = "Fabric-${rootProject.version}"
 }
