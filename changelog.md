@@ -1,5 +1,5 @@
 ## 1.4.4
-- Rewrite mixin from 1.4.3 to be less intrusive
+- Fix Autoleveling's config attribute modifiers per level never applying
 
 ## 1.4.3
 - Add Autoleveling entity-specific attribute_modifiers per level
