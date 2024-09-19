@@ -3,7 +3,7 @@ package dev.muon.medieval.platform;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 
-public class ExamplePlatformHelperNeoForge implements ExamplePlatformHelper {
+public class MedievalPlatformHelperNeoForge implements MedievalPlatformHelper {
 
     @Override
     public Platform getPlatform() {
@@ -18,5 +18,10 @@ public class ExamplePlatformHelperNeoForge implements ExamplePlatformHelper {
     @Override
     public boolean isDevelopmentEnvironment() {
         return !FMLLoader.isProduction();
+    }
+
+    @Override
+    public FTBHelper getFTBHelper() {
+        return new FTBHelperNeoForge();
     }
 }

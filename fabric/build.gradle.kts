@@ -31,7 +31,7 @@ dependencies {
     modLocalRuntime("com.terraformersmc:modmenu:${Versions.MOD_MENU}")
 
 
-    modImplementation("curse.maven:ftb-chunks-fabric-472657:5710629")
+    modImplementation("curse.maven:ftb-chunks-fabric-472657:5710610")
     modImplementation("curse.maven:ftb-library-fabric-438495:5714915")
     modImplementation("curse.maven:ftb-teams-fabric-438497:5631447")
     modLocalRuntime("curse.maven:architectury-api-419699:5553799")

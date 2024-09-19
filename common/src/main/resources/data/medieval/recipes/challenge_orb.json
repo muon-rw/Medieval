@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "NDN",
+      "DRD",
+      "NDN"
+    ],
+    "key": {
+      "N": {
+        "item": "minecraft:netherite_scrap"
+      },
+      "D": {
+        "item": "apotheosis:infused_breath"
+      },
+      "R": {
+        "item": "simplyswords:empowered_remnant"
+      }
+    },
+    "result": {
+      "item": "medieval:challenge_orb",
+      "count": 1
+    }
+  }

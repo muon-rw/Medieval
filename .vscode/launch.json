@@ -1,0 +1,47 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "request": "launch",
+      "name": "neoforge - Client",
+      "presentation": {
+        "group": "Mod Development - neoforge",
+        "order": 0
+      },
+      "projectName": "neoforge",
+      "mainClass": "net.neoforged.devlaunch.Main",
+      "args": [
+        "@C:\\Users\\renpi\\IdeaProjects\\Medieval\\neoforge\\build\\moddev\\clientRunProgramArgs.txt"
+      ],
+      "vmArgs": [
+        "@C:\\Users\\renpi\\IdeaProjects\\Medieval\\neoforge\\build\\moddev\\clientRunVmArgs.txt",
+        "-Dfml.modFolders\u003dmedieval%%C:\\Users\\renpi\\IdeaProjects\\Medieval\\neoforge\\bin\\main;medieval%%C:\\Users\\renpi\\IdeaProjects\\Medieval\\neoforge\\bin\\test"
+      ],
+      "cwd": "${workspaceFolder}\\neoforge\\runs\\client",
+      "console": "internalConsole",
+      "shortenCommandLine": "none"
+    },
+    {
+      "type": "java",
+      "request": "launch",
+      "name": "neoforge - Server",
+      "presentation": {
+        "group": "Mod Development - neoforge",
+        "order": 1
+      },
+      "projectName": "neoforge",
+      "mainClass": "net.neoforged.devlaunch.Main",
+      "args": [
+        "@C:\\Users\\renpi\\IdeaProjects\\Medieval\\neoforge\\build\\moddev\\serverRunProgramArgs.txt"
+      ],
+      "vmArgs": [
+        "@C:\\Users\\renpi\\IdeaProjects\\Medieval\\neoforge\\build\\moddev\\serverRunVmArgs.txt",
+        "-Dfml.modFolders\u003dmedieval%%C:\\Users\\renpi\\IdeaProjects\\Medieval\\neoforge\\bin\\main;medieval%%C:\\Users\\renpi\\IdeaProjects\\Medieval\\neoforge\\bin\\test"
+      ],
+      "cwd": "${workspaceFolder}\\neoforge\\runs\\server",
+      "console": "internalConsole",
+      "shortenCommandLine": "none"
+    }
+  ]
+}

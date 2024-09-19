@@ -1,6 +1,6 @@
 package dev.muon.medieval.platform;
 
-public interface ExamplePlatformHelper {
+public interface MedievalPlatformHelper {
 
     /**
      * Gets the current platform
@@ -23,4 +23,11 @@ public interface ExamplePlatformHelper {
      * @return True if in a development environment, false otherwise.
      */
     boolean isDevelopmentEnvironment();
+
+    /**
+     * Gets the FTB helper for the current platform.
+     *
+     * @return An instance of FTBHelper for the current platform.
+     */
+    FTBHelper getFTBHelper();
 }

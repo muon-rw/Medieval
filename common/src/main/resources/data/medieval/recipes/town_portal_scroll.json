@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "PPP",
+      "PEP",
+      "PDP"
+    ],
+    "key": {
+      "P": {
+        "item": "minecraft:netherite_scrap"
+      },
+      "E": {
+        "item": "minecraft:ender_pearl"
+      },
+      "D": {
+        "item": "minecraft:diamond"
+      }
+    },
+    "result": {
+      "item": "medieval:town_portal_scroll",
+      "count": 2
+    }
+  }
