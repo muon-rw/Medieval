@@ -7,3 +7,5 @@ ____
 - Town Portal Scroll texture
 - Reimplement config
 - Test FTB Chunks
+- Fix `clientbound/minecraft:container_set_slot` crash
+- Optimize Structure Regenerator

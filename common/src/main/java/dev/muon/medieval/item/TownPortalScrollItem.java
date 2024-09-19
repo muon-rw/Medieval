@@ -76,16 +76,6 @@ public class TownPortalScrollItem extends Item {
             return InteractionResultHolder.fail(itemStack);
         }
 
-        // this will never actually fire
-        if (player.getCooldowns().isOnCooldown(this)) {
-            if (level.isClientSide) {
-                int remainingCooldownSeconds = (int) (player.getCooldowns().getCooldownPercent(this, 0) * COOLDOWN_TICKS / 20);
-                String formattedTime = String.format("%d:%02d", remainingCooldownSeconds / 60, remainingCooldownSeconds % 60);
-                player.displayClientMessage(Component.translatable("item.medieval.town_portal_scroll.cooldown", formattedTime), true);
-            }
-            return InteractionResultHolder.fail(itemStack);
-        }
-
         player.startUsingItem(hand);
         return InteractionResultHolder.consume(itemStack);
     }
@@ -114,7 +104,6 @@ public class TownPortalScrollItem extends Item {
         boolean teleported = false;
         Component resultMessage = null;
 
-        // 1. Try player's bed or individual respawn point
         BlockPos respawnPos = player.getRespawnPosition();
         ServerLevel respawnLevel = player.server.getLevel(player.getRespawnDimension());
 
@@ -128,7 +117,6 @@ public class TownPortalScrollItem extends Item {
             }
         }
 
-        // 2. If no bed/respawn point, try nearest village
         if (!teleported) {
             BlockPos nearestVillage = serverLevel.findNearestMapStructure(VILLAGE_TAG, player.blockPosition(), 64, false);
             if (nearestVillage != null) {
@@ -139,7 +127,6 @@ public class TownPortalScrollItem extends Item {
             }
         }
 
-        // 3. If no village found, use world spawn
         if (!teleported) {
             ServerLevel overworld = player.server.overworld();
             BlockPos worldSpawn = overworld.getSharedSpawnPos();
@@ -148,7 +135,6 @@ public class TownPortalScrollItem extends Item {
             resultMessage = Component.translatable("item.medieval.town_portal_scroll.teleport_world_spawn").withStyle(ChatFormatting.GREEN);
         }
 
-        // Rest of the method remains the same
         if (teleported) {
             serverLevel.playSound(null, player.getX(), player.getY(), player.getZ(),
                     SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 0.75F);

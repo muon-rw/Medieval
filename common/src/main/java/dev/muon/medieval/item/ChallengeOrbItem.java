@@ -134,7 +134,10 @@ public abstract class ChallengeOrbItem extends Item {
             if (result.success) {
                 player.displayClientMessage(Component.literal("Success! " + result.message).withStyle(ChatFormatting.GREEN), true);
                 player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
-                itemStack.shrink(1);
+
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
             } else {
                 player.displayClientMessage(Component.literal("Failed: " + result.message).withStyle(ChatFormatting.RED), true);
             }

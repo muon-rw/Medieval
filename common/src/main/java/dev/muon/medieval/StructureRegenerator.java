@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.protocol.game.ClientboundForgetLevelChunkPacket;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -57,7 +58,7 @@ public class StructureRegenerator {
         ChunkPos chunkPosMax = new ChunkPos(SectionPos.blockToSectionCoord(boundingBox.maxX()), SectionPos.blockToSectionCoord(boundingBox.maxZ()));
 
         removeExistingEntities(level, boundingBox);
-        forceResetLootContainers(level, boundingBox);
+        //forceResetLootContainers(level, boundingBox);
 
         List<ChunkPos> affectedChunks = new ArrayList<>();
 
@@ -70,12 +71,11 @@ public class StructureRegenerator {
             affectedChunks.add(chunkPos);
         });
 
-        // Sync chunks to clients, seems necessary on 1.21 now
+        // surely one of these works, should probably figure out which
         for (ChunkPos chunkPos : affectedChunks) {
-            level.getChunkSource().blockChanged(new BlockPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ()));
+                level.getChunkSource().blockChanged(new BlockPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ()));
         }
         resendChunksToNearbyPlayers(level, affectedChunks);
-
 
         long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
@@ -94,22 +94,10 @@ public class StructureRegenerator {
             LevelChunk chunk = level.getChunk(chunkPos.x, chunkPos.z);
             for (ServerPlayer player : level.getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
                 playerChunks.computeIfAbsent(player, k -> new ArrayList<>()).add(chunk);
+                ClientboundForgetLevelChunkPacket forgetPacket = new ClientboundForgetLevelChunkPacket(chunkPos);
+                player.connection.send(forgetPacket);
             }
         }
-
-        LevelLightEngine lightEngine = level.getLightEngine();
-
-        playerChunks.forEach((player, chunksForPlayer) -> {
-            for (LevelChunk chunk : chunksForPlayer) {
-                ClientboundLevelChunkWithLightPacket packet = new ClientboundLevelChunkWithLightPacket(
-                        chunk,
-                        lightEngine,
-                        null,
-                        null
-                );
-                player.connection.send(packet);
-            }
-        });
     }
 
     public static BlockPos isAnyClaimed(ServerLevel level, BoundingBox boundingBox) {
@@ -195,6 +183,7 @@ public class StructureRegenerator {
                 .min((s1, s2) -> Double.compare(s1.getBoundingBox().getCenter().distSqr(pos), s2.getBoundingBox().getCenter().distSqr(pos)))
                 .orElse(null);
     }
+
     public static class RegenerationResult {
         public final boolean success;
         public final String message;
