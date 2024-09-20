@@ -23,4 +23,5 @@ public class MedievalPlatformHelperFabric implements MedievalPlatformHelper {
     public FTBHelper getFTBHelper() {
         return new FTBHelperFabric();
     }
+
 }

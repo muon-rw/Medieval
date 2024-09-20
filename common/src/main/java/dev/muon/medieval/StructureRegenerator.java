@@ -1,13 +1,12 @@
 package dev.muon.medieval;
 
 
-import dev.muon.medieval.config.MedievalConfig;
+import dev.muon.medieval.platform.MedievalPlatformHelper;
 import dev.muon.medieval.platform.Services;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.protocol.game.ClientboundForgetLevelChunkPacket;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -22,8 +21,6 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
-import net.minecraft.world.level.lighting.LevelLightEngine;
-import org.apache.commons.lang3.mutable.MutableObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,6 +29,16 @@ import java.util.*;
 public class StructureRegenerator {
     private static final Logger LOGGER = LogManager.getLogger();
 
+     //TODO: Reimplement config
+    private static final int SEARCH_RADIUS = 4; // IN CHUNKS
+    private static final List<String> VALID_STRUCTURE_NAMESPACES = Arrays.asList(
+            "dungeons_arise",
+            "dungeons_arise_seven_seas"
+    );
+    private static final List<String> ADDITIONAL_VALID_STRUCTURES = Arrays.asList(
+            "minecraft:ancient_city",
+            "minecraft:end_city"
+    );
     public static RegenerationResult regenerateStructure(ServerLevel level, BlockPos pos, ResourceLocation structureId) {
         if (!isValidStructure(structureId)) {
             return new RegenerationResult(false, "Invalid structure");
@@ -57,11 +64,13 @@ public class StructureRegenerator {
         ChunkPos chunkPosMin = new ChunkPos(SectionPos.blockToSectionCoord(boundingBox.minX()), SectionPos.blockToSectionCoord(boundingBox.minZ()));
         ChunkPos chunkPosMax = new ChunkPos(SectionPos.blockToSectionCoord(boundingBox.maxX()), SectionPos.blockToSectionCoord(boundingBox.maxZ()));
 
+        // To prevent duplicates, and spamming dropped items from loot containers
         removeExistingEntities(level, boundingBox);
-        //forceResetLootContainers(level, boundingBox);
+        unpackAndDeleteLootContainers(level, boundingBox);
 
         List<ChunkPos> affectedChunks = new ArrayList<>();
 
+        // Regeneration
         ChunkPos.rangeClosed(chunkPosMin, chunkPosMax).forEach(chunkPos -> {
             structureStart.placeInChunk(level, level.structureManager(), level.getChunkSource().getGenerator(), level.getRandom(),
                     new BoundingBox(chunkPos.getMinBlockX(), level.getMinBuildHeight(), chunkPos.getMinBlockZ(),
@@ -71,11 +80,13 @@ public class StructureRegenerator {
             affectedChunks.add(chunkPos);
         });
 
-        // surely one of these works, should probably figure out which
+        // Sync the refreshed structure
+        // Shouldn't something like this be happening already with `placeInChunk`? idfk
         for (ChunkPos chunkPos : affectedChunks) {
                 level.getChunkSource().blockChanged(new BlockPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ()));
         }
-        resendChunksToNearbyPlayers(level, affectedChunks);
+        resendChunksAndUpdateLighting(level, affectedChunks);
+
 
         long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
@@ -87,28 +98,33 @@ public class StructureRegenerator {
         return new RegenerationResult(true, duration + " ms");
     }
 
-    private static void resendChunksToNearbyPlayers(ServerLevel level, List<ChunkPos> chunks) {
-        Map<ServerPlayer, List<LevelChunk>> playerChunks = new HashMap<>();
-
+    private static void resendChunksAndUpdateLighting(ServerLevel level, List<ChunkPos> chunks) {
         for (ChunkPos chunkPos : chunks) {
             LevelChunk chunk = level.getChunk(chunkPos.x, chunkPos.z);
+            ClientboundLevelChunkWithLightPacket packet = new ClientboundLevelChunkWithLightPacket(
+                    chunk,
+                    level.getLightEngine(),
+                    null,
+                    null
+            );
             for (ServerPlayer player : level.getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
-                playerChunks.computeIfAbsent(player, k -> new ArrayList<>()).add(chunk);
-                ClientboundForgetLevelChunkPacket forgetPacket = new ClientboundForgetLevelChunkPacket(chunkPos);
-                player.connection.send(forgetPacket);
+                player.connection.send(packet);
             }
         }
     }
 
     public static BlockPos isAnyClaimed(ServerLevel level, BoundingBox boundingBox) {
-        return Services.PLATFORM.getFTBHelper().isAnyClaimed(level, boundingBox);
+        if (Services.PLATFORM.isModLoaded("ftbchunks")) {
+            return Services.PLATFORM.getFTBHelper().isAnyClaimed(level, boundingBox);
+        }
+        return null;
     }
 
     public static boolean isValidStructure(ResourceLocation structureId) {
-        return true;
-        //return MedievalConfig.INSTANCE.allowedStructureNamespaces.get().contains(structureId.getNamespace()) ||
-        //        MedievalConfig.INSTANCE.additionalValidStructures.get().contains(structureId.toString());
+        return VALID_STRUCTURE_NAMESPACES.contains(structureId.getNamespace()) ||
+                ADDITIONAL_VALID_STRUCTURES.contains(structureId.toString());
     }
+
 
     private static void removeExistingEntities(ServerLevel level, BoundingBox boundingBox) {
         List<net.minecraft.world.entity.Entity> entitiesToRemove = level.getEntitiesOfClass(
@@ -137,7 +153,7 @@ public class StructureRegenerator {
                 entity instanceof net.minecraft.world.entity.projectile.SpectralArrow;
     }
 
-    private static void forceResetLootContainers(ServerLevel level, BoundingBox boundingBox) {
+    private static void unpackAndDeleteLootContainers(ServerLevel level, BoundingBox boundingBox) {
         BlockPos.betweenClosed(boundingBox.minX(), boundingBox.minY(), boundingBox.minZ(),
                         boundingBox.maxX(), boundingBox.maxY(), boundingBox.maxZ())
                 .forEach(pos -> {
@@ -154,7 +170,7 @@ public class StructureRegenerator {
     public static StructureStart findNearestStructure(ServerLevel level, BlockPos pos, ResourceLocation structureId) {
         Map<Structure, StructureStart> structures = new HashMap<>();
         // SEARCH RADIUS IN CHUNKS
-        int searchRadius = 4;//MedievalConfig.INSTANCE.structureSearchRadius.get();
+        int searchRadius = SEARCH_RADIUS;
         for (int x = -searchRadius; x <= searchRadius; x++) {
             for (int z = -searchRadius; z <= searchRadius; z++) {
                 ChunkPos chunkPos = new ChunkPos((pos.getX() >> 4) + x, (pos.getZ() >> 4) + z);

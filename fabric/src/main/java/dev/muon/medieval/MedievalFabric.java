@@ -17,7 +17,7 @@ public class MedievalFabric implements ModInitializer {
         Medieval.init();
 
         ItemRegistryFabric.init();
-        
+
         registerCreativeTabs();
     }
 

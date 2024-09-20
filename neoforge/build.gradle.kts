@@ -72,6 +72,7 @@ repositories {
 }
 
 dependencies {
+
     implementation("curse.maven:ftb-chunks-forge-314906:5710609")
     implementation("curse.maven:ftb-library-forge-404465:5714916")
     implementation("curse.maven:ftb-teams-forge-404468:5631446")

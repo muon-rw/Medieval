@@ -1,5 +1,7 @@
 package dev.muon.medieval.platform;
 
+import dev.muon.medieval.config.MedievalConfigHelper;
+
 public interface MedievalPlatformHelper {
 
     /**
@@ -30,4 +32,6 @@ public interface MedievalPlatformHelper {
      * @return An instance of FTBHelper for the current platform.
      */
     FTBHelper getFTBHelper();
+
+
 }

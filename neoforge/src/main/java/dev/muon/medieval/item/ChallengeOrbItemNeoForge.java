@@ -6,7 +6,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ChallengeOrbItemNeoForge extends ChallengeOrbItem {
-    private static DeferredHolder<DataComponentType<?>, DataComponentType<ChallengeOrbData>> CHALLENGE_ORB_DATA;
+    public static DeferredHolder<DataComponentType<?>, DataComponentType<ChallengeOrbData>> CHALLENGE_ORB_DATA;
 
     public ChallengeOrbItemNeoForge(Properties properties) {
         super(properties);
@@ -14,7 +14,7 @@ public class ChallengeOrbItemNeoForge extends ChallengeOrbItem {
 
     @Override
     protected ChallengeOrbData getData(ItemStack stack) {
-        return stack.getOrDefault(CHALLENGE_ORB_DATA.value(), new ChallengeOrbData(null, 0));
+        return stack.getOrDefault(CHALLENGE_ORB_DATA.value(), new ChallengeOrbData("", 0));
     }
 
     @Override

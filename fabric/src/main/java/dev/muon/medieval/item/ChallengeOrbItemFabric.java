@@ -4,11 +4,11 @@ import dev.muon.medieval.Medieval;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.world.item.ItemStack;
 
 public class ChallengeOrbItemFabric extends ChallengeOrbItem {
-    private static DataComponentType<ChallengeOrbData> CHALLENGE_ORB_DATA;
+    public static DataComponentType<ChallengeOrbData> CHALLENGE_ORB_DATA;
 
     public ChallengeOrbItemFabric(Properties properties) {
         super(properties);
@@ -16,7 +16,7 @@ public class ChallengeOrbItemFabric extends ChallengeOrbItem {
 
     @Override
     protected ChallengeOrbData getData(ItemStack stack) {
-        return stack.getOrDefault(CHALLENGE_ORB_DATA, new ChallengeOrbData(null, 0));
+        return stack.getOrDefault(CHALLENGE_ORB_DATA, new ChallengeOrbData("", 0));
     }
 
     @Override
@@ -30,6 +30,7 @@ public class ChallengeOrbItemFabric extends ChallengeOrbItem {
                 Medieval.loc("challenge_orb_data"),
                 DataComponentType.<ChallengeOrbData>builder()
                         .persistent(ChallengeOrbData.CODEC)
+                        .networkSynchronized(ByteBufCodecs.fromCodec(ChallengeOrbData.CODEC))
                         .build()
         );
     }

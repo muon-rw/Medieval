@@ -21,15 +21,11 @@ public class MedievalNeoForge {
         Medieval.setHelper(new MedievalPlatformHelperNeoForge());
         Services.setup(new MedievalPlatformHelperNeoForge());
 
-        ItemRegistryNeoForge.init();
-        ItemRegistryNeoForge.ITEMS.register(eventBus);
-        ItemRegistryNeoForge.registerDataComponents();
-        ItemRegistryNeoForge.DATA_COMPONENTS.register(eventBus);
+        ItemRegistryNeoForge.init(eventBus);
 
         registerCreativeTabs();
         CREATIVE_MODE_TABS.register(eventBus);
     }
-
     private void registerCreativeTabs() {
         CREATIVE_MODE_TABS.register("medieval_tab", () -> CreativeModeTab.builder()
                 .icon(() -> new ItemStack(ItemRegistry.CHALLENGE_ORB))
