@@ -9,7 +9,6 @@ ____
 - Recipes (or not)
 - Reimplement config
 - Fix translateable challenge orb messages
-- better sdrp
-
+- 
 ### Ultra High Priority:
 - Secret cow level

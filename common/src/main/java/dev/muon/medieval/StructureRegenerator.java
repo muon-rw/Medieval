@@ -30,7 +30,7 @@ public class StructureRegenerator {
     private static final Logger LOGGER = LogManager.getLogger();
 
      //TODO: Reimplement config
-    private static final int SEARCH_RADIUS = 4; // IN CHUNKS
+    private static final int SEARCH_RADIUS = 6; // IN CHUNKS
     private static final List<String> VALID_STRUCTURE_NAMESPACES = Arrays.asList(
             "dungeons_arise",
             "dungeons_arise_seven_seas"

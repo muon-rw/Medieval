@@ -1,2 +1,5 @@
 # 1.0.0
-- Initial 1.21.1 Multiloader Rewrite
+- Initial Multiloader Rewrite
+- Challenge Orbs, Town Portal Scrolls
+- Temperature Task (Fabric)
+- Quest Assets
