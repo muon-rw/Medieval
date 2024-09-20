@@ -122,7 +122,7 @@ public abstract class ChallengeOrbItem extends Item {
         }
 
         Medieval.LOG.debug("No valid structure instances found nearby");
-        player.displayClientMessage(Component.literal("No suitable structure found nearby.").withStyle(ChatFormatting.RED), true);
+        player.displayClientMessage(Component.literal("No regeneratable structure found nearby.").withStyle(ChatFormatting.RED), true);
     }
 
     private void confirmAndRegenerate(ServerLevel level, Player player, ItemStack itemStack) {

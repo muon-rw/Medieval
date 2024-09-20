@@ -25,6 +25,5 @@ object Versions {
     const val JEI = "19.17.0.193"
     const val EMI = "1.1.13+1.21.1"
     const val JAVA = 21
-
-    const val FZZY_CONFIG_VERSION = "0.4.3+1.21"
+    const val CLOTH_CONFIG_VERSION = "15.0.127"
 }

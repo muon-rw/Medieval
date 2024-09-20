@@ -2,6 +2,7 @@ package dev.muon.medieval;
 
 import dev.muon.medieval.item.ItemRegistry;
 import dev.muon.medieval.item.ItemRegistryFabric;
+import dev.muon.medieval.quest.TaskTypes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
@@ -16,8 +17,8 @@ public class MedievalFabric implements ModInitializer {
         Medieval.LOG.info("Hello Fabric world!");
         Medieval.init();
 
+        TaskTypes.init();
         ItemRegistryFabric.init();
-
         registerCreativeTabs();
     }
 

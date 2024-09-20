@@ -16,5 +16,16 @@
   "item.medieval.town_portal_scroll.bed_obstructed": "Previous bed was missing or obstructed, teleporting to nearest village.",
   "item.medieval.town_portal_scroll.teleport_village": "No bed found, teleporting to nearby village...",
   "item.medieval.town_portal_scroll.no_destination": "No valid teleport destination found.",
-  "itemGroup.medieval": "Medieval"
+  "itemGroup.medieval": "Medieval",
+  "medieval": "Medieval",
+  "ftbquests.task.medieval.temperature": "Temperature",
+  "ftbquests.task.medieval.temperature.above": "Above",
+  "ftbquests.task.medieval.temperature.below": "Below",
+  "ftbquests.task.medieval.temperature.equal": "Equal to",
+  "ftbquests.task.medieval.temperature.target_temperature": "Target Temperature",
+  "ftbquests.task.medieval.temperature.comparison": "Temperature Comparison",
+  "ftbquests.task.medieval.temperature.description": "Reach a specific temperature",
+  "ftbquests.task.medieval.temperature.text.above": "Reach a temperature above %s",
+  "ftbquests.task.medieval.temperature.text.below": "Reach a temperature below %s",
+  "ftbquests.task.medieval.temperature.text.equal": "Reach a temperature of exactly %s"
 }
