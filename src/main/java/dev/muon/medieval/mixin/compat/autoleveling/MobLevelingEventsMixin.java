@@ -100,18 +100,17 @@ public class MobLevelingEventsMixin {
 
         if (settings != null && !settings.getAttributeModifiers().isEmpty()) {
             int level = MobsLevelingEvents.getLevel(entity);
-            Medieval.LOGGER.info("Applying enhanced attribute bonuses for entity: {} with level: {}", entity.getType().getDescription(), level);
+            Medieval.LOGGER.debug("Applying enhanced attribute bonuses for entity: {} with level: {}", entity.getType().getDescription(), level);
 
             settings.getAttributeModifiers().forEach((attribute, modifier) -> {
                 double scaledAmount = modifier.getAmount() * level;
-                Medieval.LOGGER.info("Applying modifier for attribute: {}, amount: {}, operation: {}",
+                Medieval.LOGGER.debug("Applying modifier for attribute: {}, amount: {}, operation: {}",
                         attribute.toString(), scaledAmount, modifier.getOperation());
                 applyAttributeBonusIfPossible(entity, attribute, scaledAmount, modifier.getOperation());
             });
 
             ci.cancel(); // If custom modifiers are defined for this entity, we don't want the config default modifiers to be applied.
         }
-        Medieval.LOGGER.info("No enhanced settings found for entity: {}. Falling back to config bonuses.", entity.getType().getDescription());
 
     }
 

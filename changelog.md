@@ -1,3 +1,6 @@
+## 1.4.6
+- Fix other log spam
+
 ## 1.4.5
 - Fix log spam
 - Fix Autoleveling being required again
