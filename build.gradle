@@ -346,7 +346,7 @@ modrinth {
     projectId = "medieval-core-mod"
     versionNumber = "${version}"
     versionType = "release"
-    versionName = "Forge/Neoforge-${rootProject.version}+${minecraft_version}"
+    versionName = "Forge/Neoforge-${rootProject.version}+${mc_version}"
     changelog = new File("$project.rootDir/CHANGELOG.md").getText('UTF-8')
     uploadFile = jar
     gameVersions = forge_game_versions.split(", ").toList()
