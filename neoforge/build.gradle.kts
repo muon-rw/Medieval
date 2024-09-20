@@ -83,12 +83,12 @@ publishMods {
     file.set(tasks.named<Jar>("jar").get().archiveFile)
     modLoaders.add("neoforge")
     changelog = rootProject.file("CHANGELOG.md").readText()
-    version = "${Versions.MOD}+${Versions.MINECRAFT}-neoforge"
+    version = "${Versions.MOD}+${Versions.MINECRAFT}"
     type = STABLE
 
     curseforge {
         projectId = Properties.CURSEFORGE_PROJECT_ID
-        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        accessToken = providers.environmentVariable("CF_TOKEN")
 
         minecraftVersions.add(Versions.MINECRAFT)
         javaVersions.add(JavaVersion.VERSION_21)
@@ -104,8 +104,10 @@ publishMods {
         minecraftVersions.add(Versions.MINECRAFT)
     }
 
+    /*
     github {
         accessToken = providers.environmentVariable("GITHUB_TOKEN")
         parent(project(":common").tasks.named("publishGithub"))
     }
+     */
 }
