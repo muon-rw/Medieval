@@ -1,3 +1,7 @@
+## 1.4.5
+- Fix log spam
+- Fix Autoleveling being required again
+
 ## 1.4.4
 - Fix Autoleveling's config attribute modifiers per level never applying
 

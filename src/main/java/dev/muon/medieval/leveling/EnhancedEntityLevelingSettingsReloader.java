@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.logging.LogUtils;
 import daripher.autoleveling.settings.EntityLevelingSettings;
+import dev.muon.medieval.Medieval;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -22,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EnhancedEntityLevelingSettingsReloader extends SimpleJsonResourceReloadListener {
-    private static final Logger LOGGER = LogUtils.getLogger();
     private static final Gson GSON = Deserializers.createLootTableSerializer().create();
     private static final Map<ResourceLocation, EnhancedEntityLevelingSettings> ENHANCED_SETTINGS = new HashMap<>();
 
@@ -33,27 +33,24 @@ public class EnhancedEntityLevelingSettingsReloader extends SimpleJsonResourceRe
     @Nullable
     public static EnhancedEntityLevelingSettings getSettingsForEntity(EntityType<?> entityType) {
         ResourceLocation entityId = ForgeRegistries.ENTITY_TYPES.getKey(entityType);
-        LOGGER.debug("Attempting to get enhanced settings for entity: {}", entityId);
         EnhancedEntityLevelingSettings settings = ENHANCED_SETTINGS.get(entityId);
-        if (settings == null) {
-            LOGGER.debug("No enhanced settings found for entity: {}", entityId);
-        } else {
-            LOGGER.debug("Found enhanced settings for entity: {}", entityId);
+        if (settings != null) {
+            Medieval.LOGGER.debug("Found enhanced settings for entity: {}", entityId);
         }
         return settings;
     }
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-        LOGGER.info("Loading enhanced entity leveling settings");
+        Medieval.LOGGER.debug("Loading enhanced entity leveling settings");
         ENHANCED_SETTINGS.clear();
         map.forEach(this::loadSettings);
-        LOGGER.info("Loaded {} enhanced entity leveling settings", ENHANCED_SETTINGS.size());
+        Medieval.LOGGER.debug("Loaded {} enhanced entity leveling settings", ENHANCED_SETTINGS.size());
     }
 
     private void loadSettings(ResourceLocation fileId, JsonElement jsonElement) {
         try {
-            LOGGER.debug("Loading enhanced leveling settings from file: {}", fileId);
+            Medieval.LOGGER.debug("Loading enhanced leveling settings from file: {}", fileId);
             JsonObject jsonObject = jsonElement.getAsJsonObject();
 
             // Load original settings
@@ -72,9 +69,9 @@ public class EnhancedEntityLevelingSettingsReloader extends SimpleJsonResourceRe
 
             ENHANCED_SETTINGS.put(entityId, enhancedSettings);
 
-            LOGGER.info("Loaded enhanced settings for entity: {}", entityId);
+            Medieval.LOGGER.debug("Loaded enhanced settings for entity: {}", entityId);
         } catch (Exception exception) {
-            LOGGER.error("Couldn't parse enhanced leveling settings {}", fileId, exception);
+            Medieval.LOGGER.error("Couldn't parse enhanced leveling settings {}", fileId, exception);
         }
     }
 
@@ -91,9 +88,9 @@ public class EnhancedEntityLevelingSettingsReloader extends SimpleJsonResourceRe
                     double amount = modifierObject.get("amount").getAsDouble();
                     AttributeModifier.Operation operation = getOperation(modifierObject.get("operation").getAsInt());
                     attributeModifiers.put(attribute, new AttributeModifier("LevelingBonus", amount, operation));
-                    LOGGER.debug("Added attribute modifier: {} = {} ({})", attributeId, amount, operation);
+                    Medieval.LOGGER.debug("Added attribute modifier: {} = {} ({})", attributeId, amount, operation);
                 } else {
-                    LOGGER.warn("Unknown attribute: {}", attributeId);
+                    Medieval.LOGGER.debug("Unknown attribute: {}", attributeId);
                 }
             }
         }
@@ -106,7 +103,7 @@ public class EnhancedEntityLevelingSettingsReloader extends SimpleJsonResourceRe
             case 1 -> AttributeModifier.Operation.MULTIPLY_BASE;
             case 2 -> AttributeModifier.Operation.MULTIPLY_TOTAL;
             default -> {
-                LOGGER.warn("Unknown operation ID: {}. Defaulting to ADDITION", operationId);
+                Medieval.LOGGER.debug("Unknown operation ID: {}. Defaulting to ADDITION", operationId);
                 yield AttributeModifier.Operation.ADDITION;
             }
         };
