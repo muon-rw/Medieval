@@ -1,3 +1,7 @@
+## 1.5.0
+- Render player levels as the player's skill tree points instead of always level 1 - hide if no leveling mod is loaded
+- Add Just Leveling compat to the above feature. Syncs on level-up
+
 ## 1.4.6
 - Fix other log spam
 

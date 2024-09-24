@@ -2,15 +2,15 @@ package dev.muon.medieval;
 
 import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.leveling.EnhancedEntityLevelingSettingsReloader;
+import dev.muon.medieval.leveling.LevelSyncHandler;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -35,8 +35,14 @@ public class Medieval
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(Medieval.class);
+        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> "ANY", (remote, isServer) -> true));
+
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
     }
-    private void commonSetup(final FMLCommonSetupEvent event) {}
+
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        LevelSyncHandler.init(event);
+    }
 
     @SubscribeEvent
     public static void onAddReloadListeners(AddReloadListenerEvent event) {
@@ -44,6 +50,7 @@ public class Medieval
             event.addListener(new EnhancedEntityLevelingSettingsReloader());
         }
     }
+
 
     public static ResourceLocation loc(String id) {
         return new ResourceLocation(Medieval.MODID, id);

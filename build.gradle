@@ -188,6 +188,9 @@ dependencies {
     implementation fg.deobf("curse.maven:waystones-245755:5500759")
     implementation fg.deobf("curse.maven:balm-531761:5467600")
 
+    // Just Leveling
+    compileOnly fg.deobf("curse.maven:justleveling-fork-1073400:5744833")
+
 }
 
 mixin {

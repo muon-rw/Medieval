@@ -4,10 +4,8 @@ import com.minecraftserverzone.mobhealthbar.GuiHelper;
 import com.minecraftserverzone.mobhealthbar.configs.ConfigHolder;
 import com.minecraftserverzone.mobhealthbar.configs.HpBarModConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
-import daripher.autoleveling.event.MobsLevelingEvents;
-import daripher.skilltree.capability.skill.IPlayerSkills;
-import daripher.skilltree.capability.skill.PlayerSkillsProvider;
 import dev.muon.medieval.Medieval;
+import dev.muon.medieval.leveling.LevelingUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
@@ -20,20 +18,23 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = Medieval.MODID, value = Dist.CLIENT)
 public class LevelDisplayRenderer {
     private static final float TEXT_SCALE = -0.02F;
+    private static final Map<UUID, Integer> playerLevels = new HashMap<>();
+
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void onRenderNameTag(RenderNameTagEvent event) {
-        if (!(event.getEntity() instanceof LivingEntity)) return;
-        if (!ModList.get().isLoaded("autoleveling")) return;
+        if (!(event.getEntity() instanceof LivingEntity entity)) return;
 
-        LivingEntity entity = (LivingEntity) event.getEntity();
-        int entityLevel = MobsLevelingEvents.getLevel(entity) + 1;
+        int entityLevel = getEntityLevel(entity);
 
         if (entityLevel > 0 && shouldRender(entity)) {
             Minecraft minecraft = Minecraft.getInstance();
@@ -72,6 +73,19 @@ public class LevelDisplayRenderer {
         }
     }
 
+    private static int getEntityLevel(LivingEntity entity) {
+        if (entity instanceof Player) {
+            return playerLevels.getOrDefault(entity.getUUID(), 0);
+        } else {
+            return LevelingUtils.getEntityLevel(entity);
+        }
+    }
+
+    public static void updatePlayerLevel(UUID playerId, int level) {
+        playerLevels.put(playerId, level);
+    }
+
+
     private static boolean shouldRender(LivingEntity entity) {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
@@ -90,10 +104,8 @@ public class LevelDisplayRenderer {
     }
 
     private static int getLevelColor(Player player, int entityLevel) {
-
-        if (ModList.get().isLoaded("skilltree") && PlayerSkillsProvider.hasSkills(player)) {
-            IPlayerSkills skills = PlayerSkillsProvider.get(player);
-            int playerLevel = skills.getPlayerSkills().size();
+        int playerLevel = getEntityLevel(player);
+        if (playerLevel > 0) {
             int levelDifference = entityLevel - playerLevel;
 
             if (levelDifference > 10) {
@@ -103,7 +115,6 @@ public class LevelDisplayRenderer {
             } else {
                 return 0x00FF00; // green
             }
-
         } else {
             if (entityLevel < 8) {
                 return 0x00FF00; // green

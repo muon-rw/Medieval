@@ -1,22 +1,24 @@
 {
-    "required": true,
-    "package": "dev.muon.medieval.mixin",
-    "compatibilityLevel": "JAVA_17",
-    "refmap": "${modid}.refmap.json",
-    "plugin": "dev.muon.medieval.MixinConfigPlugin",
-    "mixins": [
-        "compat.survive.SurviveEventsMixin",
-        "compat.survive.GuiHelperMixin",
-        "compat.autoleveling.MobLevelingEventsMixin",
-        "TreasureGoblinBonusMixin",
-      "compat.itemproductionlib.celestisynth.CelestialCraftingMenuMixin",
-      "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",
-      "compat.itemproductionlib.ars_nouveau.CraftingLecternTileInteractiveMixin",
-      "compat.itemproductionlib.toms_storage.CraftingTerminalBlockEntityMixin",
-      "compat.itemproductionlib.toms_storage.CraftingTerminalBlockEntityInteractiveMixin",
-      "compat.itemproductionlib.travelersbackpack.TravelersBackpackCraftingMixin"
-    ],
-    "client": [
-    ],
-    "minVersion": "0.8"
+  "required": true,
+  "package": "dev.muon.medieval.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "${modid}.refmap.json",
+  "plugin": "dev.muon.medieval.MixinConfigPlugin",
+  "mixins": [
+    "compat.survive.SurviveEventsMixin",
+    "compat.survive.GuiHelperMixin",
+    "compat.autoleveling.MobLevelingEventsMixin",
+    "TreasureGoblinBonusMixin",
+    "compat.itemproductionlib.celestisynth.CelestialCraftingMenuMixin",
+    "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",
+    "compat.itemproductionlib.ars_nouveau.CraftingLecternTileInteractiveMixin",
+    "compat.itemproductionlib.toms_storage.CraftingTerminalBlockEntityMixin",
+    "compat.itemproductionlib.toms_storage.CraftingTerminalBlockEntityInteractiveMixin",
+    "compat.itemproductionlib.travelersbackpack.TravelersBackpackCraftingMixin",
+    "compat.justlevelingfork.AptitudeCapabilityMixin",
+    "compat.justlevelingfork.client.JustLevelingScreenMixin"
+  ],
+  "client": [
+  ],
+  "minVersion": "0.8"
 }
