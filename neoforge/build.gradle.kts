@@ -77,6 +77,9 @@ dependencies {
     implementation("curse.maven:ftb-library-forge-404465:5714916")
     implementation("curse.maven:ftb-teams-forge-404468:5631446")
     runtimeOnly("curse.maven:architectury-api-419699:5553800")
+
+    // lord help me
+    implementation("curse.maven:the-twilight-forest-227639:5699076")
 }
 
 publishMods {

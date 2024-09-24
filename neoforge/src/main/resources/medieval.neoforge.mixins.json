@@ -5,7 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
   "client": [
-    "client.MixinTitleScreen"
+    "client.ClientEventsMixin"
   ],
   "server": [],
   "injectors": {
