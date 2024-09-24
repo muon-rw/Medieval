@@ -1,5 +1,5 @@
 ## 1.5.0
-- Render player levels as the player's skill tree points instead of always level 1 - hide if no leveling mod is loaded
+- Render player levels as the player's skill tree points instead of always level 1 - hide if no leveling mod is loaded //todo: see if PST data needs to be synced as well
 - Add Just Leveling compat to the above feature. Syncs on level-up
 
 ## 1.4.6
