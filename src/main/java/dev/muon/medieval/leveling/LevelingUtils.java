@@ -15,7 +15,7 @@ import java.util.List;
 public class LevelingUtils {
 
     private static final int MAX_LEVEL = 20;
-    private static final int START_LEVEL = 3;
+    private static final int START_LEVEL = 2;
     private static final int MIN_POINTS = 8;
     private static final int MAX_POINTS = 80;
     private static final int POINTS_PER_LEVEL = 4;

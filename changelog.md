@@ -1,3 +1,6 @@
+## 1.5.2
+- Start JL at level 2 instead of level 3 (so that players need to spend all 80 points to reach level 20)
+
 ## 1.5.1
 - Add level progress % to just leveling client level render
 - Normalize Just Leveling "player level" around 80 max points, //todo: config
