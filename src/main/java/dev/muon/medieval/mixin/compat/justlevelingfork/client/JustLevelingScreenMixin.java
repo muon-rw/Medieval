@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(value = JustLevelingScreen.class, remap = false)
 public class JustLevelingScreenMixin {
-
     @Redirect(
             method = "drawAptitudes",
             at = @At(
@@ -26,7 +25,8 @@ public class JustLevelingScreenMixin {
         Player player = screen.getMinecraft().player;
         if (player != null) {
             int level = LevelingUtils.getPlayerLevel(player);
-            Component newComponent = Component.translatable("screen.aptitude.level.custom", level);
+            double progress = LevelingUtils.getPlayerLevelProgress(player);
+            Component newComponent = Component.translatable("screen.aptitude.level.custom", level, String.format("%.1f", progress));
             Utils.drawCenter(graphics, newComponent, x, y);
         }
     }

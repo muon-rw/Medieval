@@ -1,5 +1,5 @@
 {
-  "screen.aptitude.level.custom": "Lvl: %s",
+  "screen.aptitude.level.custom": "Level %1$d/20 | (%2$s%%)",
 
   "item.medieval.challenge_orb": "Challenge Orb",
   "item.medieval.challenge_orb.tooltip": "Respawns the nearest boss structure on use. Does not work if the structure contains any claimed chunks.",

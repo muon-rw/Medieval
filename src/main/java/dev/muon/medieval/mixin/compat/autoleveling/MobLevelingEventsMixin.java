@@ -1,13 +1,12 @@
 package dev.muon.medieval.mixin.compat.autoleveling;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import daripher.autoleveling.config.Config;
 import daripher.autoleveling.event.MobsLevelingEvents;
 import dev.muon.medieval.Medieval;
 import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.leveling.EnhancedEntityLevelingSettings;
 import dev.muon.medieval.leveling.EnhancedEntityLevelingSettingsReloader;
-import dev.muon.medieval.leveling.PlayerLevelHelper;
+import dev.muon.medieval.leveling.LevelingUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -24,7 +23,6 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -69,7 +67,7 @@ public class MobLevelingEventsMixin {
         }
 
         if (MedievalConfig.get().applyPlayerBasedLeveling) {
-            modifiedLevel += PlayerLevelHelper.getLevelsOfNearbyPlayers((ServerLevel) entity.level(), entity);
+            modifiedLevel += LevelingUtils.getLevelsOfNearbyPlayers((ServerLevel) entity.level(), entity);
         }
 
         return modifiedLevel;
