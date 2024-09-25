@@ -122,12 +122,12 @@ dependencies {
     // Important Stuff
     implementation fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
     implementation fg.deobf("curse.maven:jade-324717:${jade_file_id}")
-    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${project.clothConfigVersion}")
+    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${project.cloth_config_version}")
 
     // Shared Libs
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
-    runtimeOnly fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${project.playerAnimVersion}")
+    runtimeOnly fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${project.player_anim_version}")
     runtimeOnly fg.deobf("curse.maven:geckolib-388172:5460309")
     runtimeOnly fg.deobf("curse.maven:caelus-308989:5281700")
     runtimeOnly fg.deobf("curse.maven:attributefix-280510:4911084")
