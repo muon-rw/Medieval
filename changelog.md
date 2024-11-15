@@ -1,6 +1,5 @@
 ## 1.5.3
 - Fix Town Portal Scrolls sometimes teleporting to unsafe locations
-- Fix Passive whitelist only working with Animals
 
 ## 1.5.2
 - Start JL at level 2 instead of level 3 (so that players need to spend all 80 points to reach level 20)
