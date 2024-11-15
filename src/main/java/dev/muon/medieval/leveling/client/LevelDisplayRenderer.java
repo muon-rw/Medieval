@@ -30,7 +30,7 @@ public class LevelDisplayRenderer {
     private static final Map<UUID, Integer> playerLevels = new HashMap<>();
 
 
-    @SubscribeEvent(priority = EventPriority.HIGH)
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onRenderNameTag(RenderNameTagEvent event) {
         if (!(event.getEntity() instanceof LivingEntity entity)) return;
 

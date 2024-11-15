@@ -46,34 +46,22 @@ public class ChallengeOrbItem extends Item {
         ItemStack itemStack = player.getItemInHand(hand);
         CompoundTag tag = itemStack.getOrCreateTag();
 
-        // never reached idk why it's still here
-        if (player.getCooldowns().isOnCooldown(this)) {
-            player.displayClientMessage(Component.translatable("item.medieval.challenge_orb.cooldown")
-                    .withStyle(ChatFormatting.RED), true);
-            return InteractionResultHolder.fail(itemStack);
+        if (!tag.contains("FoundStructure")) {
+            findStructure(serverLevel, player, itemStack);
+            player.getCooldowns().addCooldown(this, SEARCH_COOLDOWN);
+            return InteractionResultHolder.success(itemStack);
         }
 
         long currentTime = serverLevel.getGameTime();
-        if (tag.contains("FoundStructure")) {
-            long searchTime = tag.getLong("SearchTime");
-            if (currentTime - searchTime > SEARCH_TIMEOUT_TICKS) {
-                // Search has timed out, reset and search again
-                tag.remove("FoundStructure");
-                tag.remove("SearchTime");
-                findStructure(serverLevel, player, itemStack);
-
-            } else {
-
-                // Confirm Click
-                confirmAndRegenerate(serverLevel, player, itemStack);
-            }
-        } else {
-
-            // Initial click
+        long searchTime = tag.getLong("SearchTime");
+        if (currentTime - searchTime > SEARCH_TIMEOUT_TICKS) {
+            tag.remove("FoundStructure");
+            tag.remove("SearchTime");
             findStructure(serverLevel, player, itemStack);
-            player.getCooldowns().addCooldown(this, SEARCH_COOLDOWN);
+            return InteractionResultHolder.success(itemStack);
         }
 
+        confirmAndRegenerate(serverLevel, player, itemStack);
         return InteractionResultHolder.success(itemStack);
     }
 

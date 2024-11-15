@@ -15,8 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = SurviveEvents.class, remap = false)
 public class SurviveEventsMixin {
 
-    /**    Force disable Survive's Temperature checks.
-     *     Big performance hit, and for some reason still calculates when disabled
+    /**
+     * Force disable Survive's Temperature checks.
+     * Big performance hit, and for some reason still calculates when disabled
      */
 
     @Inject(method = "getExactTemperature", at = @At("HEAD"), cancellable = true)

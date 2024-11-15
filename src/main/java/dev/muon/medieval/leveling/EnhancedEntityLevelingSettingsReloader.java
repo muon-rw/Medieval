@@ -53,15 +53,11 @@ public class EnhancedEntityLevelingSettingsReloader extends SimpleJsonResourceRe
             Medieval.LOGGER.debug("Loading enhanced leveling settings from file: {}", fileId);
             JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-            // Load original settings
             EntityLevelingSettings originalSettings = EntityLevelingSettings.load(jsonObject);
-
-            // Load our enhanced settings
             Map<Attribute, AttributeModifier> attributeModifiers = readAttributeModifiers(jsonObject);
 
             EnhancedEntityLevelingSettings enhancedSettings = new EnhancedEntityLevelingSettings(originalSettings, attributeModifiers);
 
-            // Extract the entity name from the file path
             String path = fileId.getPath();
             String[] pathParts = path.split("/");
             String entityName = pathParts[pathParts.length - 1].replace(".json", "");

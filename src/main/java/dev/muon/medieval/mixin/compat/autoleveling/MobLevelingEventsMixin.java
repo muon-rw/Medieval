@@ -41,12 +41,11 @@ public class MobLevelingEventsMixin {
 
     @ModifyReturnValue(method = "canHaveLevel", at = @At("RETURN"))
     private static boolean cancelLevelsForPassives(boolean original, Entity entity) {
-        if (MedievalConfig.get().cancelLevelsForPassives && original && entity instanceof Animal) {
+        if (original && entity instanceof Animal animal && MedievalConfig.get().cancelLevelsForPassives) {
             if (entity.getType().is(PASSIVE_WHITELIST)) {
                 return true;
             }
-            LivingEntity livingEntity = (LivingEntity) entity;
-            AttributeInstance attackDamageAttribute = livingEntity.getAttribute(Attributes.ATTACK_DAMAGE);
+            AttributeInstance attackDamageAttribute = animal.getAttribute(Attributes.ATTACK_DAMAGE);
             if (attackDamageAttribute == null || attackDamageAttribute.getValue() <= 0) {
                 return false;
             }
@@ -61,11 +60,9 @@ public class MobLevelingEventsMixin {
         }
 
         int modifiedLevel = original;
-
         if (MedievalConfig.get().enableStructureLevelBonus) {
             modifiedLevel += getStructureLevelBonus(entity);
         }
-
         if (MedievalConfig.get().applyPlayerBasedLeveling) {
             modifiedLevel += LevelingUtils.getLevelsOfNearbyPlayers((ServerLevel) entity.level(), entity);
         }
