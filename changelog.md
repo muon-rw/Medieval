@@ -1,3 +1,6 @@
+## 1.5.4
+- Fix level rendering bug introduced in 1.5.3
+
 ## 1.5.3
 - Fix Town Portal Scrolls sometimes teleporting to unsafe locations
 
