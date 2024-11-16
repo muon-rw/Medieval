@@ -1,3 +1,6 @@
+## 1.5.5
+- Fix Just Leveling screen modifications not applying
+
 ## 1.5.4
 - Fix level rendering bug introduced in 1.5.3
 
