@@ -15,7 +15,8 @@
     "compat.itemproductionlib.toms_storage.CraftingTerminalBlockEntityMixin",
     "compat.itemproductionlib.toms_storage.CraftingTerminalBlockEntityInteractiveMixin",
     "compat.itemproductionlib.travelersbackpack.TravelersBackpackCraftingMixin",
-    "compat.justlevelingfork.AptitudeCapabilityMixin"
+    "compat.justlevelingfork.AptitudeCapabilityMixin",
+    "compat.skilltree.LearnSkillMessageMixin"
   ],
   "client": [
     "compat.justlevelingfork.client.JustLevelingScreenMixin"

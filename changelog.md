@@ -1,3 +1,6 @@
+## 1.5.6
+- Also sync Skill Tree levels on point allocation
+
 ## 1.5.5
 - Fix Just Leveling screen modifications not applying
 
