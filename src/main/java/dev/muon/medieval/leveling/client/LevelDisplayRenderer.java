@@ -60,7 +60,7 @@ public class LevelDisplayRenderer {
             int posXAdd = HpBarModConfig.HP_BAR_TYPE[1].get();
             int posYAdd = HpBarModConfig.HP_BAR_TYPE[2].get();
 
-            int levelColor = getLevelColor(player, entityLevel);
+            int levelColor = getLevelColor(player, entity);
 
             GuiHelper.drawString(matrixStack, font, entityName, (int)f2 + posXAdd, posYAdd, 0xFFFFFF, false);
             GuiHelper.drawString(matrixStack, font, levelText, (int)f2 + posXAdd + font.width(entityName), posYAdd, levelColor, false);
@@ -103,8 +103,10 @@ public class LevelDisplayRenderer {
         return (result != null && result.getEntity() == entity) && distanceSq <= renderDistance;
     }
 
-    private static int getLevelColor(Player player, int entityLevel) {
+    private static int getLevelColor(Player player, LivingEntity entity) {
         int playerLevel = getEntityLevel(player);
+        int entityLevel = getEntityLevel(entity);
+
         if (playerLevel > 0) {
             int levelDifference = entityLevel - playerLevel;
 

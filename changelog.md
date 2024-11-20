@@ -1,3 +1,6 @@
+## 1.5.7
+- Minor Internal changes for OtherworldApoth (Will crash with 0.1.0 of OtherworldApoth)
+
 ## 1.5.6
 - Also sync Skill Tree levels on point allocation
 
