@@ -1,6 +1,6 @@
 ## 1.5.8
 - Disable a few more checks in Survive if temp isn't loaded
-- Fix Farmer's Delight Skillet, Eidolon Worktable, Tetra Workbenches, and Wizards Reborn Arcane Workbench not working with Skill Tree crafting bonuses
+- Fix Skill Tree crafting bonus support for: Farmer's Delight Skillet, Eidolon Worktable, Tetra Workbenches, Wizards Reborn Arcane Workbench
 
 ## 1.5.7
 - Minor Internal changes for OtherworldApoth (Will crash with 0.1.0 of OtherworldApoth)
