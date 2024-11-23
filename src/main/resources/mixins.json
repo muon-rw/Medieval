@@ -5,18 +5,23 @@
   "refmap": "${modid}.refmap.json",
   "plugin": "dev.muon.medieval.MixinConfigPlugin",
   "mixins": [
-    "compat.survive.SurviveEventsMixin",
-    "compat.survive.GuiHelperMixin",
-    "compat.autoleveling.MobLevelingEventsMixin",
     "TreasureGoblinBonusMixin",
-    "compat.itemproductionlib.celestisynth.CelestialCraftingMenuMixin",
-    "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",
+    "compat.autoleveling.MobLevelingEventsMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileInteractiveMixin",
-    "compat.itemproductionlib.toms_storage.CraftingTerminalBlockEntityMixin",
+    "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",
+    "compat.itemproductionlib.celestisynth.CelestialCraftingMenuMixin",
+    "compat.itemproductionlib.eidolon.WorktableContainerMixin",
+    "compat.itemproductionlib.farmersdelight.SkilletBlockEntityMixin",
+    "compat.itemproductionlib.tetra.WorkbenchTileMixin",
     "compat.itemproductionlib.toms_storage.CraftingTerminalBlockEntityInteractiveMixin",
+    "compat.itemproductionlib.toms_storage.CraftingTerminalBlockEntityMixin",
     "compat.itemproductionlib.travelersbackpack.TravelersBackpackCraftingMixin",
+    "compat.itemproductionlib.wizards_reborn.ArcaneWorkbenchMixin",
     "compat.justlevelingfork.AptitudeCapabilityMixin",
-    "compat.skilltree.LearnSkillMessageMixin"
+    "compat.skilltree.LearnSkillMessageMixin",
+    "compat.survive.GuiHelperMixin",
+    "compat.survive.SurviveEventsMixin",
+    "compat.survive.TemperatureDataMixin"
   ],
   "client": [
     "compat.justlevelingfork.client.JustLevelingScreenMixin"

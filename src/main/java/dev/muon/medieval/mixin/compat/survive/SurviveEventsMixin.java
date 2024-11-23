@@ -4,11 +4,13 @@ import com.stereowalker.survive.Survive;
 import com.stereowalker.survive.core.TempMode;
 import com.stereowalker.survive.events.SurviveEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
@@ -19,6 +21,13 @@ public class SurviveEventsMixin {
      * Force disable Survive's Temperature checks.
      * Big performance hit, and for some reason still calculates when disabled
      */
+
+    @Inject(method = "updateEnvTemperature", at = @At("HEAD"), cancellable = true)
+    private static void skipEnvTemp(LivingEntity living, CallbackInfo ci) {
+        if (!Survive.TEMPERATURE_CONFIG.enabled) {
+            ci.cancel();
+        }
+    }
 
     @Inject(method = "getExactTemperature", at = @At("HEAD"), cancellable = true)
     private static void skipExactTemp(Level world, BlockPos pos, @Coerce Object type, CallbackInfoReturnable<Double> cir) {

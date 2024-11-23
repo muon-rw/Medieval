@@ -9,15 +9,15 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin(value = CraftingLecternTile.class, remap = false)
 public class CraftingLecternTileInteractiveMixin implements Interactive {
     @Unique
-    private Player lastUser;
+    private Player medieval$lastUser;
 
     @Override
     public void setUser(Player player) {
-        this.lastUser = player;
+        this.medieval$lastUser = player;
     }
 
     @Override
     public Player getUser() {
-        return this.lastUser;
+        return this.medieval$lastUser;
     }
 }

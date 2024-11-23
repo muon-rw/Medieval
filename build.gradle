@@ -107,6 +107,7 @@ repositories {
     maven { url 'https://maven.shedaniel.me/' }
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://jitpack.io' }
+    maven { url "https://maven.isxander.dev/releases" }
 }
 
 dependencies {
@@ -123,6 +124,7 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
     implementation fg.deobf("curse.maven:jade-324717:${jade_file_id}")
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${project.cloth_config_version}")
+    implementation fg.deobf("dev.isxander:yet-another-config-lib:${project.yacl_version}")
 
     // Shared Libs
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
@@ -171,15 +173,15 @@ dependencies {
     implementation fg.deobf("curse.maven:item-production-lib-950401:5114036")
 
     // Survive
-    implementation fg.deobf("curse.maven:survive-367337:4791291")
-    implementation fg.deobf("curse.maven:unionlib-367806:5178187")
+    implementation fg.deobf("curse.maven:survive-367337:5909615")
+    implementation fg.deobf("curse.maven:unionlib-367806:5546278")
 
     // Target Dummy
     implementation fg.deobf("curse.maven:mmmmmmmmmmmm-225738:5594972")
     runtimeOnly fg.deobf("curse.maven:selene-499980:5640082")
 
     // Tom's Storage
-    implementation fg.deobf("curse.maven:toms-storage-378609:5548573")
+    compileOnly fg.deobf("curse.maven:toms-storage-378609:5548573")
 
     // Traveler's Backpack
     implementation fg.deobf("curse.maven:travelers-backpack-321117:5529995")
@@ -188,8 +190,22 @@ dependencies {
     implementation fg.deobf("curse.maven:waystones-245755:5500759")
     implementation fg.deobf("curse.maven:balm-531761:5467600")
 
+    // Farmer's Delight
+    implementation fg.deobf("curse.maven:farmers-delight-398521:5878214")
+
     // Just Leveling
     implementation fg.deobf("curse.maven:justleveling-fork-1073400:5890034")
+
+    // Eidolon
+    implementation fg.deobf("curse.maven:eidolon-repraised-870250:5877358")
+
+    // Wizards Reborn
+    implementation fg.deobf("curse.maven:wizards-reborn-913994:5887547")
+    compileOnly fg.deobf("curse.maven:fluffy-fur-1097456:5885492")
+
+    // Tetra
+    implementation fg.deobf("curse.maven:tetra-289712:5544287")
+    compileOnly fg.deobf("curse.maven:mutil-351914:4824501")
 
 }
 
