@@ -37,7 +37,9 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                 }
             }
         }
-
+        if (mixinClassName.contains("WaterEffectMixin") || mixinClassName.contains("PotionEffectMixin")) {
+            return isModLoaded("travelersbackpack") && isModLoaded("survive");
+        }
 
         if (mixinClassName.contains("TreasureGoblinBonusMixin")) {
             return isModLoaded("apotheosis") && isModLoaded("dummmmmmy");

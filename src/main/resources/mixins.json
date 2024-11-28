@@ -5,7 +5,9 @@
   "refmap": "${modid}.refmap.json",
   "plugin": "dev.muon.medieval.MixinConfigPlugin",
   "mixins": [
+    "PotionEffectMixin",
     "TreasureGoblinBonusMixin",
+    "WaterEffectMixin",
     "compat.autoleveling.MobLevelingEventsMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileInteractiveMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",

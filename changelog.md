@@ -1,3 +1,6 @@
+## 1.5.9
+- Make Traveler's Backpack hose drinking restore Survive thirst (due to Nyf's Compat not being updated)
+
 ## 1.5.8
 - Disable a few more checks in Survive if temp isn't loaded
 - Fix Skill Tree crafting bonus support for: Farmer's Delight Skillet, Eidolon Worktable, Tetra Workbenches, Wizards Reborn Arcane Workbench
