@@ -169,7 +169,7 @@ dependencies {
 
     // Autoleveling + Skill Tree
     implementation fg.deobf("curse.maven:auto-leveling-616126:4899526")
-    implementation fg.deobf("curse.maven:passive-skill-tree-850298:5367713")
+    implementation fg.deobf("curse.maven:passive-skill-tree-850298:5715659")
     implementation fg.deobf("curse.maven:item-production-lib-950401:5114036")
 
     // Survive
@@ -184,7 +184,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:toms-storage-378609:5548573")
 
     // Traveler's Backpack
-    implementation fg.deobf("curse.maven:travelers-backpack-321117:5529995")
+    implementation fg.deobf("curse.maven:travelers-backpack-321117:5764972")
 
     // Waystones
     implementation fg.deobf("curse.maven:waystones-245755:5500759")
@@ -201,11 +201,11 @@ dependencies {
 
     // Wizards Reborn
     implementation fg.deobf("curse.maven:wizards-reborn-913994:5887547")
-    compileOnly fg.deobf("curse.maven:fluffy-fur-1097456:5885492")
+    implementation fg.deobf("curse.maven:fluffy-fur-1097456:5885492")
 
     // Tetra
     implementation fg.deobf("curse.maven:tetra-289712:5544287")
-    compileOnly fg.deobf("curse.maven:mutil-351914:4824501")
+    runtimeOnly fg.deobf("curse.maven:mutil-351914:4824501")
 
 }
 
