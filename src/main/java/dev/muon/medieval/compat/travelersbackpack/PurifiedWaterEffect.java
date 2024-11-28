@@ -1,11 +1,10 @@
-package dev.muon.medieval.effect;
+package dev.muon.medieval.compat.travelersbackpack;
 
 import com.stereowalker.survive.needs.IRealisticEntity;
 import com.stereowalker.survive.needs.WaterData;
 import com.stereowalker.survive.world.level.material.SFluids;
 import com.tiviacz.travelersbackpack.api.fluids.EffectFluid;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;

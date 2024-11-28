@@ -1,8 +1,9 @@
 package dev.muon.medieval;
 
 import com.tiviacz.travelersbackpack.fluids.EffectFluidRegistry;
+import dev.muon.medieval.compat.travelersbackpack.TravelersBackpackCompat;
 import dev.muon.medieval.config.MedievalConfig;
-import dev.muon.medieval.effect.PurifiedWaterEffect;
+import dev.muon.medieval.compat.travelersbackpack.PurifiedWaterEffect;
 import dev.muon.medieval.leveling.EnhancedEntityLevelingSettingsReloader;
 import dev.muon.medieval.leveling.LevelSyncHandler;
 import net.minecraft.resources.ResourceLocation;
@@ -58,9 +59,7 @@ public class Medieval {
     @SubscribeEvent
     public static void onInterMod(InterModEnqueueEvent event) {
         event.enqueueWork(() -> {
-            if (ModList.get().isLoaded("travelersbackpack") && ModList.get().isLoaded("survive")) {
-                EffectFluidRegistry.registerFluidEffect(new PurifiedWaterEffect());
-            }
+            TravelersBackpackCompat.init();
         });
     }
 

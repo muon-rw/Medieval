@@ -1,3 +1,6 @@
+## 1.5.10
+- Fix class initialization bug
+
 ## 1.5.9
 - Make Traveler's Backpack hose drinking restore Survive thirst (due to Nyf's Compat not being updated)
 
