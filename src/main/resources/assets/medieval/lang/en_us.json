@@ -12,11 +12,12 @@
   "item.medieval.challenge_orb.cooldown": "Challenge Orb is on cooldown.",
   "item.medieval.town_portal_scroll.cooldown": "Town Portal is still on cooldown for %s",
   "item.medieval.town_portal_scroll": "Town Portal Scroll",
-  "item.medieval.town_portal_scroll.tooltip": "Channel to teleport to your bed, or to the world spawn if you have no bed. Only works in the Overworld.",
+  "item.medieval.town_portal_scroll.tooltip": "Channel to teleport to your bed, or to the world spawn if you have no bed. Cooldown: 10 minutes",
   "item.medieval.town_portal_scroll.wrong_dimension": "This item can only be used in the Overworld",
   "item.medieval.town_portal_scroll.teleport_bed": "Teleporting to bed...",
   "item.medieval.town_portal_scroll.teleport_world_spawn": "No respawn location found. Teleporting to world spawn.",
   "item.medieval.town_portal_scroll.no_destination": "No valid teleport destination found.",
+  "item.medieval.town_portal_scroll.interrupted": "Channeling cancelled.",
   "itemGroup.medieval": "Medieval",
 
   "text.autoconfig.medieval.option.levelingSearchRadius": "Leveling Search Radius",

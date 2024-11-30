@@ -26,6 +26,7 @@ minecraft {
     generateRunFolders = true
     runs {
         configureEach {
+            ideaModule = "${project.name}.main"
             workingDirectory project.file('run')
             property 'forge.logging.markers', ''
             property 'forge.logging.console.level', 'debug'
@@ -39,7 +40,6 @@ minecraft {
         client = {
         }
         server = {
-            args "--nogui"
         }
         data = {
             workingDirectory project.file('run-data')

@@ -1,3 +1,7 @@
+## 1.6.0
+- Allow Town Portal scroll usage in any dimension
+- Fix Town Portal scrolls in spotty multiplayer environments
+
 ## 1.5.10
 - Fix class initialization bug
 

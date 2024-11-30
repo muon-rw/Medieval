@@ -63,31 +63,26 @@ public class TownPortalScrollItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-
-        if (level.dimension() != Level.OVERWORLD) {
-            if (level.isClientSide) {
-                player.displayClientMessage(Component.translatable("item.medieval.town_portal_scroll.wrong_dimension").withStyle(ChatFormatting.RED), true);
-            }
-            return InteractionResultHolder.fail(itemStack);
-        }
-
         player.startUsingItem(hand);
         return InteractionResultHolder.consume(itemStack);
     }
 
-
-
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        if (level.isClientSide && livingEntity instanceof Player player) {
-            int elapsedTicks = getUseDuration(stack) - remainingUseDuration;
-            double remainingSeconds = Math.max(0, (CHANNEL_TICKS - elapsedTicks - 1) / 20.0);
+        if (livingEntity instanceof ServerPlayer player && !level.isClientSide) {
+            double remainingSeconds = remainingUseDuration / 20.0;
             String formattedTime = String.format("%.1f", remainingSeconds);
             player.displayClientMessage(Component.literal("Channeling: " + formattedTime + "s"), true);
         }
     }
 
-
+    @Override
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
+        if (livingEntity instanceof ServerPlayer player && !level.isClientSide) {
+            player.displayClientMessage(Component.translatable("item.medieval.town_portal_scroll.interrupted")
+                    .withStyle(ChatFormatting.RED), true);
+        }
+    }
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
