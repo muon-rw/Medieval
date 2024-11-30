@@ -1,9 +1,3 @@
-## 1.6.0
-*Incompatible with Otherworld Origins versions below 0.9.0*
-- Allowed Town Portal scrolls to be used in any dimension
-- Fixed Town Portal scrolls being inconsistent in multiplayer environments
-- Add experimental auto-respawning structures per player, needs to be enabled in the config
-
 ## 1.5.10
 - Fix class initialization bug
 
