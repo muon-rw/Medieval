@@ -360,6 +360,20 @@ reobf {
 
 jar.finalizedBy('reobfJarJar')
 
+tasks.register('sendToModpack', Copy) {
+    group = 'publishing'
+    dependsOn 'jarJar'
+    from tasks.jarJar.archiveFile
+    //wtf is a renpi
+    into 'C:/Users/renpi/curseforge/minecraft/Instances/Otherworld Beta/mods'
+    rename { String fileName ->
+        fileName.replace(project.version.toString(), "dev")
+    }
+    doLast {
+        println "Mod JAR sent to modpack folder: ${tasks.jarJar.archiveFileName.get()}"
+    }
+}
+
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
     projectId = "medieval-core-mod"
@@ -374,7 +388,7 @@ modrinth {
 
 task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
     apiToken = System.getenv("CF_TOKEN")
-
+    group = "publishing"
     def mainFile = upload(1055023, jar)
     mainFile.displayName = "Forge/Neoforge-${rootProject.version}+${mc_version}"
     mainFile.releaseType = "release"
