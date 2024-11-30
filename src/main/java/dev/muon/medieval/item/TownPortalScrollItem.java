@@ -1,7 +1,5 @@
 package dev.muon.medieval.item;
 
-import dev.muon.medieval.Medieval;
-import dev.muon.medieval.network.TownPortalScrollPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,7 +27,6 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -66,27 +63,30 @@ public class TownPortalScrollItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
+
+        if (level.dimension() != Level.OVERWORLD) {
+            if (level.isClientSide) {
+                player.displayClientMessage(Component.translatable("item.medieval.town_portal_scroll.wrong_dimension").withStyle(ChatFormatting.RED), true);
+            }
+            return InteractionResultHolder.fail(itemStack);
+        }
+
         player.startUsingItem(hand);
         return InteractionResultHolder.consume(itemStack);
     }
 
 
+
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        if (!level.isClientSide && livingEntity instanceof ServerPlayer player) {
-            double remainingSeconds = remainingUseDuration / 20.0;
-            Medieval.NETWORK.send(PacketDistributor.PLAYER.with(() -> player),
-                    new TownPortalScrollPacket(TownPortalScrollPacket.PacketType.UPDATE_COUNTDOWN, remainingSeconds));
+        if (level.isClientSide && livingEntity instanceof Player player) {
+            int elapsedTicks = getUseDuration(stack) - remainingUseDuration;
+            double remainingSeconds = Math.max(0, (CHANNEL_TICKS - elapsedTicks - 1) / 20.0);
+            String formattedTime = String.format("%.1f", remainingSeconds);
+            player.displayClientMessage(Component.literal("Channeling: " + formattedTime + "s"), true);
         }
     }
 
-    @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
-        if (!level.isClientSide && entity instanceof ServerPlayer player) {
-            Medieval.NETWORK.send(PacketDistributor.PLAYER.with(() -> player),
-                    new TownPortalScrollPacket(TownPortalScrollPacket.PacketType.INTERRUPT, 0));
-        }
-    }
 
 
     @Override
@@ -94,6 +94,7 @@ public class TownPortalScrollItem extends Item {
         if (!(entity instanceof ServerPlayer player)) {
             return stack;
         }
+
         ServerLevel serverLevel = player.serverLevel();
         BlockPos respawnPos = player.getRespawnPosition();
         ServerLevel respawnLevel = player.server.getLevel(player.getRespawnDimension());
@@ -125,12 +126,8 @@ public class TownPortalScrollItem extends Item {
             stack.shrink(1);
         }
         player.displayClientMessage(resultMessage, true);
-        Medieval.NETWORK.send(PacketDistributor.PLAYER.with(() -> player),
-                new TownPortalScrollPacket(TownPortalScrollPacket.PacketType.COMPLETE, 0));
-
         return stack;
     }
-
 
     private Optional<Vec3> findRespawnLocation(ServerLevel level, BlockPos pos, float angle, boolean forced) {
         BlockState blockState = level.getBlockState(pos);

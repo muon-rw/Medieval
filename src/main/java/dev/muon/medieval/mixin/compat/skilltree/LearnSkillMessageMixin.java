@@ -1,9 +1,8 @@
 package dev.muon.medieval.mixin.compat.skilltree;
 
 import daripher.skilltree.network.message.LearnSkillMessage;
-import dev.muon.medieval.Medieval;
+import dev.muon.medieval.leveling.LevelSyncHandler;
 import dev.muon.medieval.leveling.LevelingUtils;
-import dev.muon.medieval.network.SyncPlayerLevelPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
@@ -21,9 +20,9 @@ public class LearnSkillMessageMixin {
         ServerPlayer player = ctxSupplier.get().getSender();
         if (player != null) {
             int newLevel = LevelingUtils.getPlayerLevel(player);
-            Medieval.NETWORK.send(
+            LevelSyncHandler.INSTANCE.send(
                     PacketDistributor.ALL.noArg(),
-                    new SyncPlayerLevelPacket(player.getUUID(), newLevel)
+                    new LevelSyncHandler.SyncPlayerLevelPacket(player.getUUID(), newLevel)
             );
         }
     }
