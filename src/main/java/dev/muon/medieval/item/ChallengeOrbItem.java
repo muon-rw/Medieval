@@ -1,6 +1,6 @@
 package dev.muon.medieval.item;
 
-import dev.muon.medieval.StructureRegenerator;
+import dev.muon.medieval.regenerate.StructureRegenerator;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;

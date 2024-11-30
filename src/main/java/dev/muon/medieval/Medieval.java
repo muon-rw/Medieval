@@ -5,6 +5,8 @@ import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.effect.PurifiedWaterEffect;
 import dev.muon.medieval.leveling.EnhancedEntityLevelingSettingsReloader;
 import dev.muon.medieval.leveling.LevelSyncHandler;
+import dev.muon.medieval.regenerate.AutomaticStructureRegenerator;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -35,9 +37,16 @@ public class Medieval {
         MedievalConfig.register();
         ItemRegistry.register(modEventBus);
 
+        MinecraftForge.EVENT_BUS.register(new AutomaticStructureRegenerator());
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(Medieval.class);
-        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> "ANY", (remote, isServer) -> true));
+        ModLoadingContext.get().registerExtensionPoint(
+                IExtensionPoint.DisplayTest.class,
+                () -> new IExtensionPoint.DisplayTest(
+                        () -> "ANY",
+                        (remote, isServer) -> true
+                )
+        );
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
     }

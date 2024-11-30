@@ -19,6 +19,33 @@
   "item.medieval.town_portal_scroll.no_destination": "No valid teleport destination found.",
   "itemGroup.medieval": "Medieval",
 
+  "text.autoconfig.medieval.option.autoRegenBlacklistedNamespaces": "Auto-Regeneration Blacklisted Namespaces",
+  "text.autoconfig.medieval.option.autoRegenBlacklistedNamespaces.@Tooltip[0]": "Mod IDs of structures which should never auto-regenerate",
+  "text.autoconfig.medieval.option.autoRegenBlacklistedNamespaces.@Tooltip[1]": "Example: [\"dungeons_arise\", \"betterdungeons\"]",
+
+  "text.autoconfig.medieval.option.autoRegenBlacklistedStructures": "Auto-Regeneration Blacklisted Structures",
+  "text.autoconfig.medieval.option.autoRegenBlacklistedStructures.@Tooltip[0]": "Individual structure IDs that should never auto-regenerate",
+  "text.autoconfig.medieval.option.autoRegenBlacklistedStructures.@Tooltip[1]": "Format: 'namespace:structure_id'",
+
+  "text.autoconfig.medieval.option.autoRegenCheckInterval": "Auto-Regeneration Check Interval",
+  "text.autoconfig.medieval.option.autoRegenCheckInterval.@Tooltip[0]": "How often (in ticks) to check for structures to regenerate",
+  "text.autoconfig.medieval.option.autoRegenCheckInterval.@Tooltip[1]": "20 ticks = 1 second. Lower values may impact performance",
+
+  "text.autoconfig.medieval.option.enableAutoRegeneration": "Enable Auto-Regeneration",
+  "text.autoconfig.medieval.option.enableAutoRegeneration.@Tooltip[0]": "Whether structures should automatically regenerate when players approach them",
+  "text.autoconfig.medieval.option.enableAutoRegeneration.@Tooltip[1]": "Requires server restart to take effect",
+
+  "text.autoconfig.medieval.option.autoRegenRadius": "Auto-Regeneration Radius",
+  "text.autoconfig.medieval.option.autoRegenRadius.@Tooltip[0]": "How close (in blocks) a player needs to be for auto-regeneration to trigger",
+  "text.autoconfig.medieval.option.autoRegenRadius.@Tooltip[1]": "Also affects the radius for showing messages about claimed/cooldown structures",
+
+
+  "message.medieval.structure.cooldown": "Structure %s is on cooldown (Ready in: %s)",
+  "message.medieval.structure.claimed": "Structure %s is in claimed chunks",
+  "message.medieval.structure.regenerating": "Regenerating %s...",
+  "message.medieval.structure.success": "Successfully regenerated %s",
+  "message.medieval.structure.fail": "Failed to regenerate %s: %s",
+
   "text.autoconfig.medieval.option.levelingSearchRadius": "Leveling Search Radius",
   "text.autoconfig.medieval.option.levelingSearchRadius.@Tooltip[0]": "The radius to search for players with skill tree points when adding to mob levels, in blocks.",
   "text.autoconfig.medieval.option.levelingSearchRadius.@Tooltip[1]": "Range: 1.0 to 256.0",

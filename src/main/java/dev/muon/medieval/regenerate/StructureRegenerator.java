@@ -1,4 +1,4 @@
-package dev.muon.medieval;
+package dev.muon.medieval.regenerate;
 
 import dev.ftb.mods.ftbchunks.api.ClaimedChunk;
 import dev.ftb.mods.ftbchunks.api.ClaimedChunkManager;
@@ -15,7 +15,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.OwnableEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -161,7 +160,7 @@ public class StructureRegenerator {
 
     public static StructureStart findNearestStructure(ServerLevel level, BlockPos pos, ResourceLocation structureId) {
         Map<Structure, StructureStart> structures = new HashMap<>();
-        int searchRadius = MedievalConfig.get().structureSearchRadius;
+        int searchRadius = MedievalConfig.get().structureRegenSearchRadius;
         for (int x = -searchRadius; x <= searchRadius; x++) {
             for (int z = -searchRadius; z <= searchRadius; z++) {
                 ChunkPos chunkPos = new ChunkPos((pos.getX() >> 4) + x, (pos.getZ() >> 4) + z);

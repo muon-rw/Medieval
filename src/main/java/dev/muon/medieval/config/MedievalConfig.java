@@ -13,6 +13,9 @@ import java.util.*;
 public class MedievalConfig implements ConfigData {
 
         @ConfigEntry.Gui.Tooltip(count = 2)
+        public boolean applyPlayerBasedLeveling = false;
+
+        @ConfigEntry.Gui.Tooltip(count = 2)
         @ConfigEntry.BoundedDiscrete(min = 1, max = 256)
         public double levelingSearchRadius = 128.0;
 
@@ -24,17 +27,20 @@ public class MedievalConfig implements ConfigData {
         public boolean cancelLevelsForPassives = true;
 
         @ConfigEntry.Gui.Tooltip(count = 2)
+        public boolean enableStructureLevelBonus = true;
+
+        @ConfigEntry.Gui.Tooltip(count = 2)
+        public Map<String, Integer> structureLevelBonuses = new HashMap<>();
+
+        @ConfigEntry.Gui.Tooltip(count = 2)
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 32)
+        public int structureRegenSearchRadius = 6;
+
+        @ConfigEntry.Gui.Tooltip(count = 2)
         public List<String> allowedStructureNamespaces = new ArrayList<>();
 
         @ConfigEntry.Gui.Tooltip(count = 2)
         public List<String> additionalValidStructures = new ArrayList<>();
-
-        @ConfigEntry.Gui.Tooltip(count = 2)
-        public boolean applyPlayerBasedLeveling = false;
-
-        @ConfigEntry.Gui.Tooltip(count = 2)
-        @ConfigEntry.BoundedDiscrete(min = 1, max = 32)
-        public int structureSearchRadius = 6;
 
         /*
         @ConfigEntry.Gui.Tooltip(count = 2)
@@ -46,10 +52,22 @@ public class MedievalConfig implements ConfigData {
         */
 
         @ConfigEntry.Gui.Tooltip(count = 2)
-        public boolean enableStructureLevelBonus = true;
+        public boolean enableAutoRegeneration = false;
 
         @ConfigEntry.Gui.Tooltip(count = 2)
-        public Map<String, Integer> structureLevelBonuses = new HashMap<>();
+        public List<String> autoRegenBlacklistedNamespaces = new ArrayList<>();
+
+        @ConfigEntry.Gui.Tooltip(count = 2)
+        public List<String> autoRegenBlacklistedStructures = new ArrayList<>();
+
+        @ConfigEntry.Gui.Tooltip(count = 2)
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 100)
+        public int autoRegenCheckInterval = 20;
+
+        @ConfigEntry.Gui.Tooltip(count = 2)
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 256)
+        public int autoRegenRadius = 32;
+
 
         public static MedievalConfig get() {
                 return AutoConfig.getConfigHolder(MedievalConfig.class).getConfig();
