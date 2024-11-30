@@ -17,6 +17,7 @@
   "item.medieval.town_portal_scroll.teleport_bed": "Teleporting to bed...",
   "item.medieval.town_portal_scroll.teleport_world_spawn": "No respawn location found. Teleporting to world spawn.",
   "item.medieval.town_portal_scroll.no_destination": "No valid teleport destination found.",
+  "item.medieval.town_portal_scroll.interrupted": "Channeling interrupted!",
   "itemGroup.medieval": "Medieval",
 
   "text.autoconfig.medieval.option.levelingSearchRadius": "Leveling Search Radius",
