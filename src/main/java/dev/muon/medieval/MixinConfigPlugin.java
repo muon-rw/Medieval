@@ -1,5 +1,7 @@
 package dev.muon.medieval;
 
+import com.bawnorton.mixinsquared.adjuster.MixinAnnotationAdjusterRegistrar;
+import dev.muon.medieval.mixin.MedievalMixinAdjuster;
 import net.minecraftforge.fml.loading.LoadingModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
@@ -13,7 +15,9 @@ import java.util.Set;
 public class MixinConfigPlugin implements IMixinConfigPlugin {
 
     @Override
-    public void onLoad(String mixinPackage) {}
+    public void onLoad(String mixinPackage) {
+        MixinAnnotationAdjusterRegistrar.register(new MedievalMixinAdjuster());
+    }
 
     @Override
     public String getRefMapperConfig() {

@@ -108,12 +108,21 @@ repositories {
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://jitpack.io' }
     maven { url "https://maven.isxander.dev/releases" }
+    maven { url = "https://maven.bawnorton.com/releases" }
+    maven { url = 'https://maven.greenhouseteam.dev/releases/' }
+    maven { url "https://maven.ladysnake.org/releases" }
 }
 
 dependencies {
     minecraft "net.neoforged:forge:${mc_version}-${forge_version}"
 
     // Mixin
+
+    // MixinSquared's annotationProcessor MUST be registered BEFORE Mixin's one.
+    compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.2.0"))
+    implementation(jarJar("com.github.bawnorton.mixinsquared:mixinsquared-forge:0.2.0")) {
+        jarJar.ranged(it, "[0.2.0,)")
+    }
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
@@ -206,6 +215,16 @@ dependencies {
     // Tetra
     implementation fg.deobf("curse.maven:tetra-289712:5544287")
     runtimeOnly fg.deobf("curse.maven:mutil-351914:4824501")
+
+    // Origins
+    implementation fg.deobf("io.github.edwinmindcraft:calio-forge:${mc_version}-${calio_forge_version}")
+    implementation fg.deobf("io.github.edwinmindcraft:apoli-forge:${mc_version}-${apoli_forge_version}")
+    implementation fg.deobf("io.github.edwinmindcraft:origins-forge:${mc_version}-${origins_forge_version}")
+    implementation fg.deobf("top.theillusivec4.caelus:caelus-forge:${caelus_version}+1.20")
+    implementation(fg.deobf("de.dafuqs:additionalentityattributes-forge:${aea_forge_version}") {
+        exclude group: 'net.minecraftforge'
+        exclude group: 'com.github.llamalad.mixinextras'
+    })
 
 }
 

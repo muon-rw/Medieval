@@ -1,3 +1,6 @@
+## 1.6.1
+- Experimental - disable Entity Linked Item Stack-related logic in Apoli. (This will break some custom Origins!)
+
 ## 1.6.0
 - Allow Town Portal scroll usage in any dimension
 - Fix Town Portal scrolls in spotty multiplayer environments

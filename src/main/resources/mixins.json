@@ -8,6 +8,7 @@
     "PotionEffectMixin",
     "TreasureGoblinBonusMixin",
     "WaterEffectMixin",
+    "compat.apoli.ApoliEventHandlerMixin",
     "compat.autoleveling.MobLevelingEventsMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileInteractiveMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",
