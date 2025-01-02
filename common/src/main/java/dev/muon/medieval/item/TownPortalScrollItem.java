@@ -83,15 +83,13 @@ public class TownPortalScrollItem extends Item {
 
 
     @Override
-    public void onUseTick(Level level, @NotNull LivingEntity livingEntity, @NotNull ItemStack stack, int remainingUseDuration) {
-        if (level.isClientSide && livingEntity instanceof Player player) {
-            int elapsedTicks = getUseDuration(stack, player) - remainingUseDuration;
-            double remainingSeconds = Math.max(0, (CHANNEL_TICKS - elapsedTicks - 1) / 20.0);
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        if (livingEntity instanceof ServerPlayer player && !level.isClientSide) {
+            double remainingSeconds = remainingUseDuration / 20.0;
             String formattedTime = String.format("%.1f", remainingSeconds);
             player.displayClientMessage(Component.literal("Channeling: " + formattedTime + "s"), true);
         }
     }
-
 
 
     @Override
