@@ -1,7 +1,11 @@
-# 1.0.1
+## 1.1.0
+- Patch Dehydration (Fabric)
+- 
+
+## 1.0.1
 - Fix Twilight Forest x Better Combat head render conflict (Neoforge)
 
-# 1.0.0
+## 1.0.0
 - Initial Multiloader Rewrite
 - Challenge Orbs, Town Portal Scrolls
 - Temperature Task (Fabric)

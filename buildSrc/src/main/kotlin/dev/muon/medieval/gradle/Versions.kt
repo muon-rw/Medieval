@@ -1,7 +1,7 @@
 package dev.muon.medieval.gradle
 
 object Versions {
-    const val MOD = "1.0.1"
+    const val MOD = "1.1.0"
 
     const val MINECRAFT = "1.21.1"
     const val PARCHMENT_MINECRAFT = "1.21"
@@ -25,5 +25,5 @@ object Versions {
     const val JEI = "19.17.0.193"
     const val EMI = "1.1.13+1.21.1"
     const val JAVA = 21
-    const val CLOTH_CONFIG_VERSION = "15.0.127"
+    const val CLOTH_CONFIG_VERSION = "15.0.130"
 }

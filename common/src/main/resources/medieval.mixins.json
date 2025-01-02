@@ -4,6 +4,7 @@
   "package": "dev.muon.medieval.mixin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_21",
+  "plugin": "dev.muon.medieval.MixinConfigPlugin",
   "mixins": [],
   "client": [
     "client.MixinMinecraft"

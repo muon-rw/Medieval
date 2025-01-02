@@ -4,9 +4,12 @@
   "package": "dev.muon.medieval.mixin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "plugin": "dev.muon.medieval.MixinConfigPluginFabric",
+  "mixins": [
+    "compat.dehydration.ItemStackMixin",
+    "compat.dehydration.PotionItemMixin"
+  ],
   "client": [
-    "client.MixinTitleScreen"
   ],
   "server": [],
   "injectors": {

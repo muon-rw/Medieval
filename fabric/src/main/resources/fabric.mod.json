@@ -1,39 +1,42 @@
 {
-    "schemaVersion": 1,
-    "id": "${mod_id}",
-    "version": "${mod_version}+${minecraft_version}",
-    "name": "${mod_name}",
-    "description": "${mod_description}",
-    "authors": [
-        "${mod_author}"
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}+${minecraft_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "${mod_author}"
+  ],
+  "contributors": [
+    "${fabric_mod_contributors}"
+  ],
+  "contact": {
+    "homepage": "${homepage}",
+    "issues": "https://github.com/${sources}/issues",
+    "sources": "https://github.com/${sources}"
+  },
+  "license": "${mod_license}",
+  "icon": "${mod_id}.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.muon.medieval.MedievalFabric"
     ],
-    "contributors": [
-        "${fabric_mod_contributors}"
+    "preLaunch": [
+      "dev.muon.medieval.MedievalFabricPre"
     ],
-    "contact": {
-        "homepage": "${homepage}",
-        "issues": "https://github.com/${sources}/issues",
-        "sources": "https://github.com/${sources}"
-    },
-    "license": "${mod_license}",
-    "icon": "${mod_id}.png",
-    "environment": "*",
-    "entrypoints": {
-        "main": [
-            "dev.muon.medieval.MedievalFabric"
-        ],
-        "preLaunch": [
-            "dev.muon.medieval.MedievalFabricPre"
-        ]
-    },
-    "mixins": [
-        "${mod_id}.mixins.json",
-        "${mod_id}.fabric.mixins.json"
-    ],
-    "depends": {
-        "fabricloader": "${fabric_loader_range}",
-        "fabric-api": "*",
-        "minecraft": "${fabric_minecraft_version_range}",
-        "java": ">=${java_version}"
-    }
+    "mixinsquared-adjuster": [
+      "dev.muon.medieval.mixin.MedievalMixinAdjuster"
+    ]
+  },
+  "mixins": [
+    "${mod_id}.mixins.json",
+    "${mod_id}.fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "${fabric_loader_range}",
+    "fabric-api": "*",
+    "minecraft": "${fabric_minecraft_version_range}",
+    "java": ">=${java_version}"
+  }
 }

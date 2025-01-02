@@ -21,6 +21,7 @@ repositories {
     maven("https://maven.parchmentmc.org")
     maven("https://cursemaven.com")
     maven("https://api.modrinth.com/maven")
+    maven("https://maven.bawnorton.com/releases")
 }
 
 dependencies {
@@ -30,6 +31,16 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${Versions.FABRIC_LOADER}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${Versions.FABRIC_API}")
     modLocalRuntime("com.terraformersmc:modmenu:${Versions.MOD_MENU}")
+
+    modImplementation("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
+    include("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
+    annotationProcessor(("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0"))?.let {
+        include(it)?.let {
+            modImplementation(
+                it
+            )
+        }
+    }
 
     // FTB
     modImplementation("curse.maven:ftb-quests-fabric-438496:5635134")
@@ -50,6 +61,10 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-fabric:${Versions.CLOTH_CONFIG_VERSION}") {
         exclude("net.fabricmc.fabric-api")
     }
+
+    // Dehydration
+    modImplementation("curse.maven:dehydration-410830:5709714")
+
 }
 
 loom {
