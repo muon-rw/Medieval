@@ -1,3 +1,6 @@
+## 1.1.1
+- Update 1.21.1 packs logo
+
 ## 1.1.0
 - Patch Dehydration (Fabric)
 
