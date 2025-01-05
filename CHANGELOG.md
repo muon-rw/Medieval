@@ -1,3 +1,6 @@
+## 1.3.0
+- Initial GUI overhaul
+
 ## 1.2.0
 - Merged Iron's mana into Ars Nouveau mana
 - Merged Ars Nouveau spell power into Iron's spell power

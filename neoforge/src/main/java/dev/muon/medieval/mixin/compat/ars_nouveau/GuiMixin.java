@@ -1,6 +1,7 @@
 package dev.muon.medieval.mixin.compat.ars_nouveau;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import dev.muon.medieval.Medieval;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -15,13 +16,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Gui.class)
 public class GuiMixin {
     // TODO: BEFORE RELEASE, REDO BAR ASSETS
-    // TODO: Number overlays?
-    // TODO: Fix Overflowing Bars compat
     // TODO: Add effects - Absorption, poison, wither, hunger, etc.
     @Shadow @Final private Minecraft minecraft;
     @Unique
@@ -32,7 +32,17 @@ public class GuiMixin {
         this.currentDeltaTracker = deltaTracker;
     }
 
-    @Inject(method = "renderHearts", at = @At("HEAD"), cancellable = true, require = 1)
+
+    @Unique
+    private float lastHealth = -1;
+    @Unique
+    private long fullHealthStartTime = 0;
+    @Unique
+    private static final long TEXT_DISPLAY_DURATION = 1000L; // 1 second; ms
+    @Unique
+    private static final int BASE_TEXT_ALPHA = 200;
+
+    @Inject(method = "renderHearts", at = @At("HEAD"), cancellable = true)
     private void renderCustomHealth(GuiGraphics graphics, Player player, int x, int y, int height, int offsetHeartIndex, float maxHealth, int health, int displayHealth, int absorptionAmount, boolean renderHighlight, CallbackInfo ci) {
         if (minecraft.options.hideGui) return;
 
@@ -43,16 +53,51 @@ public class GuiMixin {
                 Medieval.loc("textures/gui/health_border.png"), (screenWidth / 2) - 53, screenHeight - 65, 0, 0, 102, 18, 256, 256
         );
 
-        float healthPercent = (float) health / maxHealth;
-        int barLength = (int) (86 * healthPercent);
+        float actualCurrentHealth = player.getHealth();
+        float healthPercent = actualCurrentHealth / maxHealth;
+
+        int barLength = (int)(86 * healthPercent);
         int animOffset = (int)(((player.tickCount + currentDeltaTracker.getGameTimeDeltaTicks()) / 3) % 33) * 6;
         graphics.blit(
                 Medieval.loc("textures/gui/health_bar.png"), (screenWidth / 2) - 44, screenHeight - 56, 0, animOffset, barLength, 4, 256, 256
         );
 
+        if (actualCurrentHealth >= maxHealth) {
+            if (lastHealth < maxHealth) {
+                fullHealthStartTime = System.currentTimeMillis();
+            }
+        } else {
+            fullHealthStartTime = 0;
+        }
+        lastHealth = actualCurrentHealth;
+
+        long timeSinceFullHealth = fullHealthStartTime > 0 ? System.currentTimeMillis() - fullHealthStartTime : 0;
+        if (actualCurrentHealth < maxHealth || (fullHealthStartTime > 0 && timeSinceFullHealth < TEXT_DISPLAY_DURATION)) {
+            PoseStack poseStack = graphics.pose();
+            poseStack.pushPose();
+            poseStack.scale(0.5f, 0.5f, 1.0f);
+
+            String healthText = String.format("%.1f / %.1f",
+                    actualCurrentHealth,
+                    maxHealth
+            ).replaceAll("\\.0", "");
+
+            int textWidth = minecraft.font.width(healthText);
+            int textX = ((screenWidth / 2) - (textWidth / 4)) * 2;
+            int textY = (screenHeight - 56) * 2;
+
+            int alpha = BASE_TEXT_ALPHA;
+            if (fullHealthStartTime > 0 && timeSinceFullHealth > TEXT_DISPLAY_DURATION - 200) {
+                alpha = (int)(BASE_TEXT_ALPHA * (TEXT_DISPLAY_DURATION - timeSinceFullHealth) / 200f);
+            }
+            int color = (alpha << 24) | 0xFFFFFF;
+
+            graphics.drawString(minecraft.font, healthText, textX, textY, color, true);
+            poseStack.popPose();
+        }
+
         ci.cancel();
     }
-
 
     @Inject(method = "renderFood", at = @At("HEAD"), cancellable = true)
     private void renderCustomFood(GuiGraphics graphics, Player player, int y, int x, CallbackInfo ci) {
@@ -85,4 +130,12 @@ public class GuiMixin {
         ci.cancel();
     }
 
+    @ModifyArg(
+            method = "renderArmor",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V"),
+            index = 2
+    )
+    private static int modifyArmorY(int originalY) {
+        return Minecraft.getInstance().getWindow().getGuiScaledHeight() - 49;
+    }
 }

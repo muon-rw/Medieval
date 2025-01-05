@@ -8,15 +8,15 @@
     "MobEffectMixin",
     "compat.apotheosis.ModifierInstMixin",
     "compat.irons_spellbooks.AbstractSpellMixin",
-    "compat.irons_spellbooks.CastingItemMixin",
     "compat.irons_spellbooks.CurioBaseItemMixin",
     "compat.irons_spellbooks.MagicDataMixin",
     "compat.irons_spellbooks.MagicManagerMixin",
     "compat.irons_spellbooks.ManaBarOverlayMixin"
   ],
   "client": [
-    "compat.ars_nouveau.GuiMixin",
     "compat.ars_nouveau.GuiManaHUDMixin",
+    "compat.ars_nouveau.GuiMixin",
+    "compat.irons_spellbooks.ClientSpellCastHelperMixin",
     "compat.twilightforest.ClientEventsMixin"
   ],
   "server": [],
