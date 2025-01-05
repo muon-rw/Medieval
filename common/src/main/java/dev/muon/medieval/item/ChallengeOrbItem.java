@@ -58,7 +58,6 @@ public abstract class ChallengeOrbItem extends Item {
         Medieval.LOG.info("ChallengeOrbItem used by player: {}", player.getName().getString());
 
         if (level.isClientSide) {
-            Medieval.LOG.debug("Client-side use, returning success");
             return InteractionResultHolder.success(player.getItemInHand(hand));
         }
 
@@ -67,45 +66,36 @@ public abstract class ChallengeOrbItem extends Item {
         ChallengeOrbData data = getData(itemStack);
 
         if (data == null || data.foundStructure().isEmpty()) {
-            Medieval.LOG.debug("Data is null or no structure found, finding structure");
             findStructure(serverLevel, player, itemStack);
             player.getCooldowns().addCooldown(this, SEARCH_COOLDOWN);
             return InteractionResultHolder.success(itemStack);
         }
 
-        Medieval.LOG.debug("Current ChallengeOrbData: {}", data);
 
         long currentTime = serverLevel.getGameTime();
-        Medieval.LOG.debug("Current game time: {}", currentTime);
 
         if (currentTime - data.searchTime() > SEARCH_TIMEOUT_TICKS) {
-            Medieval.LOG.debug("Search timed out, resetting data and finding new structure");
             setData(itemStack, new ChallengeOrbData("", 0));
             findStructure(serverLevel, player, itemStack);
             return InteractionResultHolder.success(itemStack);
         }
 
-        Medieval.LOG.debug("Confirming and regenerating structure");
         confirmAndRegenerate(serverLevel, player, itemStack);
         return InteractionResultHolder.success(itemStack);
     }
 
     private void findStructure(ServerLevel level, Player player, ItemStack itemStack) {
-        Medieval.LOG.debug("Entering findStructure method");
         var structureRegistry = level.registryAccess().registryOrThrow(Registries.STRUCTURE);
 
         player.displayClientMessage(Component.literal("Searching for nearby structure...").withStyle(ChatFormatting.YELLOW), true);
 
         for (var structure : structureRegistry) {
             ResourceLocation structureId = structureRegistry.getKey(structure);
-            Medieval.LOG.debug("Checking structure type: {}", structureId);
             if (structureId != null && StructureRegenerator.isValidStructure(structureId)) {
-                Medieval.LOG.debug("Structure type {} is valid, searching for nearest instance...", structureId);
 
                 StructureStart nearestStructure = StructureRegenerator.findNearestStructure(level, player.blockPosition(), structureId);
                 if (nearestStructure != null) {
 
-                    Medieval.LOG.debug("Found instance of structure {} at {}", structureId, nearestStructure.getBoundingBox().getCenter());
                     setData(itemStack, new ChallengeOrbData(structureId.toString(), level.getGameTime()));
                     player.displayClientMessage(Component.literal("Found structure: " + structureId + ". Click again to regenerate.").withStyle(ChatFormatting.GREEN), true);
 
@@ -121,7 +111,6 @@ public abstract class ChallengeOrbItem extends Item {
             }
         }
 
-        Medieval.LOG.debug("No valid structure instances found nearby");
         player.displayClientMessage(Component.literal("No regeneratable structure found nearby.").withStyle(ChatFormatting.RED), true);
     }
 
