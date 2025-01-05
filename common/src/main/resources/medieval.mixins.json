@@ -7,7 +7,6 @@
   "plugin": "dev.muon.medieval.MixinConfigPlugin",
   "mixins": [],
   "client": [
-    "client.MixinMinecraft"
   ],
   "server": [],
   "injectors": {

@@ -15,7 +15,9 @@
     "compat.irons_spellbooks.ManaBarOverlayMixin"
   ],
   "client": [
-    "client.ClientEventsMixin"
+    "compat.ars_nouveau.GuiMixin",
+    "compat.ars_nouveau.GuiManaHUDMixin",
+    "compat.twilightforest.ClientEventsMixin"
   ],
   "server": [],
   "injectors": {
