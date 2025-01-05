@@ -1,3 +1,7 @@
+## 1.2.0
+- Merged Iron's mana into Ars Nouveau mana
+- Merged Ars Nouveau spell power into Iron's spell power
+
 ## 1.1.1
 - Update 1.21.1 packs logo
 

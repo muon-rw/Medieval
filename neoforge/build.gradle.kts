@@ -9,6 +9,12 @@ plugins {
     id("me.modmuss50.mod-publish-plugin")
 }
 
+tasks {
+    withType<Javadoc> {
+        enabled = false
+    }
+}
+
 neoForge {
     version = Versions.NEOFORGE
     parchment {
@@ -60,15 +66,46 @@ tasks {
 }
 
 repositories {
+    maven {
+        url = uri("https://maven.shadowsoffire.dev/releases")
+        content {
+            includeGroup("dev.shadowsoffire")
+        }
+    }
+    maven {
+        url = uri("https://cursemaven.com")
+        content {
+            includeGroup("curse.maven")
+        }
+    }
+    maven {
+        url = uri("https://api.modrinth.com/maven")
+        content {
+            includeGroup("maven.modrinth")
+        }
+    }
+    maven {
+        url = uri("https://code.redspace.io/releases")
+        content {
+            includeGroup("io.redspace")
+        }
+    }
+    maven {
+        url = uri("https://code.redspace.io/snapshots")
+        content {
+            includeGroup("io.redspace")
+        }
+    }
+    maven("https://maven.minecraftforge.net/")
     maven("https://maven.blamejared.com/")
     maven("https://maven.terraformersmc.com/")
     maven("https://maven.wispforest.io/releases")
     maven("https://maven.su5ed.dev/releases")
     maven("https://maven.fabricmc.net")
     maven("https://maven.shedaniel.me/")
+    maven("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
+    maven("https://maven.kosmx.dev/")
     maven("https://maven.octo-studios.com/releases")
-    maven("https://cursemaven.com")
-    maven("https://api.modrinth.com/maven")
 }
 
 dependencies {
@@ -78,8 +115,30 @@ dependencies {
     implementation("curse.maven:ftb-teams-forge-404468:5631446")
     runtimeOnly("curse.maven:architectury-api-419699:5553800")
 
-    // lord help me
-    implementation("curse.maven:the-twilight-forest-227639:5699076")
+    // Accessories
+    implementation("io.wispforest:accessories-neoforge:${Versions.ACCESSORIES}")
+    implementation("curse.maven:accessories-cc-layer-1005683:5823562")
+
+    // TF
+    compileOnly("curse.maven:the-twilight-forest-227639:5699076")
+
+    // Iron's Spells n Spellbooks
+    implementation("io.redspace:irons_spellbooks:${Versions.IRONS_SPELLBOOKS}:api")
+    implementation("io.redspace:irons_spellbooks:${Versions.IRONS_SPELLBOOKS}")
+    runtimeOnly("software.bernie.geckolib:geckolib-neoforge-${Versions.GECKOLIB}")
+    runtimeOnly("dev.kosmx.player-anim:player-animation-lib-forge:${Versions.PLAYER_ANIMATOR}")
+
+    // Ars Nouveau
+    implementation("com.hollingsworth.ars_nouveau:ars_nouveau-${Versions.ARS_NOUVEAU}")
+    implementation("com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.7")
+    runtimeOnly("top.theillusivec4.curios:curios-neoforge:9.0.12+1.21")
+
+    // Apotheosis
+    implementation("dev.shadowsoffire:Placebo:${Versions.MINECRAFT}-${Versions.PLACEBO}")
+    implementation("dev.shadowsoffire:Apotheosis:${Versions.MINECRAFT}-${Versions.APOTHEOSIS}")
+    implementation("dev.shadowsoffire:ApothicAttributes:${Versions.MINECRAFT}-${Versions.APOTHIC_ATTRIBUTES}")
+    implementation("dev.shadowsoffire:ApothicSpawners:${Versions.MINECRAFT}-${Versions.APOTHIC_SPAWNERS}")
+    implementation("dev.shadowsoffire:ApothicEnchanting:${Versions.MINECRAFT}-${Versions.APOTHIC_ENCHANTING}")
 }
 
 publishMods {

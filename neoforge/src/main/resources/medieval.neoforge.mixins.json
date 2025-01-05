@@ -3,7 +3,17 @@
   "minVersion": "0.8",
   "package": "dev.muon.medieval.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "plugin": "dev.muon.medieval.MixinConfigPluginNeoForge",
+  "mixins": [
+    "MobEffectMixin",
+    "compat.apotheosis.ModifierInstMixin",
+    "compat.irons_spellbooks.AbstractSpellMixin",
+    "compat.irons_spellbooks.CastingItemMixin",
+    "compat.irons_spellbooks.CurioBaseItemMixin",
+    "compat.irons_spellbooks.MagicDataMixin",
+    "compat.irons_spellbooks.MagicManagerMixin",
+    "compat.irons_spellbooks.ManaBarOverlayMixin"
+  ],
   "client": [
     "client.ClientEventsMixin"
   ],
