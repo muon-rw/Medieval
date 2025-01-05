@@ -15,6 +15,7 @@
   "item.medieval.town_portal_scroll.teleport_bed": "Teleporting to bed...",
   "item.medieval.town_portal_scroll.bed_obstructed": "Previous bed was missing or obstructed, teleporting to nearest village.",
   "item.medieval.town_portal_scroll.teleport_village": "No bed found, teleporting to nearby village...",
+  "item.medieval.town_portal_scroll.teleport_world_spawn": "Teleported to World Spawn",
   "item.medieval.town_portal_scroll.no_destination": "No valid teleport destination found.",
   "itemGroup.medieval": "Medieval",
   "medieval": "Medieval",
