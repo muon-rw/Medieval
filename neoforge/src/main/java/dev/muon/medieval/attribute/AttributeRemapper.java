@@ -18,6 +18,7 @@ public class AttributeRemapper {
         if (isModLoaded("ars_nouveau") && (isModLoaded("irons_spellbooks"))) {
             register(AttributeRegistry.MAX_MANA, PerkAttributes.MAX_MANA, 1.0);
             register(AttributeRegistry.MANA_REGEN, PerkAttributes.MANA_REGEN_BONUS, 0.6);
+            // TODO: Implement a better system to merge spell powers
             register(PerkAttributes.SPELL_DAMAGE_BONUS, AttributeRegistry.SPELL_POWER, 0.1);
         }
     }
