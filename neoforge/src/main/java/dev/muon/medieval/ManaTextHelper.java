@@ -1,7 +1,9 @@
 package dev.muon.medieval;
 
 public class ManaTextHelper {
-    //TODO: Fix this on dedicated servers
+
+    // CURRENTLY UNUSED
+
     private static long lastManaErrorTime = 0;
 
     public static void onManaError() {

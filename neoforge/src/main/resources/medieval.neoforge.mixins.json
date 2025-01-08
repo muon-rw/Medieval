@@ -8,6 +8,7 @@
     "MobEffectMixin",
     "compat.apotheosis.ModifierInstMixin",
     "compat.irons_spellbooks.AbstractSpellMixin",
+    "compat.irons_spellbooks.CastingImplementMixin",
     "compat.irons_spellbooks.CurioBaseItemMixin",
     "compat.irons_spellbooks.MagicDataMixin",
     "compat.irons_spellbooks.MagicManagerMixin",
