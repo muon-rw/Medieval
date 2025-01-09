@@ -1,14 +1,12 @@
 package dev.muon.medieval.mixin.compat.irons_spellbooks;
 
-import com.hollingsworth.arsnouveau.api.mana.IManaCap;
+import com.hollingsworth.arsnouveau.common.capability.ManaCap;
 import com.hollingsworth.arsnouveau.setup.registry.CapabilityRegistry;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import dev.muon.medieval.Medieval;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -22,8 +20,8 @@ public class MagicDataMixin {
         if (this.serverPlayer == null) {
             return original.call();
         }
+        ManaCap manaCap = CapabilityRegistry.getMana(this.serverPlayer);
 
-        IManaCap manaCap = this.serverPlayer.getCapability(CapabilityRegistry.MANA_CAPABILITY);
         if (manaCap != null) {
             return (float) manaCap.getCurrentMana();
         }
@@ -39,13 +37,8 @@ public class MagicDataMixin {
             original.call(mana);
             return;
         }
-        IManaCap manaCap = this.serverPlayer.getCapability(CapabilityRegistry.MANA_CAPABILITY);
+        ManaCap manaCap = CapabilityRegistry.getMana(this.serverPlayer);
         if (manaCap != null) {
-
-            AttributeInstance manaAttr = serverPlayer.getAttribute(AttributeRegistry.MAX_MANA);
-            if (manaAttr != null) {
-                manaCap.setMaxMana((int) manaAttr.getValue());
-            }
 
             manaCap.setMana(mana);
             return;

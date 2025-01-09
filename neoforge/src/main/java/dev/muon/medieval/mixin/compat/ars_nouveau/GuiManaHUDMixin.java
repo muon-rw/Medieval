@@ -39,7 +39,7 @@ public class GuiManaHUDMixin {
     @Unique
     private static final long TEXT_DISPLAY_DURATION = 2000L;
     @Unique
-    private static final long TEXT_FADEOUT_DURATION = 1000L;
+    private static final long TEXT_FADEOUT_DURATION = 500L;
 
     @Unique
     private static long barEnabledStartTime = 0L;
@@ -168,16 +168,25 @@ public class GuiManaHUDMixin {
         long timeSinceBarVisible = System.currentTimeMillis() - barEnabledStartTime;
         long timeSinceFullMana = fullManaStartTime > 0 ? System.currentTimeMillis() - fullManaStartTime : 0;
 
+        // Always show text while bar is visible initially
         if (barSetVisible && timeSinceBarVisible < TEXT_DISPLAY_DURATION) {
             return true;
         }
 
+        // Always show text while not at max mana (regenerating)
         if (currentMana < maxMana) {
+            fullManaStartTime = 0; // Reset full mana timer while regenerating
             return true;
         }
 
+        // Handle transition to full mana
         if (currentMana >= maxMana && lastMana < maxMana) {
             fullManaStartTime = System.currentTimeMillis();
+        }
+
+        // Show text during the full mana transition period
+        if (fullManaStartTime > 0 && timeSinceFullMana < TEXT_DISPLAY_DURATION) {
+            return true;
         }
 
         lastMana = (float) currentMana;

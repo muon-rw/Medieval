@@ -43,7 +43,7 @@ public class GuiMixin {
     @Unique
     private static final long TEXT_DISPLAY_DURATION = 2000L; // 1 second; ms
     @Unique
-    private static final long TEXT_FADEOUT_DURATION = 1000L;
+    private static final long TEXT_FADEOUT_DURATION = 500L;
     @Unique
     private static final int BASE_TEXT_ALPHA = 200;
 

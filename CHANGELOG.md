@@ -1,3 +1,8 @@
+## 1.4.0
+- Fix casting an Iron's spell draining all of a player's mana
+- Fix Iron's Spells not actually being affected by Ars Nouveau spell power
+- GUI Tweaks
+
 ## 1.3.0
 - Initial GUI overhaul
 
