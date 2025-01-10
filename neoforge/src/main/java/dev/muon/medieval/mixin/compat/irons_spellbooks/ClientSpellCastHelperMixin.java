@@ -13,6 +13,9 @@ public class ClientSpellCastHelperMixin {
     // TODO: This doesn't even look like it's usually called.
     @Inject(method = "handleCastErrorMessage", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;setOverlayMessage(Lnet/minecraft/network/chat/Component;Z)V", ordinal = 1))
     private static void onManaError(CastErrorPacket packet, CallbackInfo ci) {
-        ManaTextHelper.onManaError();
+        // TODO: Trigger mana amount text display on cast error
+        // This is the resultant synced client method,
+        // but it doesn't seem like its ever actually called
+        // (The packet is only ever actually triggered for cooldowns)
     }
 }

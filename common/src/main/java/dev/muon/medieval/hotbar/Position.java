@@ -1,4 +1,4 @@
-package dev.muon.medieval.client;
+package dev.muon.medieval.hotbar;
 
 public record Position(int x, int y) {
     public Position offset(int x, int y) {

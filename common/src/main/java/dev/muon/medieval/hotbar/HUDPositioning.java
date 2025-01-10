@@ -1,4 +1,4 @@
-package dev.muon.medieval.client;
+package dev.muon.medieval.hotbar;
 
 import net.minecraft.client.Minecraft;
 

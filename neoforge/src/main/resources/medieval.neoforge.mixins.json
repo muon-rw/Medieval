@@ -16,7 +16,6 @@
   ],
   "client": [
     "compat.ars_nouveau.GuiManaHUDMixin",
-    "compat.ars_nouveau.GuiMixin",
     "compat.irons_spellbooks.ClientSpellCastHelperMixin",
     "compat.twilightforest.ClientEventsMixin"
   ],

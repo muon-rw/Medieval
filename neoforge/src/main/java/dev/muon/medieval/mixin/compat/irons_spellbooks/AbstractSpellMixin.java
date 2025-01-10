@@ -35,10 +35,8 @@ public class AbstractSpellMixin {
     }
 
 
-    // CURRENTLY UNUSED
-    // TODO: Implement on dedicated servers
     @Inject(method = "canBeCastedBy", at = @At(value = "RETURN", ordinal = 4))
     private void onManaError(int spellLevel, CastSource castSource, MagicData playerMagicData, Player player, CallbackInfoReturnable<CastResult> cir) {
-        ManaTextHelper.onManaError();
+        // TODO: Trigger text display on cast error, will need to sync to clients
     }
 }

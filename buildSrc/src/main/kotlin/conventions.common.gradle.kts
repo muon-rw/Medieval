@@ -31,7 +31,10 @@ repositories {
     }
     exclusiveContent {
         forRepositories(
-            maven("https://maven.parchmentmc.org/") {
+            //maven("https://maven.parchmentmc.org") {
+            // Workaround for proxy blocking on airplane wifi
+            // TODO: Switch this back
+            maven("https://ldtteam.jfrog.io/ui/native/parchmentmc-public/") {
                 name = "ParchmentMC"
             },
             maven("https://maven.neoforged.net/releases") {
