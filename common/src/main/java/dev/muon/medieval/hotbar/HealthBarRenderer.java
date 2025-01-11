@@ -3,6 +3,7 @@ package dev.muon.medieval.hotbar;
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.muon.medieval.Medieval;
 import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import java.lang.reflect.Method;
 
 import static dev.muon.medieval.hotbar.ConfigConstants.*;
+import static dev.muon.medieval.hotbar.RenderUtil.BASE_TEXT_ALPHA;
 import static dev.muon.medieval.hotbar.RenderUtil.TEXT_DISPLAY_DURATION;
 
 public class HealthBarRenderer {
@@ -66,8 +68,6 @@ public class HealthBarRenderer {
 
         int animOffset = (int) (((player.tickCount + deltaTracker.getGameTimeDeltaTicks()) / 3) % animationCycles) * frameHeight;
 
-        boolean hasAbsorption = absorptionAmount > 1;
-
         renderBaseBar(graphics, player, maxHealth, actualHealth, xPos, yPos, barWidth, barHeight, barXOffset, barYOffset, animOffset);
         renderOverlays(graphics, player, absorptionAmount, xPos, yPos, barWidth, barHeight, barXOffset, barYOffset);
 
@@ -77,10 +77,16 @@ public class HealthBarRenderer {
         int textX = (xPos + (borderWidth / 2));
         int textY = (yPos + barYOffset);
 
-        if (shouldRenderText(actualHealth, maxHealth, hasAbsorption)) {
+        if (shouldRenderText(actualHealth, maxHealth)) {
             int color = getHealthTextColor();
-            RenderUtil.renderText(actualHealth + absorptionAmount, maxHealth,
+            RenderUtil.renderText(actualHealth, maxHealth,
                     graphics, textX, textY, color);
+        }
+        if (absorptionAmount > 0) {
+            String absorptionText = "+" + absorptionAmount;
+            int absorptionX = xPos + borderWidth - barXOffset -
+                    (Minecraft.getInstance().font.width(absorptionText) / 2);
+            RenderUtil.renderAdditionText(absorptionText, graphics, absorptionX, textY, (BASE_TEXT_ALPHA << 24) | 0xFFFFFF);
         }
     }
 
@@ -209,10 +215,7 @@ public class HealthBarRenderer {
         return (alpha << 24) | 0xFFFFFF;
     }
 
-    private static boolean shouldRenderText(float currentHealth, float maxHealth, boolean hasAbsorption) {
-        if (hasAbsorption) {
-            return true;
-        }
+    private static boolean shouldRenderText(float currentHealth, float maxHealth) {
         if (currentHealth >= maxHealth) {
             if (lastHealth < maxHealth) {
                 fullHealthStartTime = System.currentTimeMillis();

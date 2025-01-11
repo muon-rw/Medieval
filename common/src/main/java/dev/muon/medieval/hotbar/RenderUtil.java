@@ -1,7 +1,6 @@
 package dev.muon.medieval.hotbar;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 
@@ -33,6 +32,21 @@ public class RenderUtil {
         graphics.drawString(minecraft.font, currentText, slashX - currentWidth, yPos, color, true);
         graphics.drawString(minecraft.font, slashText, slashX, yPos, color, true);
         graphics.drawString(minecraft.font, maxText, slashX + slashWidth, yPos, color, true);
+
+        poseStack.popPose();
+    }
+
+    public static void renderAdditionText(String text, GuiGraphics graphics, int baseX, int baseY, int color) {
+        Minecraft minecraft = Minecraft.getInstance();
+        PoseStack poseStack = graphics.pose();
+        poseStack.pushPose();
+        float scalingFactor = ConfigConstants.TEXT_SCALING_FACTOR;
+
+        int xPos = (int) (baseX / scalingFactor);
+        int yPos = (int) (baseY / scalingFactor);
+        poseStack.scale(scalingFactor, scalingFactor, 1.0f);
+
+        graphics.drawString(minecraft.font, text, xPos, yPos, color, true);
 
         poseStack.popPose();
     }
