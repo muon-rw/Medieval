@@ -79,6 +79,7 @@ publishMods {
     version = "${Versions.MOD}+${Versions.MINECRAFT}"
     type = STABLE
 
+    /*
     github {
         accessToken = providers.environmentVariable("GITHUB_TOKEN")
         repository = Properties.GITHUB_REPO
@@ -87,4 +88,5 @@ publishMods {
 
         allowEmptyFiles = true
     }
+     */
 }
