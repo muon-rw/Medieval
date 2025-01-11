@@ -1,7 +1,7 @@
 ## 1.5.0
 - Fix Overflowing Bars compat
 - Custom Hotbar now works on Fabric
-- Added more health overlay types
+- More GUI/effect support improvements
 - Added preliminary hotbars compat for Scorchful/Frostiful (Fabric)
 
 ## 1.4.0
