@@ -139,6 +139,10 @@ dependencies {
     implementation("dev.shadowsoffire:ApothicAttributes:${Versions.MINECRAFT}-${Versions.APOTHIC_ATTRIBUTES}")
     implementation("dev.shadowsoffire:ApothicSpawners:${Versions.MINECRAFT}-${Versions.APOTHIC_SPAWNERS}")
     implementation("dev.shadowsoffire:ApothicEnchanting:${Versions.MINECRAFT}-${Versions.APOTHIC_ENCHANTING}")
+
+    // Overflowing Bars
+    implementation("curse.maven:overflowing-bars-852662:5770623")
+    implementation("curse.maven:puzzles-lib-495476:6013576")
 }
 
 publishMods {

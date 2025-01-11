@@ -1,10 +1,13 @@
 package dev.muon.medieval;
 
+import dev.muon.medieval.compat.OverflowingBarsCompat;
 import dev.muon.medieval.item.ItemRegistry;
 import dev.muon.medieval.item.ItemRegistryFabric;
 import dev.muon.medieval.quest.TaskTypes;
+import fuzs.puzzleslib.api.client.event.v1.gui.RenderGuiLayerEvents;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -20,6 +23,14 @@ public class MedievalFabric implements ModInitializer {
         TaskTypes.init();
         ItemRegistryFabric.init();
         registerCreativeTabs();
+        initializeCompat();
+    }
+
+    public void initializeCompat() {
+        if (FabricLoader.getInstance().isModLoaded("overflowingbars")) {
+            RenderGuiLayerEvents.before(RenderGuiLayerEvents.PLAYER_HEALTH)
+                    .register(OverflowingBarsCompat::onRenderPlayerHealth);
+        }
     }
 
     private void registerCreativeTabs() {

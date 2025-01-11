@@ -39,23 +39,28 @@ public class StaminaBarRenderer {
                 xPos, yPos, 0, 0, borderWidth, borderHeight, 256, 256
         );
 
-        float maxStamina = 20f;  // Minecraft's max food level
+        float maxStamina = 20f;
         float currentStamina = player.getFoodData().getFoodLevel();
         float staminaPercent = currentStamina / maxStamina;
         int partialBarWidth = (int) (barWidth * staminaPercent);
 
         int animOffset = (int) (((player.tickCount + deltaTracker.getGameTimeDeltaTicks()) / 3) % animationCycles) * frameHeight;
 
+
         boolean hasHungerEffect = player.hasEffect(MobEffects.HUNGER);
         if (hasHungerEffect) {
-            RenderSystem.setShaderColor(0.4f, 0.8f, 0.4f, 1.0f);
+            graphics.blit(
+                    Medieval.loc("textures/gui/stamina_bar_hunger.png"),
+                    xPos + barXOffset, yPos + barYOffset,
+                    0, animOffset, partialBarWidth, barHeight, 256, 256
+            );
+        } else {
+            graphics.blit(
+                    Medieval.loc("textures/gui/stamina_bar.png"),
+                    xPos + barXOffset, yPos + barYOffset,
+                    0, animOffset, partialBarWidth, barHeight, 256, 256
+            );
         }
-
-        graphics.blit(
-                Medieval.loc("textures/gui/stamina_bar.png"),
-                xPos + barXOffset, yPos + barYOffset,
-                0, animOffset, partialBarWidth, barHeight, 256, 256
-        );
 
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -69,18 +74,16 @@ public class StaminaBarRenderer {
     }
 
     private static boolean shouldRenderText(float currentStamina, float maxStamina, boolean hasHungerEffect) {
-        // Always show if affected by hunger
         if (hasHungerEffect) {
             return true;
         }
 
-        // Track transition above sprint threshold
         if (currentStamina >= SPRINT_THRESHOLD) {
             if (lastStamina < SPRINT_THRESHOLD) {
                 aboveThresholdStartTime = System.currentTimeMillis();
             }
         } else {
-            aboveThresholdStartTime = 0;  // Reset timer when below threshold
+            aboveThresholdStartTime = 0;
         }
         lastStamina = currentStamina;
 

@@ -1,3 +1,9 @@
+## 1.5.0
+- Fix Overflowing Bars compat
+- Custom Hotbar now works on Fabric
+- Added more health overlay types
+- Added preliminary hotbars compat for Scorchful/Frostiful (Fabric)
+
 ## 1.4.0
 - Fix casting an Iron's spell draining all of a player's mana
 - Fix Iron's Spells not actually being affected by Ars Nouveau spell power

@@ -35,7 +35,7 @@ public class GuiMixin {
     private void renderCustomHealth(GuiGraphics graphics, Player player, int originalX, int originalY, int height, int offsetHeartIndex, float maxHealth, int health, int displayHealth, int absorptionAmount, boolean renderHighlight, CallbackInfo ci) {
         if (minecraft.options.hideGui) return;
 
-        HealthBarRenderer.render(graphics, player, minecraft, height,
+        HealthBarRenderer.render(graphics, player,
                 player.getMaxHealth(), player.getHealth(),
                 absorptionAmount, medieval$currentDeltaTracker);
 

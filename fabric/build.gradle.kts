@@ -22,6 +22,7 @@ repositories {
     maven("https://cursemaven.com")
     maven("https://api.modrinth.com/maven")
     maven("https://maven.bawnorton.com/releases")
+    maven("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
 }
 
 dependencies {
@@ -53,10 +54,10 @@ dependencies {
     }
 
     // Thermoo
-    modImplementation("com.github.TheDeathlyCow:thermoo:v4.2")
-    modLocalRuntime("curse.maven:scorchful-981400:5664972")
-    modLocalRuntime("curse.maven:frostiful-715248:5721630")
-    modLocalRuntime("curse.maven:thermoo-patches-1012677:5692250")
+    modImplementation("com.github.thedeathlycow:thermoo:v4.2.5")
+    modLocalRuntime("curse.maven:scorchful-981400:5946798")
+    modLocalRuntime("curse.maven:frostiful-715248:6073585")
+    modLocalRuntime("curse.maven:thermoo-patches-1012677:6033355")
     modApi("org.ladysnake:satin:2.0.0")
     modApi("me.shedaniel.cloth:cloth-config-fabric:${Versions.CLOTH_CONFIG_VERSION}") {
         exclude("net.fabricmc.fabric-api")
@@ -64,6 +65,11 @@ dependencies {
 
     // Dehydration
     modImplementation("curse.maven:dehydration-410830:5709714")
+
+    // Overflowing bars
+    modImplementation("curse.maven:overflowing-bars-852662:5770622")
+    modImplementation("curse.maven:puzzles-lib-495476:6013577")
+    modLocalRuntime("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:21.1.3")
 
 }
 
