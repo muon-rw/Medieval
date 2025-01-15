@@ -165,7 +165,6 @@ public class TownPortalScrollItem extends Item {
 
     private boolean isSafeSpawn(ServerLevel level, BlockPos pos) {
         if (!level.getBlockState(pos).isAir() || !level.getBlockState(pos.above()).isAir()) {
-            LOGGER.debug("Position {} is not safe: blocks are not air", pos);
             return false;
         }
 
@@ -173,15 +172,12 @@ public class TownPortalScrollItem extends Item {
         while (mutable.getY() < level.getMaxBuildHeight()) {
             BlockState state = level.getBlockState(mutable);
             if (!state.isAir() && !state.liquid()) {
-                LOGGER.debug("Position {} is not safe: non-air, non-liquid block found above at {}", pos, mutable);
-                return false;
+               return false;
             }
             mutable.move(Direction.UP);
         }
 
-        boolean isSolid = level.getBlockState(pos.below()).isSolid();
-        LOGGER.debug("Position {} is {}safe: ground {} solid", pos, isSolid ? "" : "not ", isSolid ? "is" : "is not");
-        return isSolid;
+        return level.getBlockState(pos.below()).isSolid();
     }
 
 
