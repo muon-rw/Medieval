@@ -1,3 +1,6 @@
+## 1.6.2
+- Fix random crash with Alshanex's Familiars (or other mods with spellcasting mobs)
+
 ## 1.6.1
 - Don't render health bar in creative mode
 
