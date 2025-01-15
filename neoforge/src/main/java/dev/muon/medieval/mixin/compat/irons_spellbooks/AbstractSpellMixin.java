@@ -4,7 +4,6 @@ package dev.muon.medieval.mixin.compat.irons_spellbooks;
 import com.hollingsworth.arsnouveau.api.perk.PerkAttributes;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import dev.muon.medieval.ManaTextHelper;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.CastResult;
