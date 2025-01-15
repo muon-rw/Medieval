@@ -1,3 +1,6 @@
+## 1.6.0
+- Add Hardcore Overlay
+
 ## 1.5.0
 - Fix Overflowing Bars compat
 - Custom Hotbar now works on Fabric

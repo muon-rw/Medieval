@@ -46,6 +46,7 @@ public class HealthBarRenderer {
     }
 
     public static void render(GuiGraphics graphics, Player player, float maxHealth, float actualHealth, int absorptionAmount, DeltaTracker deltaTracker) {
+
         Position healthPos = HUDPositioning.getHealthAnchor()
                 .offset(HUDPositioning.getHealthBarXOffset(), HUDPositioning.getHealthBarYOffset());
 
@@ -69,7 +70,8 @@ public class HealthBarRenderer {
         int animOffset = (int) (((player.tickCount + deltaTracker.getGameTimeDeltaTicks()) / 3) % animationCycles) * frameHeight;
 
         renderBaseBar(graphics, player, maxHealth, actualHealth, xPos, yPos, barWidth, barHeight, barXOffset, barYOffset, animOffset);
-        renderOverlays(graphics, player, absorptionAmount, xPos, yPos, barWidth, barHeight, barXOffset, barYOffset);
+        renderBarOverlays(graphics, player, absorptionAmount, xPos, yPos, barWidth, barHeight, barXOffset, barYOffset);
+        renderBorderOverlays(graphics, player, xPos, yPos, borderWidth, borderHeight);
 
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -104,7 +106,7 @@ public class HealthBarRenderer {
         );
     }
 
-    private static void renderOverlays(GuiGraphics graphics, Player player, int absorptionAmount,
+    private static void renderBarOverlays(GuiGraphics graphics, Player player, int absorptionAmount,
                                        int xPos, int yPos, int barWidth, int barHeight,
                                        int barXOffset, int barYOffset) {
 
@@ -125,6 +127,33 @@ public class HealthBarRenderer {
         }
         RenderSystem.disableBlend();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+    }
+
+
+    private static void renderBorderOverlays(GuiGraphics graphics, Player player,
+                                             int xPos, int yPos, int borderWidth, int borderHeight) {
+
+        if (player.level().getLevelData().isHardcore()) {
+            RenderSystem.enableBlend();
+            RenderSystem.defaultBlendFunc();
+            graphics.blit(
+                    Medieval.loc("textures/gui/hardcore_overlay.png"),
+                    xPos, yPos,
+                    0, 0, borderWidth, borderHeight,
+                    256, 256
+            );
+            RenderSystem.disableBlend();
+        }
+
+        if (ConfigConstants.HEALTH_DETAIL_OVERLAY) {
+            graphics.blit(
+                    Medieval.loc("textures/gui/detail_overlay.png"),
+                    xPos + ConfigConstants.HEALTH_OVERLAY_X_OFFSET,
+                    yPos + ConfigConstants.HEALTH_OVERLAY_Y_OFFSET,
+                    0, 0, borderWidth, borderHeight,
+                    256, 256
+            );
+        }
     }
 
     private static void renderTemperatureOverlay(GuiGraphics graphics, float tempScale,
