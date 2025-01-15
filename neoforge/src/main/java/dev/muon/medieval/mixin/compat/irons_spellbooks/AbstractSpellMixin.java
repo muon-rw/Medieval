@@ -9,7 +9,6 @@ import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.CastResult;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,10 +25,10 @@ public class AbstractSpellMixin {
 
     @ModifyReturnValue(method = "getSpellPower", at = @At("RETURN"))
     private float getSpellPower(float original, @Local(argsOnly = true) Entity sourceEntity){
-        if (!(sourceEntity instanceof LivingEntity)) {
+        if (!(sourceEntity instanceof Player)) {
             return original;
         }
-        double entitySpellPowerModifier = ((LivingEntity)sourceEntity).getAttributeValue(PerkAttributes.SPELL_DAMAGE_BONUS);
+        double entitySpellPowerModifier = ((Player)sourceEntity).getAttributeValue(PerkAttributes.SPELL_DAMAGE_BONUS);
         return (float) (original * (entitySpellPowerModifier * 0.1 /*todo: config this value*/));
     }
 
