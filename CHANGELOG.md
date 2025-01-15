@@ -1,3 +1,6 @@
+## 1.6.1
+- Don't render health bar in creative mode
+
 ## 1.6.0
 - Add Hardcore Overlay
 

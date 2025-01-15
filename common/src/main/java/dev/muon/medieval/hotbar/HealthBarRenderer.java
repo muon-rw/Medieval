@@ -47,6 +47,9 @@ public class HealthBarRenderer {
 
     public static void render(GuiGraphics graphics, Player player, float maxHealth, float actualHealth, int absorptionAmount, DeltaTracker deltaTracker) {
 
+        if (player.getAbilities().instabuild) {
+            return;
+        }
         Position healthPos = HUDPositioning.getHealthAnchor()
                 .offset(HUDPositioning.getHealthBarXOffset(), HUDPositioning.getHealthBarYOffset());
 
