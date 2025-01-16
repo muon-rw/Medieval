@@ -117,7 +117,6 @@ public class HealthBarRenderer {
         RenderSystem.defaultBlendFunc();
         float tempScale = getTemperatureScale(player);
         renderTemperatureOverlay(graphics, tempScale, xPos, yPos, barWidth, barHeight, barXOffset, barYOffset);
-        // TODO: Scorchful wetness overlay
         // TODO: Improve overlay sprites
 
         if (absorptionAmount > 0) {
@@ -148,6 +147,21 @@ public class HealthBarRenderer {
             RenderSystem.disableBlend();
         }
 
+        float wetScale = getWetnessScale(player);
+        if (wetScale > 0) {
+            RenderSystem.enableBlend();
+            RenderSystem.defaultBlendFunc();
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, wetScale);
+            graphics.blit(
+                    Medieval.loc("textures/gui/wetness_overlay.png"),
+                    xPos, yPos,
+                    0, 0, borderWidth, borderHeight,
+                    256, 256
+            );
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+            RenderSystem.disableBlend();
+        }
+
         if (ConfigConstants.HEALTH_DETAIL_OVERLAY) {
             graphics.blit(
                     Medieval.loc("textures/gui/detail_overlay.png"),
@@ -158,6 +172,7 @@ public class HealthBarRenderer {
             );
         }
     }
+
 
     private static void renderTemperatureOverlay(GuiGraphics graphics, float tempScale,
                                                  int xPos, int yPos, int barWidth, int barHeight,
@@ -178,6 +193,16 @@ public class HealthBarRenderer {
                     0, 0, coldWidth, barHeight,
                     256, 256
             );
+        }
+    }
+
+    // TODO: Move to something less cursed / easier to extend
+    private static float getWetnessScale(Player player) {
+        try {
+            Method getWetScale = player.getClass().getMethod("thermoo$getSoakedScale");
+            return (float) getWetScale.invoke(player);
+        } catch (Exception e) {
+            return 0.0f;
         }
     }
 

@@ -1,3 +1,6 @@
+## 1.6.3
+- Fix not displaying a scorchful wetness overlay (Fabric)
+
 ## 1.6.2
 - Fix random crash with Alshanex's Familiars (or other mods with spellcasting mobs)
 
