@@ -22,6 +22,7 @@ repositories {
     maven("https://cursemaven.com")
     maven("https://api.modrinth.com/maven")
     maven("https://maven.bawnorton.com/releases")
+    maven("https://maven.kosmx.dev/")
     maven("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
 }
 
@@ -42,6 +43,11 @@ dependencies {
             )
         }
     }
+
+    // Accessories
+
+    modImplementation("io.wispforest:accessories-fabric:${Versions.ACCESSORIES}")
+    modLocalRuntime("curse.maven:accessories-tc-layer-1005680:6008871")
 
     // FTB
     modImplementation("curse.maven:ftb-quests-fabric-438496:5635134")
@@ -70,6 +76,13 @@ dependencies {
     modImplementation("curse.maven:overflowing-bars-852662:5770622")
     modImplementation("curse.maven:puzzles-lib-495476:6013577")
     modLocalRuntime("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:21.1.3")
+
+    // Spell Engine
+
+    modImplementation("maven.modrinth:spell-engine:${Versions.SPELL_ENGINE}+${Versions.MINECRAFT}")
+    modImplementation("maven.modrinth:spell-power:${Versions.SPELL_POWER}+${Versions.MINECRAFT}")
+    modLocalRuntime("dev.kosmx.player-anim:player-animation-lib-fabric:${Versions.PLAYER_ANIMATOR}")
+    implementation("com.github.ZsoltMolnarrr:TinyConfig:${Versions.TINY_CONFIG}")
 
 }
 

@@ -1,3 +1,6 @@
+## 1.7.0
+- Add FTB Teams support to Spell Engine
+
 ## 1.6.3
 - Fix not displaying a scorchful wetness overlay (Fabric)
 
