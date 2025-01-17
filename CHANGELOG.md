@@ -1,3 +1,6 @@
+## 1.7.1
+- Fix crash on Dedicated Servers (Neoforge)
+
 ## 1.7.0
 - Add FTB Teams support to Spell Engine
 

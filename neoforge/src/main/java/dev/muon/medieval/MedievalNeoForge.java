@@ -35,8 +35,7 @@ public class MedievalNeoForge {
     }
 
     public void initializeCompat() {
-        if (isModLoaded("overflowingbars")) {
-            // Register our handler to intercept their health bar rendering
+        if (net.neoforged.fml.loading.FMLEnvironment.dist.isClient() && isModLoaded("overflowingbars")) {
             RenderGuiLayerEvents.before(RenderGuiLayerEvents.PLAYER_HEALTH)
                     .register(OverflowingBarsCompat::onRenderPlayerHealth);
         }
