@@ -29,7 +29,7 @@ public class AbstractSpellMixin {
             return original;
         }
         double entitySpellPowerModifier = ((Player)sourceEntity).getAttributeValue(PerkAttributes.SPELL_DAMAGE_BONUS);
-        return (float) (original * (entitySpellPowerModifier * 0.1 /*todo: config this value*/));
+        return (float) (original + (entitySpellPowerModifier * 0.2 /*todo: config this value*/));
     }
 
 

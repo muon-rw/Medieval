@@ -1,3 +1,6 @@
+## 1.7.2
+- Fix Iron's Spells being far weaker than intended (Neoforge)
+
 ## 1.7.1
 - Fix crash on Dedicated Servers (Neoforge)
 
