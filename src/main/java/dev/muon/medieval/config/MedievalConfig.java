@@ -12,6 +12,9 @@ import java.util.*;
 @Config(name = "medieval")
 public class MedievalConfig implements ConfigData {
 
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        public boolean enableCustomResourceBars = true;
+
         @ConfigEntry.Gui.Tooltip(count = 2)
         @ConfigEntry.BoundedDiscrete(min = 1, max = 256)
         public double levelingSearchRadius = 128.0;
@@ -35,15 +38,6 @@ public class MedievalConfig implements ConfigData {
         @ConfigEntry.Gui.Tooltip(count = 2)
         @ConfigEntry.BoundedDiscrete(min = 1, max = 32)
         public int structureSearchRadius = 6;
-
-        /*
-        @ConfigEntry.Gui.Tooltip(count = 2)
-        public boolean scaleWithEnchantPower = false;
-
-        @ConfigEntry.Gui.Tooltip(count = 2)
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
-        public double levelsPerEnchantmentLevel = 0.1;
-        */
 
         @ConfigEntry.Gui.Tooltip(count = 2)
         public boolean enableStructureLevelBonus = true;

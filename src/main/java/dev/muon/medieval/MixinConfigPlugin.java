@@ -36,6 +36,15 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                         return isModLoaded("itemproductionlib") && isModLoaded(modId);
                     } else if (i + 1 < parts.length) {
                         String modId = parts[i + 1];
+                        if (modId.equals("irons_spellbooks")) {
+                            if (mixinClassName.contains("CastingItemMixin")) {
+                                return isModLoaded("irons_spellbooks") && isModLoaded("ars_nouveau");
+                            }
+                            if (mixinClassName.contains("ManaBarOverlayMixin")) {
+                                return isModLoaded("irons_spellbooks") && !isModLoaded("ars_nouveau");
+                            }
+                            return isModLoaded(modId);
+                        }
                         return isModLoaded(modId);
                     }
                 }

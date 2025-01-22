@@ -1,9 +1,8 @@
 package dev.muon.medieval;
 
-import com.tiviacz.travelersbackpack.fluids.EffectFluidRegistry;
 import dev.muon.medieval.compat.travelersbackpack.TravelersBackpackCompat;
 import dev.muon.medieval.config.MedievalConfig;
-import dev.muon.medieval.compat.travelersbackpack.PurifiedWaterEffect;
+import dev.muon.medieval.config.ConfigConstants;
 import dev.muon.medieval.leveling.EnhancedEntityLevelingSettingsReloader;
 import dev.muon.medieval.leveling.LevelSyncHandler;
 import net.minecraft.resources.ResourceLocation;
@@ -11,13 +10,13 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.LoadingModList;
+import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import dev.muon.medieval.item.ItemRegistry;
@@ -38,9 +37,6 @@ public class Medieval {
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(Medieval.class);
-        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> "ANY", (remote, isServer) -> true));
-
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -54,7 +50,6 @@ public class Medieval {
         }
     }
 
-
     // TODO: Remove if Nyf's Compat updates to be compatible with latest dependencies
     @SubscribeEvent
     public static void onInterMod(InterModEnqueueEvent event) {
@@ -63,7 +58,7 @@ public class Medieval {
         });
     }
 
-    public static ResourceLocation loc(String id) {
-        return new ResourceLocation(Medieval.MODID, id);
+    public static ResourceLocation loc(String path) {
+        return new ResourceLocation(Medieval.MODID, path);
     }
 }

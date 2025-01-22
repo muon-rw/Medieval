@@ -161,6 +161,9 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:lionfish-api-1001614:5363774")
     runtimeOnly fg.deobf("curse.maven:lendercataclysm-551586:5474791")
 
+    // Mana Unification
+    implementation fg.deobf("curse.maven:mana-unification-1083306:5729342")
+
     // Celestisynth
     implementation fg.deobf("curse.maven:celestisynth-872712:5116555")
 
@@ -225,6 +228,13 @@ dependencies {
         exclude group: 'net.minecraftforge'
         exclude group: 'com.github.llamalad.mixinextras'
     })
+
+    // Dungeons and Combat
+    compileOnly fg.deobf("curse.maven:dungeons-and-combat-1128235:6077203")
+
+    // Overflowing Bars
+    //implementation fg.deobf("curse.maven:overflowing-bars-852662:5763974")
+    //implementation fg.deobf("curse.maven:puzzles-lib-495476:5904750")
 
 }
 

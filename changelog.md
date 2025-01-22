@@ -1,3 +1,7 @@
+## 1.7.0
+- Backport Dynamic HUD Bars
+- Disable Dungeons and Combat book usage
+
 ## 1.6.1
 - Experimental - disable Entity Linked Item Stack-related logic in Apoli. 
 (This should be a *massive* performance increase in some cases, but will break some custom Origins!)

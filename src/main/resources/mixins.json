@@ -10,6 +10,8 @@
     "WaterEffectMixin",
     "compat.apoli.ApoliEventHandlerMixin",
     "compat.autoleveling.MobLevelingEventsMixin",
+    "compat.dungeons_and_combat.CombatStyleManualItemMixin",
+    "compat.irons_spellbooks.CastingItemMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileInteractiveMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",
     "compat.itemproductionlib.celestisynth.CelestialCraftingMenuMixin",
@@ -27,6 +29,8 @@
     "compat.survive.TemperatureDataMixin"
   ],
   "client": [
+    "compat.ars_nouveau.GuiManaHUDMixin",
+    "compat.irons_spellbooks.ManaBarOverlayMixin",
     "compat.justlevelingfork.client.JustLevelingScreenMixin"
   ],
   "minVersion": "0.8"
