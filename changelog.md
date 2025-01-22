@@ -1,5 +1,6 @@
 ## 1.7.0
 - Backport Dynamic HUD Bars
+- Fixed glass breaking sound bug when nearby player is wearing a Frostward ring
 - Disable Dungeons and Combat book usage
 
 ## 1.6.1

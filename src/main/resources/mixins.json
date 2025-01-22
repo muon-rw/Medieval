@@ -11,6 +11,8 @@
     "compat.apoli.ApoliEventHandlerMixin",
     "compat.autoleveling.MobLevelingEventsMixin",
     "compat.dungeons_and_combat.CombatStyleManualItemMixin",
+    "compat.ice_and_fire.FrozenDataMixin",
+    "compat.ice_and_fire_spellbooks.ServerEventsMixin",
     "compat.irons_spellbooks.CastingItemMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileInteractiveMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",

@@ -232,9 +232,15 @@ dependencies {
     // Dungeons and Combat
     compileOnly fg.deobf("curse.maven:dungeons-and-combat-1128235:6077203")
 
-    // Overflowing Bars
-    //implementation fg.deobf("curse.maven:overflowing-bars-852662:5763974")
-    //implementation fg.deobf("curse.maven:puzzles-lib-495476:5904750")
+    // Ice and Fire Spellbooks
+    implementation fg.deobf("curse.maven:ice-and-fire-spellbooks-977855:5844739")
+
+    // Ice and Fire
+    implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5633453")
+    implementation fg.deobf("curse.maven:citadel-331936:6002521")
+
+    // Traveloptics
+    implementation fg.deobf("curse.maven:to-tweaks-irons-spells-1046916:6094255")
 
 }
 
