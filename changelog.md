@@ -2,6 +2,7 @@
 - Backport Dynamic HUD Bars
 - Fixed glass breaking sound bug when nearby player is wearing a Frostward ring
 - Disable Dungeons and Combat book usage
+- Nerfed a few problematic spells
 
 ## 1.6.1
 - Experimental - disable Entity Linked Item Stack-related logic in Apoli. 

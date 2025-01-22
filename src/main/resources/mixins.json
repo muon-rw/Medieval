@@ -14,6 +14,7 @@
     "compat.ice_and_fire.FrozenDataMixin",
     "compat.ice_and_fire_spellbooks.ServerEventsMixin",
     "compat.irons_spellbooks.CastingItemMixin",
+    "compat.irons_spellbooks.EchoingStrikesEffectMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileInteractiveMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",
     "compat.itemproductionlib.celestisynth.CelestialCraftingMenuMixin",
@@ -28,7 +29,9 @@
     "compat.skilltree.LearnSkillMessageMixin",
     "compat.survive.GuiHelperMixin",
     "compat.survive.SurviveEventsMixin",
-    "compat.survive.TemperatureDataMixin"
+    "compat.survive.TemperatureDataMixin",
+    "compat.traveloptics.AerialCollapseMixin",
+    "compat.traveloptics.AnnihilationMixin"
   ],
   "client": [
     "compat.ars_nouveau.GuiManaHUDMixin",
