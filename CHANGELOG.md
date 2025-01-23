@@ -1,3 +1,6 @@
+## 1.7.4 
+- Fix inverted health bar hiding logic from 1.7.3
+
 ## 1.7.3
 - Fix health bar showing in spectator mode
 
