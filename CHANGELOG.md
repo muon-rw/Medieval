@@ -1,3 +1,6 @@
+## 1.7.3
+- Fix health bar showing in spectator mode
+
 ## 1.7.2
 - Fix Iron's Spells being far weaker than intended (Neoforge)
 
