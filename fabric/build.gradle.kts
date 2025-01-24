@@ -78,7 +78,6 @@ dependencies {
     modLocalRuntime("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:21.1.3")
 
     // Spell Engine
-
     modImplementation("maven.modrinth:spell-engine:${Versions.SPELL_ENGINE}+${Versions.MINECRAFT}")
     modImplementation("maven.modrinth:spell-power:${Versions.SPELL_POWER}+${Versions.MINECRAFT}")
     modLocalRuntime("dev.kosmx.player-anim:player-animation-lib-fabric:${Versions.PLAYER_ANIMATOR}")

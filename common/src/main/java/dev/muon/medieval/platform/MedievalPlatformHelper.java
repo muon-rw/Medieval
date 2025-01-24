@@ -1,7 +1,5 @@
 package dev.muon.medieval.platform;
 
-import dev.muon.medieval.config.MedievalConfigHelper;
-
 public interface MedievalPlatformHelper {
 
     /**
