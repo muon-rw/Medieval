@@ -240,8 +240,10 @@ dependencies {
     implementation fg.deobf("curse.maven:citadel-331936:6002521")
 
     // Traveloptics
-    implementation fg.deobf("curse.maven:to-tweaks-irons-spells-1046916:6094255")
+    compileOnly fg.deobf("curse.maven:to-tweaks-irons-spells-1046916:6094255")
 
+    // Twilight
+    runtimeOnly fg.deobf("curse.maven:the-twilight-forest-227639:5468648")
 }
 
 mixin {

@@ -1,3 +1,6 @@
+## 1.7.1
+- Capped the number of item stacks that can be dropped per entity (configurable)
+
 ## 1.7.0
 - Backport Dynamic HUD Bars
 - Fixed glass breaking sound bug when nearby player is wearing a Frostward ring

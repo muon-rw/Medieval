@@ -16,6 +16,10 @@ public class MedievalConfig implements ConfigData {
         public boolean enableCustomResourceBars = true;
 
         @ConfigEntry.Gui.Tooltip(count = 2)
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 1024)
+        public int maxStacksPerEntity = 16;
+
+        @ConfigEntry.Gui.Tooltip(count = 2)
         @ConfigEntry.BoundedDiscrete(min = 1, max = 256)
         public double levelingSearchRadius = 128.0;
 
