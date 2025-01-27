@@ -1,3 +1,6 @@
+## 1.7.5
+- Stamina bar Green -> Yellow -> Red at 6 or lower (sprint threshold)
+
 ## 1.7.4 
 - Fix inverted health bar hiding logic from 1.7.3
 
