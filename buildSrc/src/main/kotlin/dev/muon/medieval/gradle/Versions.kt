@@ -1,7 +1,7 @@
 package dev.muon.medieval.gradle
 
 object Versions {
-    const val MOD = "1.7.7"
+    const val MOD = "1.7.8"
 
     const val MINECRAFT = "1.21.1"
     const val PARCHMENT_MINECRAFT = "1.21"

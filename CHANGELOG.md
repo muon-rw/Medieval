@@ -1,3 +1,6 @@
+## 1.7.8
+- Fix Mixin crash on Fabric from 1.7.7
+
 ## 1.7.7
 - Improve sprites for the heat/cold overlays
 - Yeet dehydration patches
