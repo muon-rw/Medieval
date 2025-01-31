@@ -82,7 +82,6 @@ dependencies {
     modImplementation("maven.modrinth:spell-power:${Versions.SPELL_POWER}+${Versions.MINECRAFT}")
     modLocalRuntime("dev.kosmx.player-anim:player-animation-lib-fabric:${Versions.PLAYER_ANIMATOR}")
     implementation("com.github.ZsoltMolnarrr:TinyConfig:${Versions.TINY_CONFIG}")
-
 }
 
 loom {

@@ -1,3 +1,8 @@
+## 1.7.6
+- Render low stamina as red instead of yellow
+- Made healthbar sprite a bit less bright
+- Improve Spell Engine FTB Teams compatibility 
+
 ## 1.7.5
 - Stamina bar Green -> Yellow -> Red at 6 or lower (sprint threshold)
 
