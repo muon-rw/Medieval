@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 
 public class StaminaBarRenderer {
     private static final float SPRINT_THRESHOLD = 6.0f;
-    //private static final float CRITICAL_THRESHOLD = 2.0f;
+    //private static final float WARNING_THRESHOLD = 7.0f;
 
     private enum BarType {
         NORMAL("stamina_bar"),
@@ -28,9 +28,9 @@ public class StaminaBarRenderer {
         }
 
         public static BarType fromPlayerState(Player player, float stamina) {
-            if (player.hasEffect(MobEffects.HUNGER)) return HUNGER;
             if (stamina <= SPRINT_THRESHOLD) return CRITICAL;
-            //if (stamina <= SPRINT_THRESHOLD) return WARNING;
+            if (player.hasEffect(MobEffects.HUNGER)) return HUNGER;
+            //if (stamina <= WARNING_THRESHOLD) return WARNING;
             return NORMAL;
         }
     }

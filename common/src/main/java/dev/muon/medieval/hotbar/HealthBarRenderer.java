@@ -215,7 +215,7 @@ public class HealthBarRenderer {
             int maxTemperature = (int) getMaxTemp.invoke(player);
             int temperature = (int) getTemp.invoke(player);
 
-            return temperature >= maxTemperature - 1;
+            return temperature > 0.5 && temperature >= maxTemperature - 1;
         } catch (Exception e) {
             // Thermoo not present
             return false;

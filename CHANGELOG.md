@@ -1,3 +1,6 @@
+## 1.7.9
+- Minor changes to Thermoo rendering logic
+
 ## 1.7.8
 - Fix Mixin crash on Fabric from 1.7.7
 
