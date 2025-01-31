@@ -1,3 +1,7 @@
+## 1.7.7
+- Improve sprites for the heat/cold overlays
+- Yeet dehydration patches
+
 ## 1.7.6
 - Render low stamina as red instead of yellow
 - Made healthbar sprite a bit less bright
