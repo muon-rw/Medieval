@@ -6,8 +6,6 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "dev.muon.medieval.MixinConfigPluginFabric",
   "mixins": [
-    "compat.dehydration.ItemStackMixin",
-    "compat.dehydration.PotionItemMixin",
     "compat.spell_engine.TargetHelperMixin"
   ],
   "client": [
