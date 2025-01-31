@@ -69,9 +69,6 @@ dependencies {
         exclude("net.fabricmc.fabric-api")
     }
 
-    // Dehydration
-    modImplementation("curse.maven:dehydration-410830:5709714")
-
     // Overflowing bars
     modImplementation("curse.maven:overflowing-bars-852662:5770622")
     modImplementation("curse.maven:puzzles-lib-495476:6013577")
