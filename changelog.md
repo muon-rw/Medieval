@@ -1,3 +1,6 @@
+## 1.7.2
+- Fix the cap from 1.7.1 applying to players. Update the default stack limit
+
 ## 1.7.1
 - Capped the number of item stacks that can be dropped per entity (configurable)
 
