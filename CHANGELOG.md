@@ -1,3 +1,7 @@
+## 1.8.0
+- Patch for Attributes GUI text color (neoforge)
+- Patch for Attributes GUI dynamic attributes (neoforge)
+
 ## 1.7.9
 - Minor changes to Thermoo rendering logic
 

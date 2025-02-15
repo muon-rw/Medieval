@@ -15,6 +15,7 @@
     "compat.irons_spellbooks.ManaBarOverlayMixin"
   ],
   "client": [
+    "compat.apotheosis.AttributesGuiMixin",
     "compat.ars_nouveau.GuiManaHUDMixin",
     "compat.irons_spellbooks.ClientSpellCastHelperMixin",
     "compat.twilightforest.ClientEventsMixin"
