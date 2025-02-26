@@ -21,8 +21,8 @@ public class OverflowingBarsCompat {
         HealthBarRenderer.render(guiGraphics, player,
                 player.getMaxHealth(), player.getHealth(),
                 (int)absorptionAmount, deltaTracker);
-        ClientAbstractions.INSTANCE.addGuiLeftHeight(minecraft.gui, ConfigConstants.HEALTH_BORDER_HEIGHT);
-
+        ClientAbstractions.INSTANCE.addGuiLeftHeight(minecraft.gui, ConfigConstants.HEALTH_BORDER_HEIGHT + 1);
+        ClientAbstractions.INSTANCE.addGuiRightHeight(minecraft.gui, 1);
         return EventResult.INTERRUPT;
     }
 }

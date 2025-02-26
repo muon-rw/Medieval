@@ -5,15 +5,15 @@ import dev.ftb.mods.ftbteams.api.FTBTeamsAPI;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.spell_engine.utils.TargetHelper;
-import net.spell_engine.utils.TargetHelper.Relation;
+import net.spell_engine.internals.target.EntityRelation;
+import net.spell_engine.internals.target.EntityRelations;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value = TargetHelper.class, remap = false)
-public class TargetHelperMixin {
+@Mixin(value = EntityRelations.class, remap = false)
+public class EntityRelationsMixin {
     @ModifyReturnValue(method = "getRelation", at = @At("RETURN"))
-    private static Relation checkFTBTeams(Relation original, LivingEntity attacker, Entity target) {
+    private static EntityRelation checkFTBTeams(EntityRelation original, LivingEntity attacker, Entity target) {
         if (!FTBTeamsAPI.api().isManagerLoaded()) {
             return original;
         }
@@ -23,8 +23,8 @@ public class TargetHelperMixin {
 
         var teamManager = FTBTeamsAPI.api().getManager();
         if (teamManager.arePlayersInSameTeam(attackerPlayer.getUUID(), targetPlayer.getUUID())) {
-            return Relation.ALLY;
+            return EntityRelation.ALLY;
         }
-        return Relation.MIXED;
+        return EntityRelation.MIXED;
     }
 }

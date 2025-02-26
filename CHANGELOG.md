@@ -1,3 +1,7 @@
+## 1.8.1
+- Update for Spell Engine 1.5+ (Fabric)
+- Bump armor/air up by 1 pixel
+
 ## 1.8.0
 - Patch for Attributes GUI text color (neoforge)
 - Patch for Attributes GUI dynamic attributes (neoforge)

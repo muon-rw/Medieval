@@ -6,7 +6,7 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "dev.muon.medieval.MixinConfigPluginFabric",
   "mixins": [
-    "compat.spell_engine.TargetHelperMixin"
+    "compat.spell_engine.EntityRelationsMixin"
   ],
   "client": [
   ],
