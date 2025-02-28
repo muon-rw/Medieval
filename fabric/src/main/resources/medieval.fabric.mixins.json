@@ -6,7 +6,11 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "dev.muon.medieval.MixinConfigPluginFabric",
   "mixins": [
-    "compat.spell_engine.EntityRelationsMixin"
+    "compat.affinity.AssemblyAugmentBlockEntityAccessor",
+    "compat.affinity.AssemblyAugmentBlockEntityMixin",
+    "compat.affinity.AssemblyAugmentBlockMixin",
+    "compat.spell_engine.EntityRelationsMixin",
+    "compat.affinity.BlockBehaviourMixin"
   ],
   "client": [
   ],

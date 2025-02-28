@@ -1,7 +1,7 @@
 package dev.muon.medieval.gradle
 
 object Versions {
-    const val MOD = "1.8.1"
+    const val MOD = "1.8.2"
 
     const val MINECRAFT = "1.21.1"
     const val PARCHMENT_MINECRAFT = "1.21"
@@ -42,4 +42,8 @@ object Versions {
     const val SPELL_ENGINE = "1.5.1"
     const val SPELL_POWER = "1.2.1"
     const val TINY_CONFIG = "2.3.2"
+
+    const val CARDINAL_COMPONENTS = "6.1.1"
+    const val PLAYER_ABILITY_LIB = "1.10.0"
+    const val WORLD_MESHER = "0.4.7+1.21"
 }

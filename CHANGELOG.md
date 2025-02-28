@@ -1,3 +1,6 @@
+## 1.8.2
+- Affinity x Visual Workbench compat (Fabric)
+
 ## 1.8.1
 - Update for Spell Engine 1.5+ (Fabric)
 - Bump armor/air up by 1 pixel
