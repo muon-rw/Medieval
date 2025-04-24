@@ -1,3 +1,6 @@
+## 1.8.3
+- Add internal structure dump command on fabric
+
 ## 1.8.2
 - Affinity x Visual Workbench compat (Fabric)
 
