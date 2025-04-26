@@ -105,7 +105,7 @@ repositories {
     maven("https://maven.shedaniel.me/")
     maven("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
     maven("https://maven.kosmx.dev/")
-    maven("https://maven.octo-studios.com/releases")
+    maven("https://maven.theillusivec4.top/")
 }
 
 dependencies {
@@ -131,7 +131,7 @@ dependencies {
     // Ars Nouveau
     implementation("com.hollingsworth.ars_nouveau:ars_nouveau-${Versions.ARS_NOUVEAU}")
     implementation("com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.7")
-    runtimeOnly("top.theillusivec4.curios:curios-neoforge:9.0.12+1.21")
+    runtimeOnly("top.theillusivec4.curios:curios-neoforge:${Versions.CURIOS}")
 
     // Apotheosis
     implementation("dev.shadowsoffire:Placebo:${Versions.MINECRAFT}-${Versions.PLACEBO}")
