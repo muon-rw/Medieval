@@ -1,6 +1,5 @@
 package dev.muon.medieval.mixin.compat.irons_spellbooks;
 
-import dev.muon.medieval.ManaTextHelper;
 import io.redspace.ironsspellbooks.network.casting.CastErrorPacket;
 import io.redspace.ironsspellbooks.player.ClientSpellCastHelper;
 import org.spongepowered.asm.mixin.Mixin;
