@@ -106,9 +106,11 @@ repositories {
     maven("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
     maven("https://maven.kosmx.dev/")
     maven("https://maven.theillusivec4.top/")
+    maven("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
 }
 
 dependencies {
+    runtimeOnly("curse.maven:configured-457570:5873783")
 
     implementation("curse.maven:ftb-chunks-forge-314906:5710609")
     implementation("curse.maven:ftb-library-forge-404465:5714916")

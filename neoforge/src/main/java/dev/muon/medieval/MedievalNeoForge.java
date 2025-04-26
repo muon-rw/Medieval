@@ -1,5 +1,6 @@
 package dev.muon.medieval;
 
+import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.hotbar.compat.OverflowingBarsCompat;
 import dev.muon.medieval.item.ItemRegistry;
 import dev.muon.medieval.item.ItemRegistryNeoForge;
@@ -12,7 +13,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.fml.loading.moddiscovery.ModInfo;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -26,6 +30,9 @@ public class MedievalNeoForge {
         Medieval.setHelper(new MedievalPlatformHelperNeoForge());
         Services.setup(new MedievalPlatformHelperNeoForge());
 
+        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.COMMON, MedievalConfig.COMMON_SPEC);
+        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.CLIENT, MedievalConfig.CLIENT_SPEC);
+
         ItemRegistryNeoForge.init(eventBus);
 
         registerCreativeTabs();
@@ -35,11 +42,12 @@ public class MedievalNeoForge {
     }
 
     public void initializeCompat() {
-        if (net.neoforged.fml.loading.FMLEnvironment.dist.isClient() && isModLoaded("overflowingbars")) {
+        if (FMLEnvironment.dist.isClient() && isModLoaded("overflowingbars")) {
             RenderGuiLayerEvents.before(RenderGuiLayerEvents.PLAYER_HEALTH)
                     .register(OverflowingBarsCompat::onRenderPlayerHealth);
         }
     }
+
     public boolean isModLoaded(String modId) {
         if (ModList.get() == null) {
             return LoadingModList.get().getMods().stream().map(ModInfo::getModId).anyMatch(modId::equals);

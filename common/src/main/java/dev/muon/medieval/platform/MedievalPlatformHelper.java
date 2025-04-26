@@ -30,6 +30,4 @@ public interface MedievalPlatformHelper {
      * @return An instance of FTBHelper for the current platform.
      */
     FTBHelper getFTBHelper();
-
-
 }

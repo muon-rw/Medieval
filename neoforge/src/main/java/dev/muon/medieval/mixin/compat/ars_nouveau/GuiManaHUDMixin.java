@@ -9,6 +9,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.muon.medieval.Medieval;
+import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.hotbar.ArsNouveauManaProvider;
 import dev.muon.medieval.hotbar.HUDPositioning;
 import dev.muon.medieval.hotbar.ManaBarRenderer;
@@ -39,6 +40,10 @@ public class GuiManaHUDMixin {
 
     @Inject(method = "renderOverlay", at = @At("HEAD"), cancellable = true)
     private static void renderCustomManaBar(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+        if (!MedievalConfig.CLIENT.enableCustomResourceBars.get()) {
+            return;
+        }
+
         if (!GuiManaHUD.shouldDisplayBar()) return;
         if (minecraft.options.hideGui) return;
 

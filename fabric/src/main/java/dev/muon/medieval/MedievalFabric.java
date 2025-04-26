@@ -3,10 +3,15 @@ package dev.muon.medieval;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import dev.muon.medieval.compat.OverflowingBarsCompat;
+import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.item.ItemRegistry;
 import dev.muon.medieval.item.ItemRegistryFabric;
+import dev.muon.medieval.platform.MedievalPlatformHelperFabric;
+import dev.muon.medieval.platform.Services;
 import dev.muon.medieval.quest.TaskTypes;
 import fuzs.puzzleslib.api.client.event.v1.gui.RenderGuiLayerEvents;
+import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
+import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeModConfigEvents;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -21,6 +26,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.neoforged.fml.config.ModConfig;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,13 +38,23 @@ public class MedievalFabric implements ModInitializer {
     public void onInitialize() {
         Medieval.LOG.info("Hello Fabric world!");
         Medieval.init();
+        Medieval.setHelper(new MedievalPlatformHelperFabric());
+        Services.setup(new MedievalPlatformHelperFabric());
 
         TaskTypes.init();
         ItemRegistryFabric.init();
         registerCreativeTabs();
+
+        NeoForgeConfigRegistry.INSTANCE.register(Medieval.MOD_ID, ModConfig.Type.COMMON, MedievalConfig.COMMON_SPEC);
+        NeoForgeConfigRegistry.INSTANCE.register(Medieval.MOD_ID, ModConfig.Type.CLIENT, MedievalConfig.CLIENT_SPEC);
+
         initializeCompat();
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> registerCommand(dispatcher));
+
+        // Register config load/reload events if needed late
+        // NeoForgeModConfigEvents.loading(Medieval.MOD_ID).register(MedievalConfig::onLoad);
+        // NeoForgeModConfigEvents.reloading(Medieval.MOD_ID).register(MedievalConfig::onReload);
     }
 
     public void initializeCompat() {

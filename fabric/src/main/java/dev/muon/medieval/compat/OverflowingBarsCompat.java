@@ -1,5 +1,6 @@
 package dev.muon.medieval.compat;
 
+import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.hotbar.ConfigConstants;
 import dev.muon.medieval.hotbar.HealthBarRenderer;
 import fuzs.puzzleslib.api.client.core.v1.ClientAbstractions;
@@ -11,6 +12,10 @@ import net.minecraft.world.entity.player.Player;
 
 public class OverflowingBarsCompat {
     public static EventResult onRenderPlayerHealth(Minecraft minecraft, GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+        if (!MedievalConfig.CLIENT.enableCustomResourceBars.get()) {
+            return EventResult.PASS;
+        }
+
         Player player = minecraft.player;
         if (player == null || minecraft.options.hideGui) {
             return EventResult.PASS;

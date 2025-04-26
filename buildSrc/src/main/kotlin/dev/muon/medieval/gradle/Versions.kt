@@ -1,7 +1,7 @@
 package dev.muon.medieval.gradle
 
 object Versions {
-    const val MOD = "1.8.3"
+    const val MOD = "1.9.0"
 
     const val MINECRAFT = "1.21.1"
     const val PARCHMENT_MINECRAFT = "1.21.1"
@@ -29,7 +29,7 @@ object Versions {
 
     const val GECKOLIB = "1.21.1:4.7.3"
     const val PLAYER_ANIMATOR = "2.0.1+1.21.1"
-    const val IRONS_SPELLBOOKS = "1.21-3.11.0"
+    const val IRONS_SPELLBOOKS = "$MINECRAFT-3.11.0"
 
     const val ARS_NOUVEAU = "$MINECRAFT:5.8.1.1088"
 
@@ -47,4 +47,6 @@ object Versions {
     const val CARDINAL_COMPONENTS = "6.1.1"
     const val PLAYER_ABILITY_LIB = "1.10.0"
     const val WORLD_MESHER = "0.4.7+1.21"
+
+    const val FCAP = "21.1.3"
 }

@@ -45,6 +45,9 @@ dependencies {
         }
     }
 
+    // Config
+    modImplementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${Versions.FCAP}")
+    
     // Accessories
     modImplementation("io.wispforest:accessories-fabric:${Versions.ACCESSORIES}")
     modLocalRuntime("curse.maven:accessories-tc-layer-1005680:6008871")

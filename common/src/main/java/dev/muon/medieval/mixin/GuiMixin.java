@@ -1,5 +1,6 @@
 package dev.muon.medieval.mixin;
 
+import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.hotbar.ConfigConstants;
 import dev.muon.medieval.hotbar.HealthBarRenderer;
 import dev.muon.medieval.hotbar.StaminaBarRenderer;
@@ -33,6 +34,10 @@ public class GuiMixin {
 
     @Inject(method = "renderHearts", at = @At("HEAD"), cancellable = true)
     private void renderCustomHealth(GuiGraphics graphics, Player player, int originalX, int originalY, int height, int offsetHeartIndex, float maxHealth, int health, int displayHealth, int absorptionAmount, boolean renderHighlight, CallbackInfo ci) {
+        if (!MedievalConfig.CLIENT.enableCustomResourceBars.get()) {
+            return;
+        }
+
         if (minecraft.options.hideGui) return;
 
         HealthBarRenderer.render(graphics, player,
@@ -45,6 +50,10 @@ public class GuiMixin {
 
     @Inject(method = "renderFood", at = @At("HEAD"), cancellable = true)
     private void renderCustomFood(GuiGraphics graphics, Player player, int originalY, int originalX, CallbackInfo ci) {
+        if (!MedievalConfig.CLIENT.enableCustomResourceBars.get()) {
+            return;
+        }
+
         if (minecraft.options.hideGui) return;
 
         StaminaBarRenderer.render(graphics, player, medieval$currentDeltaTracker);
@@ -59,7 +68,7 @@ public class GuiMixin {
             index = 2
     )
     private static int cancelHealthBasedShifting(int originalY) {
-        if (ConfigConstants.ENABLE_CUSTOM_HEALTH) {
+        if (MedievalConfig.CLIENT.enableCustomResourceBars.get()) {
             return Minecraft.getInstance().getWindow().getGuiScaledHeight() - 49;
         }
         return originalY;

@@ -1,6 +1,8 @@
 package dev.muon.medieval;
 
 
+// import dev.muon.medieval.config.MedievalConfig; // Removed unused import
+import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.platform.Services;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.core.BlockPos;
@@ -24,23 +26,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.*;
+import java.util.List;
 
 public class StructureRegenerator {
     private static final Logger LOGGER = LogManager.getLogger();
 
-     //TODO: Reimplement config
-    private static final int SEARCH_RADIUS = 6; // IN CHUNKS
-    private static final List<String> VALID_STRUCTURE_NAMESPACES = Arrays.asList(
-            "dungeons_arise",
-            "dungeons_arise_seven_seas"
-    );
-    private static final List<String> ADDITIONAL_VALID_STRUCTURES = Arrays.asList(
-            "minecraft:ancient_city",
-            "minecraft:end_city"
-    );
+    private static final int SEARCH_RADIUS = 6;
     public static RegenerationResult regenerateStructure(ServerLevel level, BlockPos pos, ResourceLocation structureId) {
         if (!isValidStructure(structureId)) {
-            return new RegenerationResult(false, "Invalid structure");
+            return new RegenerationResult(false, "Structure not allowed by config");
         }
 
         StructureStart structureStart = findNearestStructure(level, pos, structureId);
@@ -120,8 +114,28 @@ public class StructureRegenerator {
     }
 
     public static boolean isValidStructure(ResourceLocation structureId) {
-        return VALID_STRUCTURE_NAMESPACES.contains(structureId.getNamespace()) ||
-                ADDITIONAL_VALID_STRUCTURES.contains(structureId.toString());
+        List<? extends String> allowedNamespaces = MedievalConfig.COMMON.structureNamespaces.get();
+        List<? extends String> allowedStructures = MedievalConfig.COMMON.additionalStructures.get();
+        List<? extends String> excludedPaths = MedievalConfig.COMMON.excludedStructurePaths.get();
+
+        if (allowedStructures != null && allowedStructures.contains(structureId.toString())) {
+            return true; // Explicitly allowed by ID, bypasses other checks
+        }
+
+        if (excludedPaths != null) {
+            String path = structureId.getPath();
+            for (String excludedPath : excludedPaths) {
+                if (path.equals(excludedPath)) {
+                    return false; 
+                }
+            }
+        }
+
+        if (allowedNamespaces != null && allowedNamespaces.contains(structureId.getNamespace())) {
+            return true; 
+        }
+
+        return false;
     }
 
 

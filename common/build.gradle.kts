@@ -40,6 +40,10 @@ repositories {
         url = uri("https://maven.blamejared.com/")
     }
     maven("https://maven.wispforest.io/releases")
+    maven {
+        name = "Fuzs Mod Resources"
+        url = uri("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
+    }
 }
 
 dependencies {
@@ -50,6 +54,10 @@ dependencies {
     compileOnly("io.wispforest:accessories-common:${Versions.ACCESSORIES}-mojmap")
     compileOnly("mezz.jei:jei-${Versions.MINECRAFT}-common-api:${Versions.JEI}")
     compileOnly("dev.emi:emi-xplat-mojmap:${Versions.EMI}:api")
+
+    compileOnlyApi("org.jetbrains:annotations:24.1.0")
+
+    api("fuzs.forgeconfigapiport:forgeconfigapiport-common-neoforgeapi:${Versions.FCAP}")
 }
 
 configurations {

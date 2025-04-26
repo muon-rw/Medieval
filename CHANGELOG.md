@@ -1,3 +1,8 @@
+## 1.9.0
+- Make challenge orb structures configurable, and populate more structures
+- Make custom resource bars configurable (just a toggle for now)
+- Add icon for mod menu
+
 ## 1.8.3
 - Add internal structure dump command on fabric
 
