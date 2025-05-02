@@ -22,6 +22,9 @@
     "main": [
       "dev.muon.medieval.MedievalFabric"
     ],
+    "client": [
+      "dev.muon.medieval.client.MedievalClient"
+    ],
     "preLaunch": [
       "dev.muon.medieval.MedievalFabricPre"
     ],

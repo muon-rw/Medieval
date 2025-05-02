@@ -13,6 +13,8 @@
     "compat.affinity.BlockBehaviourMixin"
   ],
   "client": [
+    "client.LocalPlayerDamageMixin",
+    "compat.reactivemusic.SongPickerMixin"
   ],
   "server": [],
   "injectors": {

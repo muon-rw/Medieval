@@ -1,3 +1,6 @@
+## 1.9.1
+- Reactive Music combat music patch
+
 ## 1.9.0
 - Make challenge orb structures configurable, and populate more structures
 - Make custom resource bars configurable (just a toggle for now)

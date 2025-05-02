@@ -98,6 +98,9 @@ dependencies {
 
     // Visual Workbench
     modImplementation("curse.maven:visual-workbench-500273:5714955")
+
+    // Reactive Music
+    modImplementation("curse.maven:reactive-music-960382:6132849")
 }
 
 loom {
