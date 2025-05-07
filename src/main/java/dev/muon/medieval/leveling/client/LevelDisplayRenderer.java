@@ -90,6 +90,7 @@ public class LevelDisplayRenderer {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
         if (player == null) return false;
+        if (!ConfigHolder.COMMON.SHOW_BAR.get()) return false;
 
         double distanceSq = player.distanceToSqr(entity);
         double renderDistance = ConfigHolder.COMMON.HP_BAR_TYPE[3].get();

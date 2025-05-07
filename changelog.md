@@ -1,3 +1,6 @@
+## 1.7.3
+- Fix Level Display Renderer not respecting YDM's config
+
 ## 1.7.2
 - Fix the cap from 1.7.1 applying to players. Update the default stack limit
 
