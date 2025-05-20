@@ -1,4 +1,9 @@
 {
+  "sdrp.the_aether.in": "Floating around The Aether",
+  "sdrp.everbright.in": "In The Everbright",
+  "sdrp.everdawn.in": "In the Everdawn",
+  "sdrp.otherside.in": "In a Deeper Dark...",
+  "sdrp.twilight_forest.in": "In the Twilight Forest",
   "screen.aptitude.level.custom": "Level %1$d/20 | (%2$s%%)",
 
   "item.medieval.challenge_orb": "Challenge Orb",

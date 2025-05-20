@@ -1,3 +1,6 @@
+## 1.7.4
+- Add SDRP dimension translations
+
 ## 1.7.3
 - Fix Level Display Renderer not respecting YDM's config
 
