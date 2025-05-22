@@ -27,10 +27,14 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.neoforged.fml.config.ModConfig;
+import net.minecraft.tags.TagKey;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 public class MedievalFabric implements ModInitializer {
 
@@ -83,7 +87,17 @@ public class MedievalFabric implements ModInitializer {
             "dungeons_arise_seven_seas",
             "mes",
             "nova_structures",
-            "the_bumblezone"
+            "the_bumblezone",
+            "ati_structures"
+    );
+
+    private static final List<TagKey<Structure>> DIFFICULTY_TAGS = Arrays.asList(
+            TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath("dungeon_difficulty", "level_1")),
+            TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath("dungeon_difficulty", "level_2")),
+            TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath("dungeon_difficulty", "level_3")),
+            TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath("dungeon_difficulty", "level_4")),
+            TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath("dungeon_difficulty", "level_5")),
+            TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath("dungeon_difficulty", "level_6"))
     );
 
     private static void registerCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -100,13 +114,49 @@ public class MedievalFabric implements ModInitializer {
         Medieval.LOG.info("Structure dump initiated by command from: " + source.getTextName());
         try {
             Registry<Structure> structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE);
-            Set<ResourceLocation> structureIds = structureRegistry.keySet();
-
-            Medieval.LOG.info("--- Dumping Structure IDs ---");
-            structureIds.stream()
+            
+            Set<ResourceLocation> allStructureIdsInTargetNamespaces = structureRegistry.keySet().stream()
                     .filter(id -> TARGET_NAMESPACES.contains(id.getNamespace()))
+                    .collect(Collectors.toSet());
+
+            Set<ResourceLocation> categorizedStructureIds = new HashSet<>();
+
+            Medieval.LOG.info("--- Dumping Structure IDs by Difficulty Tag ---");
+
+            for (TagKey<Structure> tagKey : DIFFICULTY_TAGS) {
+                Medieval.LOG.info("--- Structures in Tag: " + tagKey.location() + " ---");
+                List<ResourceLocation> structuresInThisTag = new ArrayList<>();
+
+                structureRegistry.getTagOrEmpty(tagKey).forEach(holder -> {
+                    ResourceLocation id = holder.unwrapKey().get().location(); 
+                    if (allStructureIdsInTargetNamespaces.contains(id)) {
+                        structuresInThisTag.add(id);
+                    }
+                });
+
+                structuresInThisTag.stream()
+                        .sorted(ResourceLocation::compareTo)
+                        .forEach(id -> {
+                            Medieval.LOG.info(id.toString());
+                            categorizedStructureIds.add(id);
+                        });
+                if (structuresInThisTag.isEmpty()) {
+                    Medieval.LOG.info("No structures found in this tag and target namespaces.");
+                }
+            }
+
+            Medieval.LOG.info("--- Uncategorized Structures (from target namespaces) ---");
+            List<ResourceLocation> uncategorizedStructures = allStructureIdsInTargetNamespaces.stream()
+                    .filter(id -> !categorizedStructureIds.contains(id))
                     .sorted(ResourceLocation::compareTo)
-                    .forEach(id -> Medieval.LOG.info(id.toString()));
+                    .collect(Collectors.toList());
+
+            if (uncategorizedStructures.isEmpty()) {
+                Medieval.LOG.info("No uncategorized structures found in target namespaces.");
+            } else {
+                uncategorizedStructures.forEach(id -> Medieval.LOG.info(id.toString()));
+            }
+            
             Medieval.LOG.info("--- Structure ID Dump Complete ---");
             source.sendSystemMessage(Component.literal("Structure dump complete."));
 

@@ -1,3 +1,6 @@
+## 1.9.3
+- More structure dump utils
+
 ## 1.9.2
 - Remove Spell Engine x FTB Teams compat (no longer needed)
 - Cool starterkit stuff . mp3
