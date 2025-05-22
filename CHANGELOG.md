@@ -1,3 +1,7 @@
+## 1.9.2
+- Remove Spell Engine x FTB Teams compat (no longer needed)
+- Cool starterkit stuff . mp3
+
 ## 1.9.1
 - Reactive Music combat music patch
 

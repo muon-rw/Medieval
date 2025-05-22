@@ -7,7 +7,6 @@ import dev.muon.medieval.config.MedievalConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
@@ -34,7 +33,7 @@ public class SongPickerMixin {
      * (Attacking a mob is no longer sufficient on its own).
      */
     @Unique
-    private static boolean medieval_isInCombat(LocalPlayer player, Level world) {
+    private static boolean medieval$isInCombat(LocalPlayer player, Level world) {
         if (player == null || world == null) {
             return false;
         }
@@ -77,7 +76,7 @@ public class SongPickerMixin {
             ),
             remap = false
     )
-    private static void medieval_overwriteNearbyMobsCheck(CallbackInfo ci) {
+    private static void overwriteNearbyMobsCheck(CallbackInfo ci) {
         Minecraft mc = Minecraft.getInstance();
         LocalPlayer player = mc.player;
         Level world = mc.level;
@@ -85,7 +84,7 @@ public class SongPickerMixin {
             return;
         }
 
-        boolean isInCombat = medieval_isInCombat(player, world);
+        boolean isInCombat = medieval$isInCombat(player, world);
         SongPicker.songpackEventMap.put(SongpackEventType.NEARBY_MOBS, isInCombat);
     }
 }

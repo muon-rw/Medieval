@@ -18,6 +18,8 @@ repositories {
     maven("https://maven.terraformersmc.com/")
     maven("https://jitpack.io/")
     maven("https://maven.ladysnake.org/releases")
+    maven("https://maven.ladysnake.org/snapshots")
+    maven("https://maven.jamieswhiteshirt.com/libs-release")
     maven("https://maven.parchmentmc.org")
     maven("https://cursemaven.com")
     maven("https://api.modrinth.com/maven")
@@ -25,6 +27,14 @@ repositories {
     maven("https://maven.kosmx.dev/")
     maven("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
     maven("https://maven.minecraftforge.net/")
+    maven("https://maven.ftb.dev/releases")
+    maven("https://maven.bai.lol" )
+    maven("https://maven.kosmx.dev/")
+    maven("https://nexus.resourcefulbees.com/repository/maven-public/")
+    maven("https://jm.gserv.me/repository/maven-public/" )
+    maven("https://masa.dy.fi/maven" )
+    maven("https://maven.quiltmc.org/repository/release" )
+    maven("https://maven.uuid.gg/releases" )
 }
 
 dependencies {
@@ -53,20 +63,20 @@ dependencies {
     modLocalRuntime("curse.maven:accessories-tc-layer-1005680:6008871")
 
     // FTB
-    modImplementation("curse.maven:ftb-quests-fabric-438496:5635134")
-    modImplementation("curse.maven:ftb-chunks-fabric-472657:5710610")
-    modImplementation("curse.maven:ftb-library-fabric-438495:5714915")
-    modImplementation("curse.maven:ftb-teams-fabric-438497:5631447")
+    modImplementation("dev.ftb.mods:ftb-quests-fabric:${Versions.FTB_QUESTS}")
+    modImplementation("dev.ftb.mods:ftb-chunks-fabric:${Versions.FTB_CHUNKS}")
+    modImplementation("dev.ftb.mods:ftb-library-fabric:${Versions.FTB_LIBRARY}")
+    modImplementation("dev.ftb.mods:ftb-teams-fabric:${Versions.FTB_TEAMS}")
     modLocalRuntime("curse.maven:architectury-api-419699:5553799")
     modApi("teamreborn:energy:4.1.0") {
         exclude("net.fabricmc.fabric-api")
     }
 
     // Thermoo
-    modImplementation("com.github.thedeathlycow:thermoo:v4.2.5")
-    modLocalRuntime("curse.maven:scorchful-981400:5946798")
-    modLocalRuntime("curse.maven:frostiful-715248:6073585")
-    modLocalRuntime("curse.maven:thermoo-patches-1012677:6033355")
+    modImplementation("com.github.thedeathlycow:thermoo:v4.5.3")
+    modLocalRuntime("curse.maven:scorchful-981400:6480177")
+    modLocalRuntime("curse.maven:frostiful-715248:6529178")
+    modLocalRuntime("curse.maven:thermoo-patches-1012677:6487343")
     modApi("org.ladysnake:satin:2.0.0")
     modApi("me.shedaniel.cloth:cloth-config-fabric:${Versions.CLOTH_CONFIG_VERSION}") {
         exclude("net.fabricmc.fabric-api")
@@ -100,7 +110,15 @@ dependencies {
     modImplementation("curse.maven:visual-workbench-500273:5714955")
 
     // Reactive Music
-    modImplementation("curse.maven:reactive-music-960382:6132849")
+    modCompileOnly("curse.maven:reactive-music-960382:6132849")
+
+    // Starter Kit
+    modCompileOnly("curse.maven:starter-kit-390717:6429851")
+    modCompileOnly("curse.maven:collective-342584:6429221")
+
+    // Origins
+    modCompileOnly("io.github.apace100:apoli:${Versions.APOLI}")
+    modCompileOnly("io.github.apace100:origins-fabric:${Versions.ORIGINS}")
 }
 
 loom {

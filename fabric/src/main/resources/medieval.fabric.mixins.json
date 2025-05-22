@@ -9,12 +9,12 @@
     "compat.affinity.AssemblyAugmentBlockEntityAccessor",
     "compat.affinity.AssemblyAugmentBlockEntityMixin",
     "compat.affinity.AssemblyAugmentBlockMixin",
-    "compat.spell_engine.EntityRelationsMixin",
     "compat.affinity.BlockBehaviourMixin"
   ],
   "client": [
     "client.LocalPlayerDamageMixin",
-    "compat.reactivemusic.SongPickerMixin"
+    "compat.reactivemusic.SongPickerMixin",
+    "compat.starterkit.StarterKitMixin"
   ],
   "server": [],
   "injectors": {
