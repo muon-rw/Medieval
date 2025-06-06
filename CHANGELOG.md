@@ -1,3 +1,6 @@
+## 1.9.6
+- JiJ AEA (Neo)
+
 ## 1.9.5
 - Target Dummy patches
 
