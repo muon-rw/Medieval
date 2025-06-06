@@ -7,6 +7,7 @@
   "mixins": [
     "MobEffectMixin",
     "compat.apotheosis.ModifierInstMixin",
+    "compat.apothic_compats.ModLootCategoriesMixin",
     "compat.irons_spellbooks.AbstractSpellMixin",
     "compat.irons_spellbooks.CastingImplementMixin",
     "compat.irons_spellbooks.CurioBaseItemMixin",

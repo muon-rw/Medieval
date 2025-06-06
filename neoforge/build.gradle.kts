@@ -142,6 +142,9 @@ dependencies {
     implementation("dev.shadowsoffire:ApothicSpawners:${Versions.MINECRAFT}-${Versions.APOTHIC_SPAWNERS}")
     implementation("dev.shadowsoffire:ApothicEnchanting:${Versions.MINECRAFT}-${Versions.APOTHIC_ENCHANTING}")
 
+    // Apothic Compats
+    implementation("curse.maven:apothic-compats-1188699:6433252")
+
     // Overflowing Bars
     implementation("curse.maven:overflowing-bars-852662:5770623")
     implementation("curse.maven:puzzles-lib-495476:6013576")
