@@ -6,6 +6,8 @@
   "plugin": "dev.muon.medieval.MixinConfigPluginNeoForge",
   "mixins": [
     "MobEffectMixin",
+    "RageGloveItemMixin",
+    "TreasureGoblinBonusMixin",
     "compat.apotheosis.ModifierInstMixin",
     "compat.apothic_compats.ModLootCategoriesMixin",
     "compat.irons_spellbooks.AbstractSpellMixin",

@@ -148,6 +148,14 @@ dependencies {
     // Overflowing Bars
     implementation("curse.maven:overflowing-bars-852662:5770623")
     implementation("curse.maven:puzzles-lib-495476:6013576")
+
+    // Dummy
+    implementation("curse.maven:mmmmmmmmmmmm-225738:6608246")
+    implementation("curse.maven:selene-499980:6612980")
+
+    // Relics
+    implementation("curse.maven:relics-mod-445274:6444603")
+    implementation("curse.maven:octo-lib-916747:6011408")
 }
 
 publishMods {
