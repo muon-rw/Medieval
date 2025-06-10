@@ -1,3 +1,7 @@
+## 2.0.0
+- Combat music tweaks (fabric)
+- Remove custom resource bars
+
 ## 1.9.6
 - JiJ AEA (Neo)
 

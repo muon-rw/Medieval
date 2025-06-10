@@ -18,7 +18,7 @@ public abstract class LocalPlayerDamageMixin {
             method = "hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z",
             at = @At("HEAD")
     )
-    private void medieval_onPlayerHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    private void onPlayerHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         LocalPlayer player = (LocalPlayer) (Object) this;
         if (player.level() != null && player.level().isClientSide()) {
             Entity attacker = source.getDirectEntity();

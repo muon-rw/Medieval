@@ -1,7 +1,6 @@
 package dev.muon.medieval;
 
 import dev.muon.medieval.config.MedievalConfig;
-import dev.muon.medieval.hotbar.compat.OverflowingBarsCompat;
 import dev.muon.medieval.item.ItemRegistry;
 import dev.muon.medieval.item.ItemRegistryNeoForge;
 import dev.muon.medieval.platform.MedievalPlatformHelperNeoForge;
@@ -38,14 +37,6 @@ public class MedievalNeoForge {
         registerCreativeTabs();
         CREATIVE_MODE_TABS.register(eventBus);
 
-        initializeCompat();
-    }
-
-    public void initializeCompat() {
-        if (FMLEnvironment.dist.isClient() && isModLoaded("overflowingbars")) {
-            RenderGuiLayerEvents.before(RenderGuiLayerEvents.PLAYER_HEALTH)
-                    .register(OverflowingBarsCompat::onRenderPlayerHealth);
-        }
     }
 
     public boolean isModLoaded(String modId) {

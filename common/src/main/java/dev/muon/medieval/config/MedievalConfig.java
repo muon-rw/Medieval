@@ -92,24 +92,16 @@ public class MedievalConfig {
     }
 
     public static class Client {
-        // Custom HUD
-        public final ModConfigSpec.BooleanValue enableCustomResourceBars;
 
         // Reactive Music Integration
         public final ModConfigSpec.DoubleValue combatMusicDetectionRadius;
 
         Client(ModConfigSpec.Builder builder) {
-            builder.push("Custom HUD");
-            enableCustomResourceBars = builder
-                    .comment("Enable custom rendering for Health, Stamina (Hunger), and Mana bars.",
-                             "Set to false to use vanilla/other mods' rendering.")
-                    .define("enable_custom_resource_bars", true);
-            builder.pop();
 
             builder.push("Reactive Music Integration");
             combatMusicDetectionRadius = builder
                     .comment("The horizontal radius (in blocks) around the player to check for hostile mobs that can trigger combat music.")
-                    .defineInRange("combat_music_detection_radius", 36.0, 1.0, 128.0); // Default 36, min 1, max 128
+                    .defineInRange("combat_music_detection_radius", 24.0, 1.0, 128.0); // Default 36, min 1, max 128
             builder.pop();
         }
     }

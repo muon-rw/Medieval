@@ -2,7 +2,6 @@ package dev.muon.medieval;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
-import dev.muon.medieval.compat.OverflowingBarsCompat;
 import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.item.ItemRegistry;
 import dev.muon.medieval.item.ItemRegistryFabric;
@@ -52,20 +51,8 @@ public class MedievalFabric implements ModInitializer {
         NeoForgeConfigRegistry.INSTANCE.register(Medieval.MOD_ID, ModConfig.Type.COMMON, MedievalConfig.COMMON_SPEC);
         NeoForgeConfigRegistry.INSTANCE.register(Medieval.MOD_ID, ModConfig.Type.CLIENT, MedievalConfig.CLIENT_SPEC);
 
-        initializeCompat();
-
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> registerCommand(dispatcher));
 
-        // Register config load/reload events if needed late
-        // NeoForgeModConfigEvents.loading(Medieval.MOD_ID).register(MedievalConfig::onLoad);
-        // NeoForgeModConfigEvents.reloading(Medieval.MOD_ID).register(MedievalConfig::onReload);
-    }
-
-    public void initializeCompat() {
-        if (FabricLoader.getInstance().isModLoaded("overflowingbars")) {
-            RenderGuiLayerEvents.before(RenderGuiLayerEvents.PLAYER_HEALTH)
-                    .register(OverflowingBarsCompat::onRenderPlayerHealth);
-        }
     }
 
     private void registerCreativeTabs() {
