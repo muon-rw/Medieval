@@ -1,3 +1,6 @@
+## 2.0.1
+- Patch Puffish x mana unification (Neoforge)
+
 ## 2.0.0
 - Combat music tweaks (fabric)
 - Remove custom resource bars

@@ -27,7 +27,7 @@ public class ModifierInstMixin {
     private StepFunction valueFactory;
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void onInit(Holder<Attribute> attr, AttributeModifier.Operation op, StepFunction valueFactory, CallbackInfo ci) {
+    private void remapAttributeAffixes(Holder<Attribute> attr, AttributeModifier.Operation op, StepFunction valueFactory, CallbackInfo ci) {
         Holder<Attribute> remappedAttr = AttributeRemapper.getRemappedHolder(this.attr);
         if (remappedAttr != this.attr) {
             this.attr = remappedAttr;

@@ -15,11 +15,11 @@
     "compat.irons_spellbooks.CurioBaseItemMixin",
     "compat.irons_spellbooks.MagicDataMixin",
     "compat.irons_spellbooks.MagicManagerMixin",
-    "compat.irons_spellbooks.ManaBarOverlayMixin"
+    "compat.irons_spellbooks.ManaBarOverlayMixin",
+    "compat.puffish_skills.AttributeRewardMixin"
   ],
   "client": [
     "compat.apotheosis.AttributesGuiMixin",
-    "compat.ars_nouveau.GuiManaHUDMixin",
     "compat.irons_spellbooks.ClientSpellCastHelperMixin",
     "compat.twilightforest.ClientEventsMixin"
   ],

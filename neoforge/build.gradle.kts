@@ -107,6 +107,7 @@ repositories {
     maven("https://maven.kosmx.dev/")
     maven("https://maven.theillusivec4.top/")
     maven("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
+    maven("https://maven.puffish.net")
 }
 
 dependencies {
@@ -160,6 +161,10 @@ dependencies {
     // Relics
     implementation("curse.maven:relics-mod-445274:6444603")
     implementation("curse.maven:octo-lib-916747:6011408")
+
+    // Puffish
+    implementation("net.puffish:skillsmod:${Versions.PUFFISH_SKILLS}:neoforge")
+    implementation("net.puffish:attributesmod:${Versions.PUFFISH_ATTRIBUTES}:neoforge")
 }
 
 publishMods {
