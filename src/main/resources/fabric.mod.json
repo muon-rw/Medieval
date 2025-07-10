@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "medieval",
+	"version": "${version}",
+	"name": "Medieval",
+	"description": "Core mod for the Medieval MC Modpacks",
+	"authors": [
+		"MuonR"
+	],
+	"contact": {
+		"discord": "https://lunapixel.studio/discord",
+		"sources": "https://github.com/muon-rw/medieval/"
+	},
+	"license": "ARR",
+	"icon": "assets/medieval/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.muon.medieval.Medieval"
+		]
+	},
+	"mixins": [
+		"medieval.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.14",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
