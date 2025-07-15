@@ -18,6 +18,9 @@ public class ItemRegistry {
     public static final RegistryObject<Item> CHALLENGE_ORB = ITEMS.register("challenge_orb",
             () -> new ChallengeOrbItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> WAYFINDERS_MEDALLION = ITEMS.register("wayfinders_medallion",
+            () -> new WayfindersMedallionItem(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> TOWN_PORTAL_SCROLL = ITEMS.register("town_portal_scroll",
             () -> new TownPortalScrollItem(new Item.Properties().stacksTo(16)));
 
@@ -28,6 +31,7 @@ public class ItemRegistry {
                     .displayItems((parameters, output) -> {
                         output.accept(CHALLENGE_ORB.get());
                         output.accept(TOWN_PORTAL_SCROLL.get());
+                        output.accept(WAYFINDERS_MEDALLION.get());
                     })
                     .build());
 

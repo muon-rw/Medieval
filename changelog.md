@@ -1,3 +1,6 @@
+## 1.8.1
+- Properly add Wayfinder's Medallion
+
 ## 1.8.0
 - Add Wayfinder's Medallion
 - Add Automatic Structure Regen
