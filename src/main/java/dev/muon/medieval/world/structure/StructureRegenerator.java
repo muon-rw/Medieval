@@ -1,4 +1,4 @@
-package dev.muon.medieval;
+package dev.muon.medieval.world.structure;
 
 import dev.ftb.mods.ftbchunks.api.ClaimedChunk;
 import dev.ftb.mods.ftbchunks.api.ClaimedChunkManager;
@@ -15,7 +15,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.OwnableEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -114,8 +113,7 @@ public class StructureRegenerator {
 
 
     public static boolean isValidStructure(ResourceLocation structureId) {
-        return MedievalConfig.get().allowedStructureNamespaces.contains(structureId.getNamespace()) ||
-                MedievalConfig.get().additionalValidStructures.contains(structureId.toString());
+        return MedievalConfig.get().isStructureWhitelisted(structureId);
     }
 
     private static void removeExistingEntities(ServerLevel level, BoundingBox boundingBox) {

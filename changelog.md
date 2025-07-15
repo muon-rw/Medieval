@@ -1,3 +1,7 @@
+## 1.8.0
+- Add Wayfinder's Medallion
+- Add Automatic Structure Regen
+
 ## 1.7.4
 - Add SDRP dimension translations
 

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CWC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:copper"
+    },
+    "W": {
+      "item": "minecraft:compass"
+    }
+  },
+  "result": {
+    "item": "medieval:wayfinders_medallion",
+    "count": 1
+  }
+}
