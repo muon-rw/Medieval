@@ -5,7 +5,6 @@ import com.stereowalker.survive.needs.WaterData;
 import com.stereowalker.survive.world.level.material.SFluids;
 import com.tiviacz.travelersbackpack.api.fluids.EffectFluid;
 import com.tiviacz.travelersbackpack.util.Reference;
-import dev.muon.medieval.Medieval;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -27,7 +26,9 @@ public class PurifiedWaterEffect extends EffectFluid {
 
     @Override
     public boolean canExecuteEffect(FluidStack stack, Level level, Entity entity) {
-        Medieval.LOGGER.info("Current Value: {}, Require Value: {}", stack.getAmount(), Reference.BUCKET);
-        return true;
+        if (entity instanceof Player player && stack.getAmount() >= this.amountRequired) {
+             return ((IRealisticEntity)player).waterData().getWaterLevel() < 20;
+        }
+        return false;
     }
 }
