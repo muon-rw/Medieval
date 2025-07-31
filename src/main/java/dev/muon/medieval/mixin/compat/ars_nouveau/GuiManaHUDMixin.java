@@ -5,6 +5,7 @@ import com.hollingsworth.arsnouveau.client.gui.GuiManaHUD;
 import com.hollingsworth.arsnouveau.setup.registry.CapabilityRegistry;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.muon.medieval.compat.ars_nouveau.ArsNouveauManaProvider;
+import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.hotbar.ManaBarRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -32,6 +33,7 @@ public class GuiManaHUDMixin {
 
     @Inject(method = "renderOverlay", at = @At("HEAD"), cancellable = true)
     private static void renderCustomManaBar(ForgeGui gui, GuiGraphics guiGraphics, float pt, int width, int height, CallbackInfo ci) {
+        if (!MedievalConfig.get().enableCustomResourceBars) return;
         if (!GuiManaHUD.shouldDisplayBar()) return;
         if (minecraft.options.hideGui) return;
 

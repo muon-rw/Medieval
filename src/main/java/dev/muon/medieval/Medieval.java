@@ -14,6 +14,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.LoadingModList;
 import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
@@ -41,6 +42,9 @@ public class Medieval {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         LevelSyncHandler.init(event);
+        event.enqueueWork(() -> {
+            TravelersBackpackCompat.init();
+        });
     }
 
     @SubscribeEvent
@@ -48,14 +52,6 @@ public class Medieval {
         if (ModList.get().isLoaded("autoleveling")) {
             event.addListener(new EnhancedEntityLevelingSettingsReloader());
         }
-    }
-
-    // TODO: Remove if Nyf's Compat updates to be compatible with latest dependencies
-    @SubscribeEvent
-    public static void onInterMod(InterModEnqueueEvent event) {
-        event.enqueueWork(() -> {
-            TravelersBackpackCompat.init();
-        });
     }
 
     public static ResourceLocation loc(String path) {

@@ -14,7 +14,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.OwnableEntity;
+import net.minecraft.world.entity.animal.horse.SkeletonHorse;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -128,10 +131,15 @@ public class StructureRegenerator {
         entitiesToRemove.forEach(net.minecraft.world.entity.Entity::discard);
     }
 
-    private static boolean shouldRemoveEntity(net.minecraft.world.entity.Entity entity) {
+    private static boolean shouldRemoveEntity(Entity entity) {
 
         if (entity instanceof net.minecraft.world.entity.Mob) {
-            return !(entity instanceof OwnableEntity) || ((OwnableEntity) entity).getOwner() == null;
+            if (entity instanceof OwnableEntity && ((OwnableEntity) entity).getOwner() instanceof Player) {
+                return false;
+            }
+            if (entity.hasControllingPassenger() && entity.getControllingPassenger() instanceof Player) {
+                return false;
+            }
         }
         return entity instanceof net.minecraft.world.entity.decoration.Painting ||
                 entity instanceof net.minecraft.world.entity.decoration.ItemFrame ||
