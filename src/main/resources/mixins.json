@@ -5,10 +5,9 @@
   "refmap": "${modid}.refmap.json",
   "plugin": "dev.muon.medieval.MixinConfigPlugin",
   "mixins": [
-    "compat.travelersbackpack.PotionEffectMixin",
     "TreasureGoblinBonusMixin",
-    "compat.travelersbackpack.WaterEffectMixin",
     "compat.apoli.ApoliEventHandlerMixin",
+    "compat.apotheosis.AttributeBonusMixin",
     "compat.autoleveling.MobLevelingEventsMixin",
     "compat.dungeons_and_combat.CombatStyleManualItemMixin",
     "compat.ice_and_fire.FrozenDataMixin",
@@ -29,6 +28,8 @@
     "compat.skilltree.LearnSkillMessageMixin",
     "compat.survive.SurviveEventsMixin",
     "compat.survive.TemperatureDataMixin",
+    "compat.travelersbackpack.PotionEffectMixin",
+    "compat.travelersbackpack.WaterEffectMixin",
     "compat.traveloptics.AerialCollapseMixin",
     "compat.traveloptics.AnnihilationMixin"
   ],

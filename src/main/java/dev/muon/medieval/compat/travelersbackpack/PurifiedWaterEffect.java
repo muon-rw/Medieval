@@ -12,7 +12,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class PurifiedWaterEffect extends EffectFluid {
     public PurifiedWaterEffect() {
-        super("survive:purified_water", SFluids.PURIFIED_WATER, Reference.BUCKET);
+        super("survive:purified_water", SFluids.PURIFIED_WATER, Reference.POTION);
     }
 
     @Override
