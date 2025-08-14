@@ -165,6 +165,10 @@ dependencies {
     // Puffish
     implementation("net.puffish:skillsmod:${Versions.PUFFISH_SKILLS}:neoforge")
     implementation("net.puffish:attributesmod:${Versions.PUFFISH_ATTRIBUTES}:neoforge")
+
+    // My Nether's Delight
+    implementation("curse.maven:my-nethers-delight-1003673:6460371")
+    implementation("curse.maven:farmers-delight-398521:6597295")
 }
 
 publishMods {

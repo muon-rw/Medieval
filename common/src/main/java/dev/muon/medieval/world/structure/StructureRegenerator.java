@@ -1,4 +1,4 @@
-package dev.muon.medieval;
+package dev.muon.medieval.world.structure;
 
 
 // import dev.muon.medieval.config.MedievalConfig; // Removed unused import

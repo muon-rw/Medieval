@@ -1,3 +1,6 @@
+## 2.0.2
+- Fix MND crash, change attribute remapping
+
 ## 2.0.1
 - Patch Puffish x mana unification (Neoforge)
 

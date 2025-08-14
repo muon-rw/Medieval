@@ -3,7 +3,7 @@ package dev.muon.medieval.item;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.muon.medieval.Medieval;
-import dev.muon.medieval.StructureRegenerator;
+import dev.muon.medieval.world.structure.StructureRegenerator;
 import net.minecraft.ResourceLocationException;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
