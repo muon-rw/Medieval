@@ -1,3 +1,7 @@
+## 2.0.3
+- Patch Apoli inventory util
+- Patch Apoli modifier inst mixin
+
 ## 2.0.2
 - Fix MND crash, change attribute remapping
 

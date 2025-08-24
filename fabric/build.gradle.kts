@@ -55,6 +55,10 @@ dependencies {
         }
     }
 
+    // Dev Env
+    modLocalRuntime("curse.maven:spark-361579:5759670")
+    modLocalRuntime("maven.modrinth:fabric-permissions-api:0.3.1-fabric")
+
     // Config
     modImplementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${Versions.FCAP}")
     
@@ -119,6 +123,9 @@ dependencies {
     // Origins
     modCompileOnly("io.github.apace100:apoli:${Versions.APOLI}")
     modCompileOnly("io.github.apace100:origins-fabric:${Versions.ORIGINS}")
+    modCompileOnly("maven.modrinth:medieval-origins-revival:7.0.3-alpha-5-fabric")
+
+
 }
 
 loom {

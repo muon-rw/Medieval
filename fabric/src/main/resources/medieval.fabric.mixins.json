@@ -9,7 +9,9 @@
     "compat.affinity.AssemblyAugmentBlockEntityAccessor",
     "compat.affinity.AssemblyAugmentBlockEntityMixin",
     "compat.affinity.AssemblyAugmentBlockMixin",
-    "compat.affinity.BlockBehaviourMixin"
+    "compat.affinity.BlockBehaviourMixin",
+    "compat.origins.AttributeInstanceMixin",
+    "compat.origins.InventoryUtilMixin"
   ],
   "client": [
     "client.LocalPlayerDamageMixin",
