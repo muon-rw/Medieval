@@ -1,6 +1,7 @@
 package dev.muon.medieval.mixin.compat.origins;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import dev.muon.medieval.compat.origins.CachedModifiers;
 import dev.muon.medievalorigins.util.PowerCache;
 import io.github.apace100.apoli.access.OwnableAttributeInstance;
 import io.github.apace100.apoli.power.type.ModifyAttributePowerType;
@@ -19,7 +20,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 import java.util.stream.Stream;
 
 @Mixin(AttributeInstance.class)
@@ -30,16 +33,8 @@ public abstract class AttributeInstanceMixin implements OwnableAttributeInstance
     @Shadow public abstract Holder<Attribute> getAttribute();
 
     @Unique
-    private List<Modifier> medieval$cachedPowerModifiers = null;
+    private static final Map<AttributeInstance, CachedModifiers> medieval$modifierCache = new WeakHashMap<>();
 
-    @Unique
-    private double medieval$lastBaseValue = Double.NaN;
-
-    @Unique
-    private int medieval$lastModifierHash = 0;
-
-    @Unique
-    private double medieval$cachedResult = Double.NaN;
 
     @ModifyReturnValue(method = "getValue", at = @At("RETURN"))
     private double medieval$optimizedModifyAttribute(double original) {
@@ -48,64 +43,53 @@ public abstract class AttributeInstanceMixin implements OwnableAttributeInstance
             return original;
         }
 
+        // Get or create cache entry
+        CachedModifiers cache = medieval$modifierCache.computeIfAbsent(
+                (AttributeInstance)(Object)this,
+                k -> new CachedModifiers()
+        );
+
         double baseValue = this.getBaseValue();
         int modifierHash = this.getModifiers().hashCode();
 
         // Check if cache is valid
-        if (medieval$cachedPowerModifiers != null &&
-                medieval$lastBaseValue == baseValue &&
-                medieval$lastModifierHash == modifierHash) {
-
-            // If no power modifiers, return original
-            if (medieval$cachedPowerModifiers.isEmpty()) {
-                return original;
-            }
-
-            // Return cached result if we have one
-            if (!Double.isNaN(medieval$cachedResult)) {
-                return medieval$cachedResult;
-            }
+        if (!cache.isValid(baseValue, modifierHash)) {
+            // Update cache
+            cache.powerModifiers = PowerCache.getPowerTypes(owner, ModifyAttributePowerType.class)
+                    .stream()
+                    .filter(p -> p.getAttribute() == this.getAttribute())
+                    .flatMap(p -> p.getModifiers().stream())
+                    .toList();
+            cache.lastBaseValue = baseValue;
+            cache.lastModifierHash = modifierHash;
         }
 
-        // Update cache
-        medieval$cachedPowerModifiers = PowerCache.getPowerTypes(owner, ModifyAttributePowerType.class)
-                .stream()
-                .filter(p -> p.getAttribute() == this.getAttribute())
-                .flatMap(p -> p.getModifiers().stream())
-                .toList();
-        medieval$lastBaseValue = baseValue;
-        medieval$lastModifierHash = modifierHash;
-
-        // If no power modifiers, cache and return vanilla value
-        if (medieval$cachedPowerModifiers.isEmpty()) {
-            medieval$cachedResult = original;
+        // If no power modifiers, return vanilla value
+        if (cache.powerModifiers == null || cache.powerModifiers.isEmpty()) {
             return original;
         }
 
-        // Apply power modifiers and cache result
+        // Apply power modifiers
         List<Modifier> vanillaModifiers = this.getModifiers()
                 .stream()
                 .map(ModifierUtil::fromAttributeModifier)
                 .toList();
 
-        medieval$cachedResult = ModifierUtil.applyModifiers(
+        return ModifierUtil.applyModifiers(
                 owner,
-                Stream.concat(medieval$cachedPowerModifiers.stream(), vanillaModifiers.stream()).toList(),
+                Stream.concat(cache.powerModifiers.stream(), vanillaModifiers.stream()).toList(),
                 baseValue
         );
-
-        return medieval$cachedResult;
     }
 
+    // Invalidate cache when modifiers change
     @Inject(method = "addModifier", at = @At("TAIL"))
     private void medieval$invalidateCacheOnAdd(AttributeModifier modifier, CallbackInfo ci) {
-        medieval$cachedPowerModifiers = null;
-        medieval$cachedResult = Double.NaN;
+        medieval$modifierCache.remove((AttributeInstance)(Object)this);
     }
 
     @Inject(method = "removeModifier", at = @At("TAIL"))
     private void medieval$invalidateCacheOnRemove(AttributeModifier modifier, CallbackInfo ci) {
-        medieval$cachedPowerModifiers = null;
-        medieval$cachedResult = Double.NaN;
+        medieval$modifierCache.remove((AttributeInstance)(Object)this);
     }
 }
