@@ -37,7 +37,7 @@ public abstract class AttributeInstanceMixin implements OwnableAttributeInstance
 
 
     @ModifyReturnValue(method = "getValue", at = @At("RETURN"))
-    private double medieval$optimizedModifyAttribute(double original) {
+    private double medieval$modifyAttribute(double original) {
         Entity owner = this.apoli$getOwner();
         if (owner == null) {
             return original;
