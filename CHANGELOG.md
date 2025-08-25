@@ -1,3 +1,6 @@
+## 2.0.4
+- Just remove apoli modifier inst modifications
+
 ## 2.0.3
 - Patch Apoli inventory util
 - Patch Apoli modifier inst mixin

@@ -10,7 +10,6 @@
     "compat.affinity.AssemblyAugmentBlockEntityMixin",
     "compat.affinity.AssemblyAugmentBlockMixin",
     "compat.affinity.BlockBehaviourMixin",
-    "compat.origins.AttributeInstanceMixin",
     "compat.origins.InventoryUtilMixin"
   ],
   "client": [
