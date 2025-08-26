@@ -1,3 +1,6 @@
+## 2.0.5
+- Bump bundled MixinSquared
+
 ## 2.0.4
 - Just remove apoli modifier inst modifications
 

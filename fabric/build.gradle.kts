@@ -45,9 +45,9 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${Versions.FABRIC_API}")
     modLocalRuntime("com.terraformersmc:modmenu:${Versions.MOD_MENU}")
 
-    modImplementation("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
-    include("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
-    annotationProcessor(("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0"))?.let {
+    modImplementation("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.4")
+    include("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.4")
+    annotationProcessor(("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.4"))?.let {
         include(it)?.let {
             modImplementation(
                 it
