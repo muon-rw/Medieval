@@ -1,3 +1,6 @@
+## 2.0.6
+- Remove MND patch (no longer needed)
+
 ## 2.0.5
 - Bump bundled MixinSquared
 
