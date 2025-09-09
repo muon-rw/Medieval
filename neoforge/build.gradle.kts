@@ -156,7 +156,7 @@ dependencies {
 
     // Dummy
     implementation("curse.maven:mmmmmmmmmmmm-225738:6608246")
-    implementation("curse.maven:selene-499980:6612980")
+    implementation("curse.maven:selene-499980:6975910")
 
     // Relics
     implementation("curse.maven:relics-mod-445274:6444603")
