@@ -1,3 +1,16 @@
+## 2.0.0
+- Moved autoregen to Wayfinder's Medallion, now equippable
+- Patch survive filling recipe
+- Adjust level plate rendering
+- Patch Autoleveling not properly healing on mob summon
+- Fix startup crash if Iron's and Apotheosis were present, but not Ars Nouveau
+
+
+## 1.9.0
+- Update Traveler's Backpack/Survive compat
+- Remap Iron's -> Ars Nouveau mana in Apotheosis
+- Update to and require Forge 47.4.0+
+
 ## 1.8.1
 - Properly add Wayfinder's Medallion
 

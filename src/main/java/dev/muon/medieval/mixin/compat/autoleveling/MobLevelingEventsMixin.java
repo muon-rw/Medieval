@@ -1,12 +1,15 @@
 package dev.muon.medieval.mixin.compat.autoleveling;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import daripher.autoleveling.event.MobsLevelingEvents;
 import dev.muon.medieval.Medieval;
 import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.leveling.EnhancedEntityLevelingSettings;
 import dev.muon.medieval.leveling.EnhancedEntityLevelingSettingsReloader;
-import dev.muon.medieval.leveling.LevelingUtils;
+import io.redspace.ironsspellbooks.entity.mobs.AntiMagicSusceptible;
+import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
+import net.mehvahdjukaar.dummmmmmy.common.TargetDummyEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -39,6 +42,13 @@ public class MobLevelingEventsMixin {
     private static final TagKey<EntityType<?>> PASSIVE_WHITELIST = TagKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE, Medieval.loc("passive_whitelist"));
 
 
+    @Inject(method = "applyAttributeBonus", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;heal(F)V", shift = At.Shift.AFTER))
+    private static void fixHeal(LivingEntity entity, Attribute attribute, double bonus, CallbackInfo ci) {
+        if (attribute == Attributes.MAX_HEALTH) {
+            entity.setHealth(entity.getMaxHealth());
+        }
+    }
+
     @ModifyReturnValue(method = "canHaveLevel", at = @At("RETURN"))
     private static boolean cancelLevelsForPassives(boolean original, Entity entity) {
         if (original && entity instanceof Animal animal && MedievalConfig.get().cancelLevelsForPassives) {
@@ -53,8 +63,16 @@ public class MobLevelingEventsMixin {
         return original;
     }
 
+    @ModifyReturnValue(method = "Ldaripher/autoleveling/event/MobsLevelingEvents;shouldShowLevel(Lnet/minecraft/world/entity/Entity;)Z", at = @At("RETURN"))
+    private static boolean modifyShouldShow(boolean original, @Local(argsOnly = true) Entity entity) {
+        if (entity instanceof TargetDummyEntity || entity instanceof AntiMagicSusceptible) {
+            return false;
+        }
+        return original;
+    }
+
     @ModifyReturnValue(method = "createLevelForEntity", at = @At("RETURN"))
-    private static int applyAdditionalLevels(int original, LivingEntity entity, double distance) {
+    private static int modifyLevel(int original, LivingEntity entity, double distance) {
         if (entity.getType().is(FIXED_LEVEL_ENTITIES)) {
             return original;
         }
@@ -62,9 +80,6 @@ public class MobLevelingEventsMixin {
         int modifiedLevel = original;
         if (MedievalConfig.get().enableStructureLevelBonus) {
             modifiedLevel += getStructureLevelBonus(entity);
-        }
-        if (MedievalConfig.get().applyPlayerBasedLeveling) {
-            modifiedLevel += LevelingUtils.getLevelsOfNearbyPlayers((ServerLevel) entity.level(), entity);
         }
 
         return modifiedLevel;
@@ -120,7 +135,6 @@ public class MobLevelingEventsMixin {
         if (existingModifier != null) attributeInstance.removeModifier(existingModifier);
         AttributeModifier newModifier = new AttributeModifier(modifierId, "Auto Leveling Bonus", bonus, operation);
         attributeInstance.addPermanentModifier(newModifier);
-        if (attribute == Attributes.MAX_HEALTH) entity.heal(entity.getMaxHealth());
+        if (attribute == Attributes.MAX_HEALTH) entity.setHealth(entity.getMaxHealth());
     }
 }
-

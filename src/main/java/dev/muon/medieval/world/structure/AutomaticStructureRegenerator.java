@@ -2,6 +2,7 @@ package dev.muon.medieval.world.structure;
 
 import dev.muon.medieval.Medieval;
 import dev.muon.medieval.config.MedievalConfig;
+import dev.muon.medieval.item.WayfindersMedallionItem;
 import dev.muon.medieval.world.saved_data.StructureRegenerationState;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.ChatFormatting;
@@ -13,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -20,9 +22,13 @@ import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = Medieval.MODID)
 public class AutomaticStructureRegenerator {
@@ -37,13 +43,32 @@ public class AutomaticStructureRegenerator {
         if (event.phase != TickEvent.Phase.END) {
             return;
         }
-
+        if (event.side != LogicalSide.SERVER) {
+            return;
+        }
         if (!(event.player instanceof ServerPlayer player)) {
             return;
         }
 
         // Only check on interval
         if (++tickCounter % MedievalConfig.get().autoRegenCheckInterval != 0) {
+            return;
+        }
+
+        boolean hasActiveMedallion = false;
+
+        // Performance over prettiness :)
+        if (player.getMainHandItem().getItem() instanceof WayfindersMedallionItem) {
+            hasActiveMedallion = WayfindersMedallionItem.isActive(player.getMainHandItem());
+        }
+        if (!hasActiveMedallion && player.getOffhandItem().getItem() instanceof WayfindersMedallionItem) {
+            hasActiveMedallion = WayfindersMedallionItem.isActive(player.getOffhandItem());
+        }
+        if (!hasActiveMedallion) {
+            hasActiveMedallion = checkCuriosForMedallion(player);
+        }
+
+        if (!hasActiveMedallion) {
             return;
         }
 
@@ -186,5 +211,20 @@ public class AutomaticStructureRegenerator {
                 Component.translatable(translationKey, args).withStyle(formatting),
                 true
         );
+    }
+
+    private static boolean checkCuriosForMedallion(ServerPlayer player) {
+        return CuriosApi.getCuriosInventory(player).map(handler -> {
+            ICurioStacksHandler charmHandler = handler.getCurios().get("charm");
+            if (charmHandler != null) {
+                for (int i = 0; i < charmHandler.getSlots(); i++) {
+                    ItemStack stack = charmHandler.getStacks().getStackInSlot(i);
+                    if (stack.getItem() instanceof WayfindersMedallionItem && WayfindersMedallionItem.isActive(stack)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }).orElse(false);
     }
 }

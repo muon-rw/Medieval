@@ -1,14 +1,14 @@
 package dev.muon.medieval.leveling.client;
 
-import com.minecraftserverzone.mobhealthbar.GuiHelper;
 import com.minecraftserverzone.mobhealthbar.configs.ConfigHolder;
-import com.minecraftserverzone.mobhealthbar.configs.HpBarModConfig;
-import com.mojang.blaze3d.vertex.PoseStack;
+import daripher.autoleveling.event.MobsLevelingEvents;
 import dev.muon.medieval.Medieval;
 import dev.muon.medieval.leveling.LevelingUtils;
+import io.redspace.ironsspellbooks.entity.mobs.AntiMagicSusceptible;
+import net.mehvahdjukaar.dummmmmmy.common.TargetDummyEntity;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
@@ -30,47 +30,45 @@ public class LevelDisplayRenderer {
     private static final Map<UUID, Integer> playerLevels = new HashMap<>();
 
 
-    @SubscribeEvent(priority = EventPriority.HIGH)
+    @SubscribeEvent(priority = EventPriority.LOW)
     public static void onRenderNameTag(RenderNameTagEvent event) {
-        if (!(event.getEntity() instanceof LivingEntity entity)) return;
+        if (!(event.getEntity() instanceof LivingEntity entity)) {
+            // event.setResult(RenderNameTagEvent.Result.DENY);
+            return;
+        }
+
+        if (!shouldRender(entity)) {
+            // event.setResult(RenderNameTagEvent.Result.DEFAULT);
+            return;
+        }
 
         int entityLevel = getEntityLevel(entity);
-
-        if (entityLevel > 0 && shouldRender(entity)) {
-            Minecraft minecraft = Minecraft.getInstance();
-            Player player = minecraft.player;
-
-            String entityName = event.getContent().getString();
-            String levelText = " Level " + (entityLevel);
-            String combinedText = entityName + levelText;
-
-            event.setContent(Component.literal(combinedText));
-
-            PoseStack matrixStack = event.getPoseStack();
-            Font font = event.getEntityRenderer().getFont();
-
-            int textWidth = font.width(combinedText);
-            float f2 = -textWidth / 2.0f;
-
-            matrixStack.pushPose();
-            matrixStack.translate(0, entity.getBbHeight() + 1.058F, 0);
-            matrixStack.mulPose(minecraft.getEntityRenderDispatcher().cameraOrientation());
-            matrixStack.scale(TEXT_SCALE, TEXT_SCALE, TEXT_SCALE);
-
-            int posXAdd = HpBarModConfig.HP_BAR_TYPE[1].get();
-            int posYAdd = HpBarModConfig.HP_BAR_TYPE[2].get();
-
-            int levelColor = getLevelColor(player, entity);
-
-            GuiHelper.drawString(matrixStack, font, entityName, (int)f2 + posXAdd, posYAdd, 0xFFFFFF, false);
-            GuiHelper.drawString(matrixStack, font, levelText, (int)f2 + posXAdd + font.width(entityName), posYAdd, levelColor, false);
-
-            matrixStack.popPose();
-
-            event.setResult(RenderNameTagEvent.Result.ALLOW);
-        } else {
-            event.setResult(RenderNameTagEvent.Result.DEFAULT);
+        if (entityLevel <= 0) {
+            // event.setResult(RenderNameTagEvent.Result.DEFAULT);
+            return;
         }
+
+        Minecraft minecraft = Minecraft.getInstance();
+        Player player = minecraft.player;
+        if (player == null) {
+            // event.setResult(RenderNameTagEvent.Result.DEFAULT);
+            return;
+        }
+
+        Component baseNameComponent = event.getContent();
+        String baseNameString = baseNameComponent.getString();
+
+        if (baseNameString.trim().isEmpty() && !(entity instanceof Player)) {
+            baseNameComponent = entity.getName();
+        }
+
+        Component levelTextComponent = Component.literal(" Level " + entityLevel)
+                .withStyle(style -> style.withColor(getLevelColor(player, entity)));
+
+        MutableComponent newContent = baseNameComponent.copy().append(levelTextComponent);
+
+        event.setContent(newContent);
+        event.setResult(RenderNameTagEvent.Result.ALLOW);
     }
 
     private static int getEntityLevel(LivingEntity entity) {
@@ -87,10 +85,12 @@ public class LevelDisplayRenderer {
 
 
     private static boolean shouldRender(LivingEntity entity) {
+        if (!MobsLevelingEvents.shouldShowLevel(entity) || entity instanceof AntiMagicSusceptible || entity instanceof TargetDummyEntity) {
+            return false;
+        }
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
         if (player == null) return false;
-        if (!ConfigHolder.COMMON.SHOW_BAR.get()) return false;
 
         double distanceSq = player.distanceToSqr(entity);
         double renderDistance = ConfigHolder.COMMON.HP_BAR_TYPE[3].get();

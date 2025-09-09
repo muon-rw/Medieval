@@ -13,6 +13,7 @@
     "compat.ice_and_fire.FrozenDataMixin",
     "compat.ice_and_fire_spellbooks.ServerEventsMixin",
     "compat.irons_spellbooks.CastingItemMixin",
+    "compat.irons_spellbooks.DamageSourcesMixin",
     "compat.irons_spellbooks.EchoingStrikesEffectMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileInteractiveMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",
@@ -25,7 +26,9 @@
     "compat.itemproductionlib.travelersbackpack.TravelersBackpackCraftingMixin",
     "compat.itemproductionlib.wizards_reborn.ArcaneWorkbenchMixin",
     "compat.justlevelingfork.AptitudeCapabilityMixin",
+    "compat.mobhealthbar.ForgeRegistryEventsMixin",
     "compat.skilltree.LearnSkillMessageMixin",
+    "compat.survive.CanteenFillingRecipeMixin",
     "compat.survive.SurviveEventsMixin",
     "compat.survive.TemperatureDataMixin",
     "compat.travelersbackpack.PotionEffectMixin",
@@ -35,8 +38,10 @@
   ],
   "client": [
     "compat.ars_nouveau.GuiManaHUDMixin",
+    "compat.autoleveling.LevelPlateRendererMixin",
     "compat.irons_spellbooks.ManaBarOverlayMixin",
-    "compat.justlevelingfork.client.JustLevelingScreenMixin"
+    "compat.justlevelingfork.client.JustLevelingScreenMixin",
+    "compat.mobhealthbar.EntityRendererMixin"
   ],
   "minVersion": "0.8"
 }

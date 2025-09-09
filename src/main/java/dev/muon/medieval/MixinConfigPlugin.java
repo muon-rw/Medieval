@@ -45,6 +45,11 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                             }
                             return isModLoaded(modId);
                         }
+                        if (modId.equals("apotheosis")) {
+                            if (mixinClassName.contains("AttributeBonusMixin")) {
+                                return isModLoaded("apotheosis") && isModLoaded("irons_spellbooks") && isModLoaded("ars_nouveau");
+                            }
+                        }
                         return isModLoaded(modId);
                     }
                 }
