@@ -10,9 +10,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(CurioBaseItem.class)
+@Mixin(value = CurioBaseItem.class, remap = false)
 public abstract class CurioBaseItemMixin{
-
     @ModifyReturnValue(method = "getAttributeModifiers", at = @At("RETURN"))
     private Multimap<Holder<Attribute>, AttributeModifier> remapCurioAttributes(Multimap<Holder<Attribute>, AttributeModifier> original) {
         return CurioAttributeHandler.remapCurioAttributes(original);
