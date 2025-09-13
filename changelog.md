@@ -1,3 +1,6 @@
+## 2.0.1
+- Fix player-based mob leveling not working since 2.0.0
+
 ## 2.0.0
 - Moved autoregen to Wayfinder's Medallion, now equippable
 - Patch survive filling recipe

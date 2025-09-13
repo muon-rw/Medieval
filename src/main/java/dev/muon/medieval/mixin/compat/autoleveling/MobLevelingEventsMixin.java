@@ -7,6 +7,7 @@ import dev.muon.medieval.Medieval;
 import dev.muon.medieval.config.MedievalConfig;
 import dev.muon.medieval.leveling.EnhancedEntityLevelingSettings;
 import dev.muon.medieval.leveling.EnhancedEntityLevelingSettingsReloader;
+import dev.muon.medieval.leveling.LevelingUtils;
 import io.redspace.ironsspellbooks.entity.mobs.AntiMagicSusceptible;
 import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import net.mehvahdjukaar.dummmmmmy.common.TargetDummyEntity;
@@ -80,6 +81,10 @@ public class MobLevelingEventsMixin {
         int modifiedLevel = original;
         if (MedievalConfig.get().enableStructureLevelBonus) {
             modifiedLevel += getStructureLevelBonus(entity);
+        }
+
+        if (MedievalConfig.get().applyPlayerBasedLeveling) {
+            modifiedLevel += LevelingUtils.getLevelsOfNearbyPlayers((ServerLevel) entity.level(), entity);
         }
 
         return modifiedLevel;
