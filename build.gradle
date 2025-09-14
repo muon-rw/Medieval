@@ -176,7 +176,7 @@ dependencies {
     implementation fg.deobf("curse.maven:mana-unification-1083306:5729342")
 
     // Celestisynth
-    implementation fg.deobf("curse.maven:celestisynth-872712:5116555")
+    implementation fg.deobf("curse.maven:celestisynth-872712:6900952")
 
     // FTB
     implementation fg.deobf("dev.ftb.mods:ftb-chunks-forge:${ftb_chunks_version}")

@@ -17,7 +17,7 @@
     "compat.irons_spellbooks.EchoingStrikesEffectMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileInteractiveMixin",
     "compat.itemproductionlib.ars_nouveau.CraftingLecternTileMixin",
-    "compat.itemproductionlib.celestisynth.CelestialCraftingMenuMixin",
+    "compat.itemproductionlib.celestisynth.StarlitFactoryBlockEntityMixin",
     "compat.itemproductionlib.eidolon.WorktableContainerMixin",
     "compat.itemproductionlib.farmersdelight.SkilletBlockEntityMixin",
     "compat.itemproductionlib.tetra.WorkbenchTileMixin",

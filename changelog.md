@@ -1,5 +1,6 @@
 ## 2.0.1
 - Fix player-based mob leveling not working since 2.0.0
+- Update Celestisynth x Passive Skill Tree compat use Starlit Factory block
 
 ## 2.0.0
 - Moved autoregen to Wayfinder's Medallion, now equippable
