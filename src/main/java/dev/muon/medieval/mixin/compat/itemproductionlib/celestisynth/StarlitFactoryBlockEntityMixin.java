@@ -25,7 +25,6 @@ public class StarlitFactoryBlockEntityMixin {
             require = 1
     )
     private ItemStack modifyResultStack(ItemStack stack) {
-        Medieval.LOGGER.info("Passing Starlit Factory recipe contents to IPL with ItemStack: {}}", Component.translatable(stack.getDescriptionId()));
         StarlitFactoryBlockEntity self = (StarlitFactoryBlockEntity)(Object)this;
         return ItemProductionLib.itemProduced(stack, self);
     }
