@@ -9,9 +9,10 @@ import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value = WorktableContainer.class, remap = false)
+@Mixin(value = WorktableContainer.class)
 public class WorktableContainerMixin {
     @ModifyExpressionValue(
+            remap = true,
             method = "updateCraftingResult",
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/world/item/crafting/CraftingRecipe;assemble(Lnet/minecraft/world/Container;Lnet/minecraft/core/RegistryAccess;)Lnet/minecraft/world/item/ItemStack;")
@@ -21,6 +22,7 @@ public class WorktableContainerMixin {
     }
 
     @ModifyExpressionValue(
+            remap = false,
             method = "updateCraftingResult",
             at = @At(value = "INVOKE",
                     target = "Lelucent/eidolon/recipe/WorktableRecipe;getResult()Lnet/minecraft/world/item/ItemStack;")

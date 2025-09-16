@@ -1,6 +1,14 @@
+## 2.0.3
+- Fix Celestisynth patch from 2.0.2 not applying
+- Fix Eidolon and Wizards Reborn SkillTree patches not applying
+- Fix Autoleveling max-health patch from 2.0.0 not applying
+- Fix IaF Spellbooks' Frostward Ring not applying
+
+## 2.0.2
+- Update Celestisynth x Passive Skill Tree compat to use Starlit Factory block
+
 ## 2.0.1
 - Fix player-based mob leveling not working since 2.0.0
-- Update Celestisynth x Passive Skill Tree compat use Starlit Factory block
 
 ## 2.0.0
 - Moved autoregen to Wayfinder's Medallion, now equippable

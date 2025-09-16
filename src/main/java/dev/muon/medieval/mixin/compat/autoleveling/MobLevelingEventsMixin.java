@@ -1,6 +1,8 @@
 package dev.muon.medieval.mixin.compat.autoleveling;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import daripher.autoleveling.event.MobsLevelingEvents;
 import dev.muon.medieval.Medieval;
@@ -43,10 +45,10 @@ public class MobLevelingEventsMixin {
     private static final TagKey<EntityType<?>> PASSIVE_WHITELIST = TagKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE, Medieval.loc("passive_whitelist"));
 
 
-    @Inject(method = "applyAttributeBonus", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;heal(F)V", shift = At.Shift.AFTER))
-    private static void fixHeal(LivingEntity entity, Attribute attribute, double bonus, CallbackInfo ci) {
+    @WrapOperation(method = "applyAttributeBonus", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;heal(F)V"), remap = true)
+    private static void fixHeal(LivingEntity instance, float pHealAmount, Operation<Void> original, @Local(argsOnly = true) Attribute attribute) {
         if (attribute == Attributes.MAX_HEALTH) {
-            entity.setHealth(entity.getMaxHealth());
+            instance.setHealth(instance.getMaxHealth());
         }
     }
 

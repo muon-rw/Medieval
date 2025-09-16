@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.travelersbackpack;
+package dev.muon.medieval.mixin.compat.survive.travelersbackpack;
 
 import com.stereowalker.survive.needs.IRealisticEntity;
 import com.stereowalker.survive.needs.WaterData;

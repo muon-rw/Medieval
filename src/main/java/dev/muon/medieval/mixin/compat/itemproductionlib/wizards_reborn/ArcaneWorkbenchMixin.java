@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value = ArcaneWorkbenchBlockEntity.class, remap = false)
+@Mixin(value = ArcaneWorkbenchBlockEntity.class, remap = true)
 public class ArcaneWorkbenchMixin {
     @ModifyExpressionValue(
             method = "tick",

@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.apotheosis;
+package dev.muon.medieval.mixin.compat.apotheosis.irons_spellbooks.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.api.perk.PerkAttributes;
 import dev.shadowsoffire.apotheosis.adventure.loot.LootRarity;

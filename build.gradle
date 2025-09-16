@@ -131,9 +131,9 @@ dependencies {
     // Mixin
 
     // MixinSquared's annotationProcessor MUST be registered BEFORE Mixin's one.
-    compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.4"))
-    implementation(jarJar("com.github.bawnorton.mixinsquared:mixinsquared-forge:0.3.4")) {
-        jarJar.ranged(it, "[0.3.4,)")
+    compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${mixinsquared_version}"))
+    implementation(jarJar("com.github.bawnorton.mixinsquared:mixinsquared-forge:${mixinsquared_version}")) {
+        jarJar.ranged(it, "[${mixinsquared_version},)")
     }
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
@@ -218,7 +218,7 @@ dependencies {
     implementation fg.deobf("curse.maven:justleveling-fork-1073400:5890034")
 
     // Eidolon
-    implementation fg.deobf("curse.maven:eidolon-repraised-870250:5877358")
+    implementation fg.deobf("curse.maven:eidolon-repraised-870250:6993244")
 
     // Wizards Reborn
     implementation fg.deobf("curse.maven:wizards-reborn-913994:5887547")

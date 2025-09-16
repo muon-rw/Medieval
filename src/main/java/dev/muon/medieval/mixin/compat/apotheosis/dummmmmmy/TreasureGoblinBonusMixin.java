@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin;
+package dev.muon.medieval.mixin.compat.apotheosis.dummmmmmy;
 
 import dev.shadowsoffire.apotheosis.adventure.compat.AdventureTwilightCompat;
 import dev.shadowsoffire.apotheosis.adventure.loot.LootRarity;

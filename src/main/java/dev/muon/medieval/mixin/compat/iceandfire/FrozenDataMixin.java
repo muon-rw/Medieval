@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.ice_and_fire;
+package dev.muon.medieval.mixin.compat.iceandfire;
 
 import com.github.alexthe666.iceandfire.entity.props.FrozenData;
 import io.redspace.ironsspellbooks.registries.ItemRegistry;
