@@ -1,3 +1,6 @@
+## 2.0.4
+- Nerf Terrible sword from Aquamirae, merge Aquamirae crit into Apotheosis crit
+
 ## 2.0.3
 - Fix Celestisynth patch from 2.0.2 not applying
 - Fix Eidolon and Wizards Reborn SkillTree patches not applying

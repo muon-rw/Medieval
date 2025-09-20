@@ -256,6 +256,10 @@ dependencies {
 
     // Twilight
     runtimeOnly fg.deobf("curse.maven:the-twilight-forest-227639:5468648")
+
+    // Aquamirae
+    implementation fg.deobf("curse.maven:ob-aquamirae-536254:4616373")
+    implementation fg.deobf("curse.maven:obscure-api-638417:4616364")
 }
 
 mixin {
