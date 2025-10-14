@@ -41,7 +41,8 @@
     "compat.survive.travelersbackpack.PotionEffectMixin",
     "compat.survive.travelersbackpack.WaterEffectMixin",
     "compat.traveloptics.AerialCollapseMixin",
-    "compat.traveloptics.AnnihilationMixin"
+    "compat.traveloptics.AnnihilationMixin",
+    "compat.traveloptics.ShadowedMiasmaMixin"
   ],
   "client": [
     "compat.ars_nouveau.GuiManaHUDMixin",

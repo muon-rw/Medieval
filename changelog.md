@@ -1,3 +1,6 @@
+## 2.0.5
+- Nerf Shadowed Miasma from TO Tweaks
+
 ## 2.0.4
 - Nerf Terrible sword from Aquamirae, merge Aquamirae crit into Apotheosis crit
 
