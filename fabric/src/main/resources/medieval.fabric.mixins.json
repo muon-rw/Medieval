@@ -6,11 +6,8 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "dev.muon.medieval.MixinConfigPluginFabric",
   "mixins": [
-    "compat.affinity.AssemblyAugmentBlockEntityAccessor",
-    "compat.affinity.AssemblyAugmentBlockEntityMixin",
-    "compat.affinity.AssemblyAugmentBlockMixin",
-    "compat.affinity.BlockBehaviourMixin",
-    "compat.origins.InventoryUtilMixin"
+    "compat.origins.InventoryUtilMixin",
+    "compat.skill_tree_rpgs.SkillHelperMixin"
   ],
   "client": [
     "client.LocalPlayerDamageMixin",

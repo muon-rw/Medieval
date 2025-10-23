@@ -1,3 +1,7 @@
+## 2.0.8
+- Remove Affinity compat
+- Fix Orb of Oblivion
+
 ## 2.0.7
 - Minimal patch for whatever the hell is going on in MMC5 with upgrade orbs
 

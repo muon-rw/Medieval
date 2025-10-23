@@ -125,7 +125,9 @@ dependencies {
     modCompileOnly("io.github.apace100:origins-fabric:${Versions.ORIGINS}")
     modCompileOnly("maven.modrinth:medieval-origins-revival:7.0.3-alpha-5-fabric")
 
-
+    // Skill Tree
+    modImplementation("curse.maven:skill-tree-1311513:7118378")
+    modImplementation("curse.maven:puffish-skills-835091:7038166")
 }
 
 loom {
