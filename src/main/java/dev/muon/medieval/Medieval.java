@@ -49,7 +49,9 @@ public class Medieval {
 
     private void interMod(final InterModEnqueueEvent event) {
         event.enqueueWork(() -> {
-            TravelersBackpackCompat.init();
+            if (ModList.get().isLoaded("travelersbackpack")) {
+                TravelersBackpackCompat.init();
+            }
         });
     }
 

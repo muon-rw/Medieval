@@ -1,3 +1,6 @@
+## 2.0.6
+- Fix Traveler's Backpack being required
+
 ## 2.0.5
 - Nerf Shadowed Miasma from TO Tweaks
 
