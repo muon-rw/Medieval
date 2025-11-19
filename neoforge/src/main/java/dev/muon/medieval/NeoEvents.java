@@ -7,18 +7,32 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber
 public class NeoEvents {
+
+    private static boolean isModLoaded(String modId) {
+        if (ModList.get() == null) {
+            return LoadingModList.get().getModFileById(modId) != null;
+        }
+        return ModList.get().isLoaded(modId);
+    }
+
+    private static boolean enableUnification() {
+        return isModLoaded("irons_spellbooks") && isModLoaded("ars_nouveau");
+    }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void remapItemAttrModifiers(ItemAttributeModifierEvent event) {
+        if (!enableUnification()) return;
         List<ItemAttributeModifiers.Entry> modifiers = event.getModifiers();
 
         new ArrayList<>(modifiers).forEach(entry -> {

@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.irons_spellbooks;
+package dev.muon.medieval.mixin.compat.irons_spellbooks.ars_nouveau;
 
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;

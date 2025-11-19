@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.twilightforest;
+package dev.muon.medieval.mixin.compat.twilightforest.bettercombat;
 
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;

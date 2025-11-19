@@ -5,24 +5,23 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "dev.muon.medieval.MixinConfigPluginNeoForge",
   "mixins": [
-    "MobEffectMixin",
-    "RageGloveItemMixin",
-    "TreasureGoblinBonusMixin",
-    "compat.apotheosis.ModifierInstMixin",
+    "compat.irons_spellbooks.ars_nouveau.MobEffectMixin",
+    "compat.dummmmmmy.relics.RageGloveItemMixin",
+    "compat.dummmmmmy.apotheosis.TreasureGoblinBonusMixin",
+    "compat.irons_spellbooks.ars_nouveau.apotheosis.ModifierInstMixin",
     "compat.apothic_compats.ModLootCategoriesMixin",
-    "compat.irons_spellbooks.AbstractSpellMixin",
-    "compat.irons_spellbooks.CastingImplementMixin",
-    "compat.irons_spellbooks.CurioBaseItemMixin",
-    "compat.irons_spellbooks.MagicDataMixin",
-    "compat.irons_spellbooks.MagicManagerMixin",
-    "compat.irons_spellbooks.ManaBarOverlayMixin",
+    "compat.irons_spellbooks.ars_nouveau.AbstractSpellMixin",
+    "compat.irons_spellbooks.ars_nouveau.CastingImplementMixin",
+    "compat.irons_spellbooks.ars_nouveau.CurioBaseItemMixin",
+    "compat.irons_spellbooks.ars_nouveau.MagicDataMixin",
+    "compat.irons_spellbooks.ars_nouveau.MagicManagerMixin",
+    "compat.irons_spellbooks.ars_nouveau.ManaBarOverlayMixin",
     "compat.irons_spellbooks.ServerPlayerEventsMixin",
-    "compat.puffish_skills.AttributeRewardMixin"
+    "compat.irons_spellbooks.ars_nouveau.puffish_skills.AttributeRewardMixin"
   ],
   "client": [
     "compat.apotheosis.AttributesGuiMixin",
-    "compat.irons_spellbooks.ClientSpellCastHelperMixin",
-    "compat.twilightforest.ClientEventsMixin"
+    "compat.twilightforest.bettercombat.ClientEventsMixin"
   ],
   "server": [],
   "injectors": {

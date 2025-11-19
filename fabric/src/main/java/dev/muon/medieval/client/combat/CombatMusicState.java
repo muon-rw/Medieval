@@ -11,6 +11,5 @@ public class CombatMusicState {
     /** Game tick the player was last damaged by a Monster. */
     public static long lastPlayerDamagedByHostileTime = -1;
 
-    // Private constructor to prevent instantiation
     private CombatMusicState() {}
 } 

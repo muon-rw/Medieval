@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.irons_spellbooks;
+package dev.muon.medieval.mixin.compat.irons_spellbooks.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.common.capability.ManaCap;
 import com.hollingsworth.arsnouveau.setup.registry.CapabilityRegistry;

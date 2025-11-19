@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.apotheosis;
+package dev.muon.medieval.mixin.compat.irons_spellbooks.ars_nouveau.apotheosis;
 
 import dev.muon.medieval.attribute.AttributeRemapper;
 import dev.shadowsoffire.apotheosis.affix.AttributeAffix;

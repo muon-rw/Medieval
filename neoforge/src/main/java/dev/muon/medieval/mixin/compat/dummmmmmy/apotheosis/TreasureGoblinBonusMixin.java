@@ -1,12 +1,10 @@
-package dev.muon.medieval.mixin;
+package dev.muon.medieval.mixin.compat.dummmmmmy.apotheosis;
 
 import dev.shadowsoffire.apotheosis.compat.twilight.TreasureGoblinBonus;
-import dev.shadowsoffire.apotheosis.loot.LootRarity;
 import dev.shadowsoffire.apotheosis.socket.gem.GemInstance;
 import net.mehvahdjukaar.dummmmmmy.common.TargetDummyEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.puffish_skills;
+package dev.muon.medieval.mixin.compat.irons_spellbooks.ars_nouveau.puffish_skills;
 
 import dev.muon.medieval.attribute.AttributeRemapper;
 import net.minecraft.core.Holder;

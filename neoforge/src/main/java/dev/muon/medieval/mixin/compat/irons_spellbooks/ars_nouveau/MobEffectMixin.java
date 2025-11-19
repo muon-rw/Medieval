@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin;
+package dev.muon.medieval.mixin.compat.irons_spellbooks.ars_nouveau;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;

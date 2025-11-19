@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin;
+package dev.muon.medieval.mixin.compat.dummmmmmy.relics;
 
 import it.hurts.sskirillss.relics.items.relics.hands.RageGloveItem;
 import net.mehvahdjukaar.dummmmmmy.common.TargetDummyEntity;

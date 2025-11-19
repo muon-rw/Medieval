@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.irons_spellbooks;
+package dev.muon.medieval.mixin.compat.irons_spellbooks.ars_nouveau;
 
 import io.redspace.ironsspellbooks.gui.overlays.ManaBarOverlay;
 import net.minecraft.client.DeltaTracker;

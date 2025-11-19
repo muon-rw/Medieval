@@ -1,4 +1,4 @@
-package dev.muon.medieval.mixin.compat.irons_spellbooks;
+package dev.muon.medieval.mixin.compat.irons_spellbooks.ars_nouveau;
 
 import com.google.common.collect.Multimap;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;

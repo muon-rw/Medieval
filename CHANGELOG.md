@@ -1,3 +1,6 @@
+## 2.0.9
+- Make neoforge mixins more modular
+
 ## 2.0.8
 - Remove Affinity compat
 - Fix Orb of Oblivion
