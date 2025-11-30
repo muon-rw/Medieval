@@ -7,17 +7,17 @@
     ],
     "key": {
       "N": {
-        "item": "minecraft:netherite_scrap"
+        "id": "minecraft:netherite_scrap"
       },
       "D": {
-        "item": "apotheosis:infused_breath"
+        "id": "apotheosis:infused_breath"
       },
       "R": {
-        "item": "simplyswords:empowered_remnant"
+        "id": "simplyswords:empowered_remnant"
       }
     },
     "result": {
-      "item": "medieval:challenge_orb",
+      "id": "medieval:challenge_orb",
       "count": 1
     }
   }

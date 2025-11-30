@@ -1,7 +1,7 @@
 package dev.muon.medieval.gradle
 
 object Versions {
-    const val MOD = "2.0.9"
+    const val MOD = "2.1.0"
 
     const val MINECRAFT = "1.21.1"
     const val PARCHMENT_MINECRAFT = "1.21.1"
@@ -62,4 +62,6 @@ object Versions {
 
     const val PUFFISH_SKILLS = "0.16.0+1.21"
     const val PUFFISH_ATTRIBUTES = "0.7.3+1.21"
+
+    const val RANGED_WEAPON_API = "2.1.1"
 }

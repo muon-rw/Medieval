@@ -54,10 +54,12 @@ dependencies {
             )
         }
     }
-
     // Dev Env
     modLocalRuntime("curse.maven:spark-361579:5759670")
     modLocalRuntime("maven.modrinth:fabric-permissions-api:0.3.1-fabric")
+
+    modImplementation("curse.maven:jade-324717:6738760")
+    modImplementation("curse.maven:emi-580555:6420930")
 
     // Config
     modImplementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${Versions.FCAP}")
@@ -97,6 +99,9 @@ dependencies {
     modLocalRuntime("dev.kosmx.player-anim:player-animation-lib-fabric:${Versions.PLAYER_ANIMATOR}")
     implementation("com.github.ZsoltMolnarrr:TinyConfig:${Versions.TINY_CONFIG}")
 
+    // RWAPI
+    modImplementation("maven.modrinth:ranged-weapon-api:${Versions.RANGED_WEAPON_API}+${Versions.MINECRAFT}")
+
     // Affinity
     modImplementation("curse.maven:affinity-938918:6171019")
     modLocalRuntime("io.wispforest:owo-lib:0.12.15+1.21")
@@ -123,7 +128,12 @@ dependencies {
     // Origins
     modCompileOnly("io.github.apace100:apoli:${Versions.APOLI}")
     modCompileOnly("io.github.apace100:origins-fabric:${Versions.ORIGINS}")
-    modCompileOnly("maven.modrinth:medieval-origins-revival:7.0.3-alpha-5-fabric")
+
+
+    // Ice and Fire: CE
+    modImplementation("curse.maven:iceandfire-ce-1040076:6859514")
+    modImplementation("curse.maven:uranus-1010827:6552767")
+    modImplementation("curse.maven:jupiter-1072905:6843051")
 
     // Skill Tree
     modImplementation("curse.maven:skill-tree-1311513:7118378")

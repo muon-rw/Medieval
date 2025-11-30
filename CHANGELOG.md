@@ -1,3 +1,8 @@
+## 2.1.0
+- Fix apothic compats extra gem bonuses not loading
+- Fix challenge orb recipe and update sprites
+- Fix town portal scroll recipe
+
 ## 2.0.9
 - Make neoforge mixins more modular
 

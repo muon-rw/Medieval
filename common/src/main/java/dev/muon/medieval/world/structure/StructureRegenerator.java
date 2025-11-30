@@ -14,7 +14,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.OwnableEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
@@ -140,22 +143,28 @@ public class StructureRegenerator {
 
 
     private static void removeExistingEntities(ServerLevel level, BoundingBox boundingBox) {
-        List<net.minecraft.world.entity.Entity> entitiesToRemove = level.getEntitiesOfClass(
-                net.minecraft.world.entity.Entity.class,
+        List<Entity> entitiesToRemove = level.getEntitiesOfClass(
+                Entity.class,
                 new net.minecraft.world.phys.AABB(
                         boundingBox.minX(), boundingBox.minY(), boundingBox.minZ(),
                         boundingBox.maxX() + 1, boundingBox.maxY() + 1, boundingBox.maxZ() + 1
                 ),
                 StructureRegenerator::shouldRemoveEntity
         );
-        entitiesToRemove.forEach(net.minecraft.world.entity.Entity::discard);
+        entitiesToRemove.forEach(Entity::discard);
     }
 
-    private static boolean shouldRemoveEntity(net.minecraft.world.entity.Entity entity) {
+    private static boolean shouldRemoveEntity(Entity entity) {
 
-        if (entity instanceof net.minecraft.world.entity.Mob) {
-            return !(entity instanceof OwnableEntity) || ((OwnableEntity) entity).getOwner() == null;
+        if (entity instanceof Mob) {
+            if (entity instanceof OwnableEntity && ((OwnableEntity) entity).getOwner() instanceof Player) {
+                return false;
+            }
+            if (entity.hasControllingPassenger() && entity.getControllingPassenger() instanceof Player) {
+                return false;
+            }
         }
+        // TODO: configurable whitelist
         return entity instanceof net.minecraft.world.entity.decoration.Painting ||
                 entity instanceof net.minecraft.world.entity.decoration.ItemFrame ||
                 entity instanceof net.minecraft.world.entity.decoration.ArmorStand ||

@@ -7,17 +7,17 @@
     ],
     "key": {
       "P": {
-        "item": "minecraft:netherite_scrap"
+        "id": "minecraft:paper"
       },
       "E": {
-        "item": "minecraft:ender_pearl"
+        "id": "minecraft:ender_pearl"
       },
       "D": {
-        "item": "minecraft:diamond"
+        "id": "minecraft:diamond"
       }
     },
     "result": {
-      "item": "medieval:town_portal_scroll",
+      "id": "medieval:town_portal_scroll",
       "count": 2
     }
   }
