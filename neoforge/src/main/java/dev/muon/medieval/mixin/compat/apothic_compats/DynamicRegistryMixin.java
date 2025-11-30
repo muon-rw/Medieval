@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Preprocess JSON before it's passed to the Dynamic Registry to remove disabled categories
+ * Preprocess JSON before it's passed to DynamicRegistry to remove disabled categories
  * There might be some better way to do this
  * Attention onlookers:
  * Do not do this
