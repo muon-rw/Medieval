@@ -169,6 +169,10 @@ dependencies {
     // My Nether's Delight
     implementation("curse.maven:my-nethers-delight-1003673:6460371")
     implementation("curse.maven:farmers-delight-398521:6597295")
+
+    // StarterKit
+    compileOnly("curse.maven:starter-kit-390717:6429852")
+    compileOnly("curse.maven:collective-342584:7148969")
 }
 
 publishMods {

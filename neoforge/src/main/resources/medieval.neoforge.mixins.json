@@ -18,7 +18,8 @@
     "compat.irons_spellbooks.ars_nouveau.ManaBarOverlayMixin",
     "compat.irons_spellbooks.ars_nouveau.MobEffectMixin",
     "compat.irons_spellbooks.ars_nouveau.apotheosis.ModifierInstMixin",
-    "compat.irons_spellbooks.ars_nouveau.puffish_skills.AttributeRewardMixin"
+    "compat.irons_spellbooks.ars_nouveau.puffish_skills.AttributeRewardMixin",
+    "compat.starterkit.StarterKitMixin"
   ],
   "client": [
     "compat.apotheosis.AttributesGuiMixin",
