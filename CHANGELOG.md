@@ -1,3 +1,6 @@
+## 2.1.1
+- Add starterkit patch to Neoforge
+
 ## 2.1.0
 - Fix apothic compats extra gem bonuses not loading
 - Fix challenge orb recipe and update sprites
