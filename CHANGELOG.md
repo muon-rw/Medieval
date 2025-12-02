@@ -1,3 +1,6 @@
+## 2.1.2
+- Witchery inventory patch, Neoforge
+
 ## 2.1.1
 - Add starterkit patch to Neoforge
 
