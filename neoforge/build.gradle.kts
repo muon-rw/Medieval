@@ -175,9 +175,9 @@ dependencies {
     compileOnly("curse.maven:collective-342584:7148969")
 
     // Witchery
-    implementation("curse.maven:just-another-witchery-remake-1125946:7234992")
-    implementation("curse.maven:modonomicon-538392:7086032")
-    implementation("curse.maven:kotlin-for-forge-351264:6994056")
+    compileOnly("curse.maven:just-another-witchery-remake-1125946:7234992")
+    // compileOnly("curse.maven:modonomicon-538392:7086032")
+    // compileOnly("curse.maven:kotlin-for-forge-351264:6994056")
 }
 
 publishMods {

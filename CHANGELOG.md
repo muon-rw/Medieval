@@ -1,3 +1,6 @@
+## 2.1.3
+- Relics crash patch, Neoforge
+
 ## 2.1.2
 - Witchery inventory patch, Neoforge
 

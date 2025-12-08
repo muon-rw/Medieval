@@ -10,6 +10,7 @@
     "compat.dummmmmmy.apotheosis.TreasureGoblinBonusMixin",
     "compat.dummmmmmy.relics.RageGloveItemMixin",
     "compat.irons_spellbooks.ServerPlayerEventsMixin",
+    "compat.relics.CurioSlotReferenceMixin",
     "compat.irons_spellbooks.ars_nouveau.AbstractSpellMixin",
     "compat.irons_spellbooks.ars_nouveau.CastingImplementMixin",
     "compat.irons_spellbooks.ars_nouveau.CurioBaseItemMixin",
