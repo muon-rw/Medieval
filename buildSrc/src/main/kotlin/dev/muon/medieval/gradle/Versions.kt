@@ -27,17 +27,19 @@ object Versions {
     const val JAVA = 21
     const val CLOTH_CONFIG_VERSION = "15.0.140"
 
-    const val GECKOLIB = "1.21.1:4.7.3"
+    const val GECKOLIB = "1.21.1:4.8.1"
     const val PLAYER_ANIMATOR = "2.0.1+1.21.1"
-    const val IRONS_SPELLBOOKS = "$MINECRAFT-3.11.0"
+    const val IRONS_SPELLBOOKS = "$MINECRAFT-3.14.8"
+    const val IRONS_JEWELRY = "$MINECRAFT-1.6.0"
+    const val ATLAS_API = "$MINECRAFT-1.2.0"
 
-    const val ARS_NOUVEAU = "$MINECRAFT:5.8.1.1088"
+    const val ARS_NOUVEAU = "$MINECRAFT:5.10.6.1250"
 
-    const val APOTHEOSIS = "8.3.0"
+    const val APOTHEOSIS = "8.4.1"
     const val APOTHIC_ATTRIBUTES = "2.8.0"
-    const val APOTHIC_SPAWNERS = "1.3.0"
-    const val APOTHIC_ENCHANTING = "1.4.0"
-    const val PLACEBO = "9.8.0"
+    const val APOTHIC_SPAWNERS = "1.3.2"
+    const val APOTHIC_ENCHANTING = "1.5.0"
+    const val PLACEBO = "9.9.1"
     const val CURIOS = "9.4.2+$MINECRAFT"
 
     const val SPELL_ENGINE = "1.6.8"

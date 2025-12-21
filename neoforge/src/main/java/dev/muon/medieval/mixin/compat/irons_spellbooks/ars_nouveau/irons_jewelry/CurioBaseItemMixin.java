@@ -1,9 +1,9 @@
-package dev.muon.medieval.mixin.compat.irons_spellbooks.ars_nouveau;
+package dev.muon.medieval.mixin.compat.irons_spellbooks.ars_nouveau.irons_jewelry;
 
 import com.google.common.collect.Multimap;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.muon.medieval.attribute.CurioAttributeHandler;
-import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
+import io.redspace.ironsjewelry.item.CurioBaseItem;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -17,3 +17,4 @@ public abstract class CurioBaseItemMixin {
         return CurioAttributeHandler.remapCurioAttributes(original);
     }
 }
+

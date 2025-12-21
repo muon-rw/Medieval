@@ -1,4 +1,8 @@
+## 2.1.5
+- Fix Iron's Jewelry mana not being unified, Neoforge
+
 ## 2.1.4
+- Make Witchery patch apply only to bugged version, Neoforge 
 
 ## 2.1.3
 - Relics crash patch, Neoforge

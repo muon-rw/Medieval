@@ -122,10 +122,6 @@ dependencies {
     implementation("curse.maven:ftb-teams-forge-404468:5631446")
     runtimeOnly("curse.maven:architectury-api-419699:5553800")
 
-    // Accessories
-    implementation("io.wispforest:accessories-neoforge:${Versions.ACCESSORIES}")
-    implementation("curse.maven:accessories-cc-layer-1005683:5823562")
-
     // TF
     compileOnly("curse.maven:the-twilight-forest-227639:5699076")
 
@@ -135,10 +131,14 @@ dependencies {
     runtimeOnly("software.bernie.geckolib:geckolib-neoforge-${Versions.GECKOLIB}")
     runtimeOnly("dev.kosmx.player-anim:player-animation-lib-forge:${Versions.PLAYER_ANIMATOR}")
 
+    // Iron's Gems n' Jewelry
+    implementation("io.redspace:irons_jewelry:${Versions.IRONS_JEWELRY}")
+    implementation("io.redspace:atlas_api:${Versions.ATLAS_API}")
+
     // Ars Nouveau
     implementation("com.hollingsworth.ars_nouveau:ars_nouveau-${Versions.ARS_NOUVEAU}")
     implementation("com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.7")
-    runtimeOnly("top.theillusivec4.curios:curios-neoforge:${Versions.CURIOS}")
+    implementation("top.theillusivec4.curios:curios-neoforge:${Versions.CURIOS}")
 
     // Apotheosis
     implementation("dev.shadowsoffire:Placebo:${Versions.MINECRAFT}-${Versions.PLACEBO}")
@@ -146,6 +146,9 @@ dependencies {
     implementation("dev.shadowsoffire:ApothicAttributes:${Versions.MINECRAFT}-${Versions.APOTHIC_ATTRIBUTES}")
     implementation("dev.shadowsoffire:ApothicSpawners:${Versions.MINECRAFT}-${Versions.APOTHIC_SPAWNERS}")
     implementation("dev.shadowsoffire:ApothicEnchanting:${Versions.MINECRAFT}-${Versions.APOTHIC_ENCHANTING}")
+
+    // For testing
+    runtimeOnly("curse.maven:apotheosis-x-irons-spellbooks-compat-1244863:7276998")
 
     // Apothic Compats
     implementation("curse.maven:apothic-compats-1188699:6433252")
