@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class MixinConfigPluginNeoForge implements IMixinConfigPlugin {
@@ -55,6 +56,11 @@ public class MixinConfigPluginNeoForge implements IMixinConfigPlugin {
                 if (!isModLoaded(modId)) {
                     LOGGER.info("Disabling mixin {} because required mod '{}' is not loaded",
                             getSimpleMixinName(mixinClassName), modId);
+                    return false;
+                }
+                if (Objects.equals(modId, "witchery") &&
+                        !Objects.equals(LoadingModList.get().getModFileById(modId).versionString(), "0.4.3")) {
+                    LOGGER.info("Disabling mixin {} because required version '{}' is different from 0.4.3", modId, LoadingModList.get().getModFileById(modId).versionString());
                     return false;
                 }
             }
