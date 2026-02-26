@@ -228,16 +228,6 @@ dependencies {
     compileOnly fg.deobf("curse.maven:tetra-289712:6912921")
     // runtimeOnly fg.deobf("curse.maven:mutil-351914:6418901")
 
-    // Origins
-    implementation fg.deobf("io.github.edwinmindcraft:calio-forge:${mc_version}-${calio_forge_version}")
-    implementation fg.deobf("io.github.edwinmindcraft:apoli-forge:${mc_version}-${apoli_forge_version}")
-    implementation fg.deobf("io.github.edwinmindcraft:origins-forge:${mc_version}-${origins_forge_version}")
-    implementation fg.deobf("top.theillusivec4.caelus:caelus-forge:${caelus_version}+1.20")
-    implementation(fg.deobf("de.dafuqs:additionalentityattributes-forge:${aea_forge_version}") {
-        exclude group: 'net.minecraftforge'
-        exclude group: 'com.github.llamalad.mixinextras'
-    })
-
     // Dungeons and Combat
     compileOnly fg.deobf("curse.maven:dungeons-and-combat-1128235:6077203")
 

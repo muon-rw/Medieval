@@ -1,3 +1,6 @@
+## 2.0.7
+- Remove IAF Spellbooks patch (fixed in mod)
+
 ## 2.0.6
 - Fix Traveler's Backpack being required
 

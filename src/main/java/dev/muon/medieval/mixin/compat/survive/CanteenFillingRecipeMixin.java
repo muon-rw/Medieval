@@ -20,7 +20,7 @@ import net.minecraft.world.level.Level;
 
 @Mixin(value = CanteenFillingRecipe.class, remap = false)
 public class CanteenFillingRecipeMixin {
-    @Inject(method = "Lcom/stereowalker/survive/world/item/crafting/CanteenFillingRecipe;matches(Lnet/minecraft/world/inventory/CraftingContainer;Lnet/minecraft/world/level/Level;)Z", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "matches(Lnet/minecraft/world/inventory/CraftingContainer;Lnet/minecraft/world/level/Level;)Z", at = @At("HEAD"), cancellable = true)
     private void medieval$fixMatchesLogic(CraftingContainer inv, Level worldIn, CallbackInfoReturnable<Boolean> cir) {
         Potion savedPotion = null;
         int bottles = 0;
@@ -54,7 +54,7 @@ public class CanteenFillingRecipeMixin {
         }
         cir.setReturnValue(savedPotion != null && bottles <= Survive.THIRST_CONFIG.canteenFillAmount(nether) && canteens == 1);
     }
-    @Inject(method = "Lcom/stereowalker/survive/world/item/crafting/CanteenFillingRecipe;assemble(Lnet/minecraft/world/inventory/CraftingContainer;Lnet/minecraft/core/RegistryAccess;)Lnet/minecraft/world/item/ItemStack;", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "assemble(Lnet/minecraft/world/inventory/CraftingContainer;Lnet/minecraft/core/RegistryAccess;)Lnet/minecraft/world/item/ItemStack;", at = @At("HEAD"), cancellable = true)
     private void medieval$preservePotionNbt(CraftingContainer inv, RegistryAccess ra, CallbackInfoReturnable<ItemStack> cir) {
         int count = 0;
         ItemStack firstPotion = ItemStack.EMPTY;

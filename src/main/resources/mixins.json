@@ -8,7 +8,6 @@
   },
   "plugin": "dev.muon.medieval.MixinConfigPlugin",
   "mixins": [
-    "compat.apoli.ApoliEventHandlerMixin",
     "compat.apotheosis.dummmmmmy.TreasureGoblinBonusMixin",
     "compat.apotheosis.irons_spellbooks.ars_nouveau.AttributeBonusMixin",
     "compat.aquamirae.attributeslib.MazeRoseMixin",
@@ -17,7 +16,6 @@
     "compat.aquamirae.attributeslib.TerribleSwordMixin",
     "compat.autoleveling.MobLevelingEventsMixin",
     "compat.dungeons_and_combat.CombatStyleManualItemMixin",
-    "compat.ice_and_fire_spellbooks.ServerEventsMixin",
     "compat.iceandfire.FrozenDataMixin",
     "compat.irons_spellbooks.DamageSourcesMixin",
     "compat.irons_spellbooks.EchoingStrikesEffectMixin",
